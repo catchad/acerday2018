@@ -1,0 +1,26 @@
+.circleBtn {
+    display: inline-block;
+    position: relative;
+    width: 60px;
+    background-color: #ffffff;
+    border-radius: 50%;
+    margin: 5px;
+    background: linear-gradient(45deg, #ff0e41, #fe6231);
+    user-select: none;
+    cursor: pointer;
+    &::before {
+        content: "";
+        display: block;
+        padding-top: 100%;
+    }
+    &--secondary {
+        background: linear-gradient(45deg, #0171cd, #0190c8);
+    }
+    &__icon {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 55%;
+        transform: translate(-50%, -50%);
+    }
+}

@@ -1,0 +1,31 @@
+.select {
+    position: relative;
+    display: block;
+    font-size: 16px;
+
+    &__selector {
+        padding-bottom: 20px;
+        text-align: center;
+        color: #ffffff;
+        border-bottom: 1px solid #ffffff;
+        cursor: pointer;
+    }
+    &__icon {
+        display: inline-block;
+        vertical-align: middle;
+        width: 60px;
+    }
+    &__name {
+        display: inline-block;
+        vertical-align: middle;
+        font-size: 1.8em;
+        margin-left: 5px;
+    }
+    &__arrow {
+        position: absolute;
+        top: 50%;
+        right: 5px;
+        width: 24px;
+        transform: translate(0, -50%);
+    }
+}

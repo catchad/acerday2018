@@ -1,0 +1,47 @@
+// .avatarUI {
+//     text-align: right;
+//     margin-right: 20px;
+//     margin-bottom: 5px;
+//     @media screen and (max-width: 1024px) {
+//         .circleBtn {
+//             width: 45px;
+//         }
+//     }
+// }
+.avatarUI {
+    @media screen and (max-width: 1024px) {
+        flex-wrap: wrap;
+        max-width: 500px;
+    }
+    &__left {
+        width: 500px;
+    }
+    &__right {
+        margin-left: auto;
+        display: flex;
+        align-items: center;
+        @media screen and (max-width: 1024px) {
+            width: 100%;
+            max-width: 400px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 30px;
+            margin-left: 0;
+        }
+    }
+    &__nextStep {
+        @media screen and (max-width: 1024px) {
+            width: 100%;
+        }
+    }
+}
+.register {
+    &__result {
+        width: 100%;
+        max-width: 300px;
+        height: auto;
+        @media screen and (max-width: 1024px) {
+            max-width: 240px;
+        }
+    }
+}

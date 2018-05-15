@@ -1,0 +1,15 @@
+.nomatch {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    // position: absolute;
+    // top: 0;
+    // left: 0;
+    width: 100%;
+    height: calc(100vh - 60px);
+    font-size: 16px;
+    &__text {
+        font-size: 2em;
+        font-weight: 300;
+    }
+}

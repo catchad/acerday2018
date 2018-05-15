@@ -1,0 +1,96 @@
+.record {
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
+    &__item {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        padding: 40px 0;
+        @media screen and (max-width: 1024px) {
+            flex-wrap: wrap;
+        }
+
+        // &:first-child {
+        //     padding-top: 0;
+        // }
+        // &:last-child {
+        //     padding-bottom: 0;
+        // }
+        &::after {
+            content: "";
+            display: block;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 0px;
+            border-top: 1px solid rgba(0, 0, 0, 0.4);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+        }
+    }
+    &__left {
+        flex: 0 0 auto;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        @media screen and (max-width: 1024px) {
+            width: 100%;
+        }
+    }
+
+    &__right {
+        flex: 0 0 auto;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-left: auto;
+        @media screen and (max-width: 1024px) {
+            margin-left: 0;
+            margin-top: 30px;
+        }
+    }
+
+    &__name1 {
+        font-size: 1.2em;
+        width: 250px;
+        text-align: center;
+        @media screen and (max-width: 1024px) {
+            width: auto;
+            flex: 1;
+        }
+    }
+
+    &__name2 {
+        font-size: 1.2em;
+        width: 250px;
+        text-align: center;
+        @media screen and (max-width: 1024px) {
+            width: auto;
+            flex: 1;
+        }
+    }
+
+    &__arrow {
+        width: 30px;
+        height: auto;
+        margin: 0 10px;
+        flex: 0 0 auto;
+    }
+
+    &__single {
+        text-align: center;
+    }
+    &__singleText {
+        font-size: 1.2em;
+        margin-bottom: 10px;
+    }
+    &__multiple {
+        text-align: center;
+    }
+    &__multipleText {
+        font-size: 1.2em;
+        margin-bottom: 10px;
+    }
+}

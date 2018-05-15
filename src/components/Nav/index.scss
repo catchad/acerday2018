@@ -1,0 +1,339 @@
+.nav {
+    position: relative;
+    // display: flex;
+    // align-items: center;
+    // margin-left: auto;
+    font-size: 16px;
+    // height: 100%;
+
+    display: block;
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 100%;
+    max-width: 500px;
+    height: 100%;
+    // background-color: rgba(0, 0, 0, 0.8);
+    background: linear-gradient(45deg, #883dcb, #fd3efd);
+    // display: none;
+    box-sizing: border-box;
+    padding: 70px 50px 40px 50px;
+
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.25s ease-out, visibility 0.25s ease-out;
+    // transform: translateX(100%);
+    // transition: transform 0.25s ease-out;
+    z-index: 9999;
+
+    @media screen and (max-width: 1024px) {
+        padding: 70px 20px 40px 20px;
+    }
+
+    &--active {
+        // transform: translateX(0%);
+        opacity: 1;
+        visibility: visible;
+    }
+
+    &__link {
+        color: #ffffff;
+        text-decoration: none;
+        cursor: pointer;
+
+        display: block;
+        font-size: 2em;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        // text-align: center;
+        padding: 20px 0;
+        margin: 0;
+    }
+    &__subLink {
+        display: block;
+        color: #ffffff;
+        text-decoration: none;
+        cursor: pointer;
+        font-size: 1.5em;
+        margin: 20px 0;
+        &::before {
+            content: "‧";
+            display: inline;
+            position: static;
+            font-weight: 1000;
+        }
+    }
+    &__subNav {
+        // display: none;
+        box-sizing: border-box;
+        padding: 10px;
+
+        // text-align: center;
+        // background-color: #000000;
+        z-index: -1;
+
+        position: relative;
+        top: 0;
+        left: 0;
+        width: 100%;
+        z-index: auto;
+        // background-color: rgba(0, 0, 0, 0.3);
+    }
+    &__group {
+        position: relative;
+
+        align-items: center;
+
+        display: block;
+        height: auto;
+    }
+}
+
+.headerIcon {
+    position: relative;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: auto;
+    &__line {
+        width: 1px;
+        height: 30px;
+        margin: 0 15px;
+        background-color: rgba(255, 255, 255, 0.6);
+    }
+    &__link {
+        margin: 0 5px;
+        cursor: pointer;
+    }
+    &__img {
+        width: 30px;
+        height: auto;
+    }
+}
+
+.userInfo {
+    // text-align: center;
+    margin-bottom: 30px;
+    display: block;
+
+    &__photo {
+        width: 150px;
+        margin-bottom: 10px;
+    }
+
+    &__name {
+        font-size: 2em;
+        margin-bottom: 10px;
+    }
+
+    &__acerID {
+        font-size: 1.3em;
+        margin-bottom: 10px;
+    }
+
+    &__point {
+        font-size: 1.3em;
+    }
+}
+.navSwitch {
+    display: block;
+    width: 40px;
+    height: auto;
+    cursor: pointer;
+    z-index: 10000;
+
+    path {
+        transition: all 0.25s ease-out;
+        transform-origin: center center;
+    }
+
+    &--close {
+        path:nth-child(1) {
+            transform: translate(-20%, 20%) rotate(45deg);
+        }
+        path:nth-child(2) {
+            transform: scale(0.5);
+            opacity: 0;
+        }
+        path:nth-child(3) {
+            transform: translate(-20%, -20%) rotate(-45deg);
+        }
+    }
+}
+
+// .nav {
+//     position: relative;
+//     display: flex;
+//     align-items: center;
+//     margin-left: auto;
+//     font-size: 16px;
+//     height: 100%;
+//     @media screen and (max-width: 1024px) {
+//         display: block;
+//         position: fixed;
+//         top: 0;
+//         left: 0;
+//         width: 100%;
+//         height: 100%;
+//         // background-color: rgba(0, 0, 0, 0.8);
+//         background: linear-gradient(45deg, #883dcb, #fd3efd);
+//         // display: none;
+//         box-sizing: border-box;
+//         padding: 70px 20px 40px 20px;
+//         overflow: auto;
+//         -webkit-overflow-scrolling: touch;
+//         opacity: 0;
+//         visibility: hidden;
+//         transition: opacity 0.25s ease-out, visibility 0.25s ease-out;
+//         z-index: 9999;
+//         &--active {
+//             // display: block;
+//             opacity: 1;
+//             visibility: visible;
+//         }
+//     }
+//     &__link {
+//         margin: 0 10px;
+//         color: #ffffff;
+//         text-decoration: none;
+//         cursor: pointer;
+//         // &:hover {
+//         //     text-decoration: underline;
+//         // }
+
+//         @media screen and (max-width: 1024px) {
+//             display: block;
+//             font-size: 2em;
+//             border-bottom: 1px solid rgba(255, 255, 255, 0.8);
+//             text-align: center;
+//             padding: 20px 0;
+//             margin: 0;
+//         }
+//     }
+//     &__subLink {
+//         display: block;
+//         margin: 10px 0;
+//         color: #ffffff;
+//         text-decoration: none;
+//         cursor: pointer;
+//         @media screen and (max-width: 1024px) {
+//             font-size: 1.5em;
+//             margin: 15px 0;
+//         }
+//     }
+//     &__subNav {
+//         // display: none;
+//         position: absolute;
+//         top: 100%;
+//         left: 50%;
+//         width: 150px;
+//         box-sizing: border-box;
+//         padding: 10px;
+//         transform: translate(-50%, -100%);
+//         text-align: center;
+//         background-color: #000000;
+//         transition: transform 0.25s ease-out;
+//         z-index: -1;
+//         @media screen and (max-width: 1024px) {
+//             position: relative;
+//             top: 0;
+//             left: 0;
+//             width: 100%;
+//             transform: none;
+//             z-index: auto;
+//             background-color: rgba(0, 0, 0, 0.3);
+//         }
+//     }
+//     &__group {
+//         position: relative;
+//         height: 100%;
+//         display: flex;
+//         align-items: center;
+//         @media screen and (max-width: 1024px) {
+//             display: block;
+//             height: auto;
+//         }
+//         &:hover .nav__subNav {
+//             transform: translate(-50%, 0%);
+//             @media screen and (max-width: 1024px) {
+//                 transform: none;
+//             }
+//         }
+//     }
+// }
+
+// .headerIcon {
+//     position: relative;
+
+//     @media screen and (max-width: 1024px) {
+//         display: flex;
+//         align-items: center;
+//         justify-content: center;
+//         margin-left: auto;
+//     }
+//     &__link {
+//         margin: 0 5px;
+//         cursor: pointer;
+//     }
+//     &__img {
+//         width: 30px;
+//         height: auto;
+//     }
+// }
+
+// .userInfo {
+//     display: none;
+//     text-align: center;
+//     margin-bottom: 30px;
+//     @media screen and (max-width: 1024px) {
+//         display: block;
+//     }
+//     &__photo {
+//         width: 150px;
+//         margin-bottom: 10px;
+//     }
+
+//     &__name {
+//         font-size: 2em;
+//         margin-bottom: 10px;
+//     }
+
+//     &__acerID {
+//         font-size: 1.3em;
+//         margin-bottom: 10px;
+//     }
+
+//     &__point {
+//         font-size: 1.3em;
+//     }
+// }
+// .navSwitch {
+//     display: none;
+//     // margin-left: auto;
+//     width: 40px;
+//     height: auto;
+//     // outline: 1px solid #ffffff;
+//     z-index: 10000;
+
+//     path {
+//         transition: all 0.25s ease-out;
+//         transform-origin: center center;
+//     }
+//     &--close {
+//         path:nth-child(1) {
+//             transform: translate(-20%, 20%) rotate(45deg);
+//         }
+//         path:nth-child(2) {
+//             transform: scale(0.5);
+//             opacity: 0;
+//         }
+//         path:nth-child(3) {
+//             transform: translate(-20%, -20%) rotate(-45deg);
+//         }
+//     }
+//     @media screen and (max-width: 1024px) {
+//         display: block;
+//     }
+// }

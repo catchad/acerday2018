@@ -1,0 +1,22 @@
+.ytContainer {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    @media screen and (max-width: 1024px) {
+        height: auto;
+        margin-bottom: 60px;
+        &::before {
+            content: "";
+            display: block;
+            padding-top: 56.25%;
+        }
+    }
+
+    &__iframe {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
+}

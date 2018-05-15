@@ -1,0 +1,480 @@
+@charset "UTF-8";
+@import url("https://fonts.googleapis.com/earlyaccess/notosanstc.css");
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+}
+
+/* HTML5 display-role reset for older browsers */
+
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+    display: block;
+}
+
+body {
+    line-height: 1;
+}
+
+ol,
+ul {
+    list-style: none;
+}
+
+blockquote,
+q {
+    quotes: none;
+}
+
+blockquote {
+    &:before,
+    &:after {
+        content: "";
+        content: none;
+    }
+}
+
+q {
+    &:before,
+    &:after {
+        content: "";
+        content: none;
+    }
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+html {
+    font-family: "Noto Sans TC", "微軟正黑體";
+    font-size: 16px;
+    font-weight: 300;
+}
+
+body {
+    background-color: #e0e3da;
+    color: #000000;
+}
+.body--hideScrollbar {
+    height: 100%;
+    overflow: hidden;
+}
+.main {
+    position: relative;
+    width: 100%;
+    // height: calc(100vh - 60px);
+    padding-top: 60px;
+    box-sizing: border-box;
+    // overflow: auto;
+    // padding-top: 10px;
+}
+
+.page {
+    overflow: hidden;
+    // padding: 40px 0;
+    &--noPaddingTop {
+        padding-top: 0;
+    }
+    &--marginLeft50 {
+        margin-left: 50%;
+        @media screen and (max-width: 1024px) {
+            margin-left: 0;
+        }
+    }
+    &__row {
+        position: relative;
+        display: block;
+        width: 100%;
+        margin: 0 auto 40px auto;
+        &:last-child {
+            margin-bottom: 0;
+        }
+        &--center {
+            text-align: center;
+        }
+        &--flex {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        &--widthS {
+            max-width: 320px;
+        }
+        &--widthM {
+            max-width: 600px;
+        }
+        &--widthL {
+            max-width: 1200px;
+        }
+        &--w800 {
+            max-width: 800px;
+        }
+        &--w1000 {
+            max-width: 1000px;
+        }
+        &--fullWidth {
+            position: relative;
+            width: 100vw;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        &--marginBottomBig {
+            margin-bottom: 100px;
+        }
+        &--marginBottomSmall {
+            margin-bottom: 0;
+        }
+    }
+    &__column {
+        flex: 1;
+        margin: 0 20px;
+        &:first-child {
+            margin-left: 0;
+        }
+        &:last-child {
+            margin-right: 0;
+        }
+    }
+    &__fixedLeft {
+        position: fixed;
+        top: 60px;
+        left: 0;
+        width: 50%;
+        height: calc(100% - 60px);
+        @media screen and (max-width: 1024px) {
+            position: relative;
+            top: 0;
+            left: 50%;
+            width: 100vw;
+            margin-top: -30px;
+            height: auto;
+            transform: translateX(-50%);
+        }
+    }
+    &__heading {
+        position: relative;
+        // margin-bottom: 60px;
+        width: 100%;
+        max-width: 1000px;
+        margin: 0 auto 60px auto;
+        font-size: 16px;
+        &--marginBottomS {
+            margin-bottom: 0;
+        }
+        &--w800 {
+            max-width: 800px;
+        }
+        @media screen and (max-width: 1024px) {
+            font-size: 12px;
+            margin: 0 auto 20px auto;
+            &--marginBottomS {
+                margin-bottom: 0;
+            }
+        }
+    }
+    &__title {
+        font-size: 3em;
+        text-align: center;
+        font-weight: 600;
+        margin-bottom: 0.3em;
+        &--white {
+            color: #ffffff;
+        }
+        &--alignLeft {
+            text-align: left;
+        }
+    }
+    &__description {
+        font-size: 1.3em;
+        text-align: center;
+        line-height: 1.5em;
+        &--white {
+            color: #ffffff;
+        }
+        &--alignLeft {
+            text-align: left;
+        }
+    }
+    &__qTitle {
+        font-size: 1.7em;
+        line-height: 1.3em;
+        margin-bottom: 40px;
+    }
+    &__subTitle {
+        font-size: 1.5em;
+        font-weight: 500;
+        margin-bottom: 10px;
+        color: #000000;
+    }
+    &__img {
+        width: 100%;
+        height: auto;
+    }
+    &__text {
+        font-size: 1.2em;
+        color: #000000;
+        line-height: 1.5em;
+        text-align: justify;
+        &--s {
+            font-size: 1em;
+            color: #000000;
+        }
+    }
+    &__ul {
+        list-style: decimal;
+        margin-left: 1.5em;
+    }
+    &__li {
+        font-size: 1.2em;
+        color: #000000;
+        line-height: 1.5em;
+        margin-bottom: 10px;
+    }
+    &__section {
+        position: relative;
+        width: 100%;
+        // max-width: 1200px;
+        margin: 60px auto 120px auto;
+        box-sizing: border-box;
+        padding: 0 30px;
+
+        &--marginTop0 {
+            margin-top: 0;
+        }
+        @media screen and (max-width: 1024px) {
+            margin: 30px auto 120px auto;
+        }
+        // box-sizing: border-box;
+        // padding: 0 20px;
+        // &:first-child {
+        //     // margin: 20px auto;
+        //     margin: 0;
+        // }
+    }
+    &__btnGroup {
+        display: flex;
+        width: 100%;
+        max-width: 600px;
+        margin: 0 auto 50px auto;
+    }
+    &__inputtext {
+        font-family: "Noto Sans TC", "微軟正黑體";
+        width: 100%;
+        border: none;
+        border-bottom: 1px solid #ffffff;
+        outline: none;
+        font-size: 1.5em;
+        font-weight: 500;
+        padding-bottom: 15px;
+        margin-bottom: 30px;
+        // color: #ffffff;
+        background-color: transparent;
+        @media screen and (max-width: 1024px) {
+            font-size: 1.2em;
+        }
+        &::-webkit-input-placeholder {
+            font-family: "Noto Sans TC", "微軟正黑體";
+            color: #000000;
+            font-weight: 500;
+        }
+        &::-moz-placeholder {
+            font-family: "Noto Sans TC", "微軟正黑體";
+            color: #000000;
+            font-weight: 500;
+        }
+        &:-ms-input-placeholder {
+            font-family: "Noto Sans TC", "微軟正黑體";
+            color: #000000;
+            font-weight: 500;
+        }
+        &:-moz-placeholder {
+            font-family: "Noto Sans TC", "微軟正黑體";
+            color: #000000;
+            font-weight: 500;
+        }
+    }
+}
+
+.squareBtn {
+    display: block;
+    position: relative;
+    width: 100%;
+    flex: 1;
+
+    border-radius: 10px;
+    box-sizing: border-box;
+    margin: 0 15px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.2s ease-out;
+    @media screen and (max-width: 1024px) {
+        margin: 0 5px;
+    }
+
+    &:hover {
+        // border: 1px solid #ffffff;
+        box-shadow: 0px 0px 0px 1px rgba(255, 255, 255, 1), 0px 0px 25px rgba(0, 0, 0, 0.6);
+    }
+    &:first-child {
+        margin-left: 0;
+    }
+    &:last-child {
+        margin-right: 0;
+    }
+    &::before {
+        content: "";
+        display: block;
+        padding-top: 100%;
+    }
+    &--active {
+        box-shadow: 0px 0px 0px 1px rgba(255, 255, 255, 1), 0px 0px 25px rgba(0, 0, 0, 0.6);
+    }
+    &__wrapper {
+        display: flex;
+        align-items: center;
+        align-content: center;
+        justify-content: center;
+        flex-wrap: wrap;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
+    &__icon {
+        display: block;
+        width: 70%;
+        margin: 0 auto 10px auto;
+        @media screen and (max-width: 1024px) {
+            width: 60%;
+        }
+    }
+    &__text {
+        font-size: 2em;
+        color: #ffffff;
+        width: 100%;
+        text-align: center;
+        @media screen and (max-width: 1024px) {
+            font-size: 1.3em;
+        }
+    }
+}
+
+.textInput {
+    width: 100%;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid #ffffff;
+    outline: none;
+    color: #ffffff;
+}
+
+// /* Let's get this party started */
+// ::-webkit-scrollbar {
+//     width: 6px;
+// }
+
+// /* Track */
+// ::-webkit-scrollbar-track {
+//     border-radius: 0px;
+// }
+
+// /* Handle */
+// ::-webkit-scrollbar-thumb {
+//     background: rgba(0, 0, 0, 0.8);
+// }

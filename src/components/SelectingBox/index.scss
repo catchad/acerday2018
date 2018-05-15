@@ -1,0 +1,35 @@
+.selectingBox {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1200;
+    // background-color: rgba(0, 0, 0, 0.8);
+    background: linear-gradient(45deg, #016ecd, #00fbe8);
+    // overflow-x: hidden;
+    // overflow-y: auto;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+    &__grid {
+        position: relative;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        max-width: 1200px;
+        margin: 20px auto 0 auto;
+        box-sizing: border-box;
+        padding: 0 20px;
+    }
+    &__option {
+        position: relative;
+        width: 33.3333%;
+        box-sizing: border-box;
+        // padding: 4%;
+        @media screen and (max-width: 1024px) {
+            width: 50%;
+        }
+    }
+}
