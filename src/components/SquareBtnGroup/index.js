@@ -37,8 +37,8 @@ class SquareBtnGroup extends Component {
                             }}
                         >
                             <div className="squareBtn__wrapper">
-                                {el.icon ? <img className="squareBtn__icon" src={el.icon} /> : ""}
-                                <p className="squareBtn__text">{el.text}</p>
+                                {el.icon ? <img className={`squareBtn__icon ${this.props.size == "s" ? "squareBtn__icon--s" : ""}`} src={el.icon} /> : ""}
+                                <p className={`squareBtn__text ${this.props.size == "s" ? "squareBtn__text--s" : ""}`}>{el.text}</p>
                             </div>
                         </a>
                     );

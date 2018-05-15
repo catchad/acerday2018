@@ -274,7 +274,7 @@ class Step3 extends Component {
                     <div className="avatarUI__left">
                         <IntlContextConsumer>
                             {context => {
-                                return <SquareBtnGroup defaultValue="hair" onChange={this.props.avatarTargetChange} data={[{ text: context.intl.formatMessage({ id: "intl.register.step3.hair" }), value: "hair" }, { text: context.intl.formatMessage({ id: "intl.register.step3.eye" }), value: "eye" }, { text: context.intl.formatMessage({ id: "intl.register.step3.mouth" }), value: "mouth" }]} />;
+                                return <SquareBtnGroup defaultValue="hair" size="s" onChange={this.props.avatarTargetChange} data={[{ text: context.intl.formatMessage({ id: "intl.register.step3.hair" }), value: "hair", icon: "https://fakeimg.pl/64x64/" }, { text: context.intl.formatMessage({ id: "intl.register.step3.eye" }), value: "eye", icon: "https://fakeimg.pl/64x64/" }, { text: context.intl.formatMessage({ id: "intl.register.step3.mouth" }), value: "mouth", icon: "https://fakeimg.pl/64x64/" }]} />;
                             }}
                         </IntlContextConsumer>
                     </div>

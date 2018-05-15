@@ -76,10 +76,10 @@ class Step1 extends Component {
         return (
             <div className="page__section" ref="section">
                 <div className="page__heading">
-                    <p className="page__title page__title--white">
+                    <p className="page__title">
                         <FormattedMessage id="intl.rhythmgame.step1.title" />
                     </p>
-                    <p className="page__description page__description--white">
+                    <p className="page__description">
                         <FormattedMessage id="intl.rhythmgame.step1.desc" />
                     </p>
                 </div>
@@ -351,7 +351,7 @@ class Step2 extends Component {
         return (
             <div className="page__section" ref="section">
                 <div className="page__heading">
-                    <p className="page__title page__title--white">
+                    <p className="page__title">
                         <FormattedMessage id="intl.rhythmgame.step2.title" />
                     </p>
                 </div>
@@ -436,7 +436,7 @@ class Step3 extends Component {
         return (
             <div className="page__section" ref="section">
                 <div className="page__heading">
-                    <p className="page__title page__title--white">
+                    <p className="page__title">
                         <FormattedMessage id="intl.rhythmgame.step3.title" />
                     </p>
                     <p className="page__description">

@@ -13,6 +13,7 @@ class Avatar extends Component {
         this.state = {
             ww: document.body.clientWidth,
             // target: "hair",
+            assetWidth: 330,
             currentHairID: 0,
             currentEyeID: 0,
             currentMouthID: 0
@@ -20,9 +21,10 @@ class Avatar extends Component {
     }
 
     componentDidMount() {
-        TweenMax.set(this.refs.hair, { x: -this.state.currentHairID * 330 });
-        TweenMax.set(this.refs.eye, { x: -this.state.currentEyeID * 330 });
-        TweenMax.set(this.refs.mouth, { x: -this.state.currentMouthID * 330 });
+        this._resizeHandler();
+        TweenMax.set(this.refs.hair, { x: -this.state.currentHairID * this.state.assetWidth });
+        TweenMax.set(this.refs.eye, { x: -this.state.currentEyeID * this.state.assetWidth });
+        TweenMax.set(this.refs.mouth, { x: -this.state.currentMouthID * this.state.assetWidth });
 
         TweenMax.set(this.refs.hair.childNodes, { opacity: this.props.target == "hair" ? 0.4 : 0 });
         TweenMax.set(this.refs.eye.childNodes, { opacity: this.props.target == "eye" ? 0.4 : 0 });
@@ -46,6 +48,8 @@ class Avatar extends Component {
                 TweenMax.set([this.refs.arrowLeft, this.refs.arrowRight], { top: `${52 + 48 / 2}%` });
                 break;
         }
+
+        window.addEventListener("resize", this._resizeHandler);
     }
 
     componentWillUnmount() {}
@@ -113,7 +117,12 @@ class Avatar extends Component {
         img2.src = assets[this.props.gender].eye[this.state.currentEyeID];
         img3.src = assets[this.props.gender].mouth[this.state.currentMouthID];
     };
-    _resizeHandler = () => {};
+    _resizeHandler = () => {
+        this.setState({
+            ww: document.body.clientWidth,
+            assetWidth: document.body.clientWidth >= 1024 ? 330 : 210
+        });
+    };
 
     updateTargetZone() {
         switch (this.props.target) {
@@ -132,9 +141,9 @@ class Avatar extends Component {
         }
     }
     componentDidUpdate() {
-        TweenMax.to(this.refs.hair, 0.5, { x: -this.state.currentHairID * 330 });
-        TweenMax.to(this.refs.eye, 0.5, { x: -this.state.currentEyeID * 330 });
-        TweenMax.to(this.refs.mouth, 0.5, { x: -this.state.currentMouthID * 330 });
+        TweenMax.to(this.refs.hair, 0.5, { x: -this.state.currentHairID * this.state.assetWidth });
+        TweenMax.to(this.refs.eye, 0.5, { x: -this.state.currentEyeID * this.state.assetWidth });
+        TweenMax.to(this.refs.mouth, 0.5, { x: -this.state.currentMouthID * this.state.assetWidth });
 
         TweenMax.to(this.refs.hair.childNodes, 0.5, { opacity: this.props.target == "hair" ? 0.4 : 0 });
         TweenMax.to(this.refs.eye.childNodes, 0.5, { opacity: this.props.target == "eye" ? 0.4 : 0 });

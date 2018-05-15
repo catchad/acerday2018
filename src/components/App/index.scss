@@ -440,8 +440,15 @@ body {
         display: block;
         width: 70%;
         margin: 0 auto 10px auto;
+
         @media screen and (max-width: 1024px) {
             width: 60%;
+        }
+        &--s {
+            width: 60%;
+            @media screen and (max-width: 1024px) {
+                width: 55%;
+            }
         }
     }
     &__text {
@@ -449,8 +456,15 @@ body {
         color: #ffffff;
         width: 100%;
         text-align: center;
+
         @media screen and (max-width: 1024px) {
             font-size: 1.3em;
+        }
+        &--s {
+            font-size: 1em;
+            @media screen and (max-width: 1024px) {
+                font-size: 0.8em;
+            }
         }
     }
 }
