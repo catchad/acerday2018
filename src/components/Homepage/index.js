@@ -1,10 +1,7 @@
 import React, { Component, Fragment } from "react";
-
 import { FormattedMessage, intlShape, IntlProvider } from "react-intl";
 import { Link } from "react-router-dom";
-import { AppContextConsumer } from "../../AppContext";
-import { IntlContextConsumer } from "../../IntlContext";
-
+import { toast } from "react-toastify";
 import Background from "../Background";
 import RoundBtn from "../RoundBtn";
 import ColorRect from "../ColorRect";
@@ -34,6 +31,16 @@ class Homepage extends Component {
         this.sliderNum = document.querySelectorAll(".homepage__slide").length - 1;
         // this._loop();
         this.myReq = requestAnimationFrame(this._loop);
+
+        toast(
+            <Fragment>
+                <p className="Toastify__title">限定任務即將開啟</p>
+                <p className="Toastify__text">想獲得更多點數嗎？確認你的任務列表了解更多</p>
+            </Fragment>
+        );
+        toast("歡迎回到AcerDay，獲得800點");
+        toast("你連續登錄網站3天，獲得2000點");
+        // toast("你連續登錄網站8天，獲得4000點");
     }
     _loop = () => {
         this.checker++;
@@ -108,17 +115,9 @@ class Homepage extends Component {
                     <p className="homepage__text">
                         每天都好玩！一起玩音樂！玩創作！<br />集點酷！抽大獎！
                     </p>
-                    <AppContextConsumer>
-                        {context => {
-                            return (
-                                <Link to={`/${context.currentCountry}/register`}>
-                                    <RoundBtn color1="#00D8EF" color2="#0097FF">
-                                        <p>登錄</p>
-                                    </RoundBtn>
-                                </Link>
-                            );
-                        }}
-                    </AppContextConsumer>
+                    <RoundBtn color1="#00D8EF" color2="#0097FF" routerLink={`/${this.props.appContext.currentCountry}/login`}>
+                        <p>登錄</p>
+                    </RoundBtn>
                 </div>
                 <div className="homepage__bg homepage__bg--1" style={this.state.currentID == 0 ? { opacity: 1, zIndex: 10 } : { opacity: 0, zIndex: 5 }} />
                 <div className="homepage__bg homepage__bg--2" style={this.state.currentID == 1 ? { opacity: 1, zIndex: 10 } : { opacity: 0, zIndex: 5 }} />

@@ -6,8 +6,6 @@ import ColorRect from "../ColorRect";
 import Loading from "../Loading";
 import { FormattedMessage, FormattedHTMLMessage } from "react-intl";
 import { Link } from "react-router-dom";
-import { AppContextConsumer } from "../../AppContext";
-import { IntlContextConsumer } from "../../IntlContext";
 import ReactTransitionGroup from "react-addons-transition-group";
 import { TweenMax } from "gsap";
 import laptop from "./laptop.png";

@@ -54,7 +54,7 @@ class Task extends Component {
                                 </div> */}
                                 <SpecialTask name="完成任務1獲得2000點" desc="看影片找答案即可獲得點數" comingsoontext="7/21開啟任務" link="st1" />
                                 <SpecialTask name="完成任務2獲得4000點" desc="看影片找答案即可獲得點數" comingsoontext="7/27開啟任務" link="st2" />
-                                <SpecialTask name="完成任務3獲得2000點" desc="看影片找答案即可獲得點數" comingsoontext="7/31開啟任務" link="st3" commingsoon />
+                                <SpecialTask name="完成任務3獲得2000點" desc="看影片找答案即可獲得點數" comingsoontext="7/31開啟任務" link="st3" />
                             </TaskItemGroup>
 
                             <div className="task__item">
@@ -74,18 +74,12 @@ class Task extends Component {
                             </div>
                         </div>
                     </div>
-                    <AppContextConsumer>
-                        {context => {
-                            return (
-                                <CircleBtn
-                                    className="task__close"
-                                    onClick={() => {
-                                        context.task.toggle();
-                                    }}
-                                />
-                            );
+                    <CircleBtn
+                        className="task__close"
+                        onClick={() => {
+                            this.props.appContext.task.toggle();
                         }}
-                    </AppContextConsumer>
+                    />
                 </div>
             </div>,
             this.node
@@ -113,14 +107,15 @@ class SpecialTask extends Component {
                         <AppContextConsumer>
                             {appContext => {
                                 return (
-                                    <Link
+                                    <RoundBtn
                                         onClick={() => {
                                             appContext.task.toggle();
                                         }}
-                                        to={`/${appContext.currentCountry}/${this.props.link}`}
+                                        size="S"
+                                        routerLink={`/${appContext.currentCountry}/${this.props.link}`}
                                     >
-                                        <RoundBtn size="S">GO</RoundBtn>
-                                    </Link>
+                                        GO
+                                    </RoundBtn>
                                 );
                             }}
                         </AppContextConsumer>

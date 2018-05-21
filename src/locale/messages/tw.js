@@ -113,6 +113,21 @@ const tw = {
     "intl.product.swtich7.content": "Spin 5 輕盈、易攜帶，搭配可翻轉軸承與金屬外殼，適合需要應付各種工作環境與切換模式、又能兼具娛樂的時尚專業人士。Spin 5採可翻轉多功能設計，讓使用者能流暢切換筆電、平板、觀賞與帳篷等不同模式，因此是發揮創造力和分享內容的完美平台。<br/><br/>Spin 5 輕盈、易攜帶，搭配可翻轉軸承與金屬外殼，適合需要應付各種工作環境與切換模式、又能兼具娛樂的時尚專業人士。Spin 5採可翻轉多功能設計，讓使用者能流暢切換筆電、平板、觀賞與帳篷等不同模式，因此是發揮創造力和分享內容的完美平台。<br/><br/>Spin 5 輕盈、易攜帶，搭配可翻轉軸承與金屬外殼，適合需要應付各種工作環境與切換模式、又能兼具娛樂的時尚專業人士。Spin 5採可翻轉多功能設計，讓使用者能流暢切換筆電、平板、觀賞與帳篷等不同模式，因此是發揮創造力和分享內容的完美平台。",
     "intl.product.swift5.content": "完美的效能與操控<br />Acer Nitro 5 搭載最新一代的顯示卡，繪圖運算速度大幅提升，並支援更為細膩的光影細節與質地，讓玩家可以完全沉浸於鮮明畫面帶來的極致快感。玩家還可享受最新一代處理器帶來的驚人效能，無論遊戲、內容創作或多工應用皆無比流暢。Acer Nitro 5 搭載最新一代的顯示卡，繪圖運算速度大幅提升，並支援更為細膩的光影細節與質地，讓玩家可以完全沉浸於鮮明畫面帶來的極致快感。玩家還可享受最新一代處理器帶來的驚人效能，無論遊戲、內容創作或多工應用皆無比流暢。Acer Nitro 5 搭載最新一代的顯示卡，繪圖運算速度大幅提升，並支援更為細膩的光影細節與質地，讓玩家可以完全沉浸於鮮明畫面帶來的極致快感。玩家還可享受最新一代處理器帶來的驚人效能，無論遊戲、內容創作或多工應用皆無比流暢。<br /><br />Nitro 5 的上蓋以雷射雕刻進行優雅表面處理，為這款電競筆電帶來顯眼細緻風格。",
 
+    "intl.notification.sentence1": "恭喜你完成註冊，獲得4000點",
+    "intl.notification.sentence2": "舊友回娘家，獲得10000點",
+    "intl.notification.sentence3": "歡迎回到AcerDay，獲得800點",
+    "intl.notification.sentence4": "你連續登錄網站3天，獲得2000點",
+    "intl.notification.sentence5": "你連續登錄網站8天，獲得4000點",
+    "intl.notification.sentence6": "你今天向{name}打招呼，獲得1000點",
+    "intl.notification.sentence7": "你連續8天進站向朋友打招呼，獲得5000點",
+    "intl.notification.sentence8": "你今天完成節奏遊戲，獲得1000點",
+    "intl.notification.sentence9": "你接受{name}的創作邀請，獲得600點",
+    "intl.notification.sentence10": "你完成與{name}的共同創作，獲得1500點",
+    "intl.notification.sentence11": "你分享與{name}的共同創作，獲得500點",
+    "intl.notification.sentence12": "你完成7/23的限定任務，獲得2000點",
+    "intl.notification.sentence13": "你完成7/27的限定任務，獲得2000點",
+    "intl.notification.sentence14": "你完成7/31的限定任務，獲得2000點",
+
     config: {
         products: ["nitro5", "spin5", "helios300", "switch7", "swift5"],
         comingsoon: true

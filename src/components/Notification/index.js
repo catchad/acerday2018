@@ -90,18 +90,12 @@ class Notification extends Component {
                             </div>
                         </div>
                     </div>
-                    <AppContextConsumer>
-                        {context => {
-                            return (
-                                <CircleBtn
-                                    className="notification__close"
-                                    onClick={() => {
-                                        context.notification.toggle();
-                                    }}
-                                />
-                            );
+                    <CircleBtn
+                        className="notification__close"
+                        onClick={() => {
+                            this.props.appContext.notification.toggle();
                         }}
-                    </AppContextConsumer>
+                    />
                 </div>
             </div>,
             this.node

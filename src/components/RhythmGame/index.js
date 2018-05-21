@@ -5,6 +5,7 @@ import Background from "../Background";
 import RoundBtn from "../RoundBtn";
 import "./index.scss";
 import user from "./user.png";
+import { toast } from "react-toastify";
 import { FormattedMessage } from "react-intl";
 import { TweenMax } from "gsap";
 import ReactTransitionGroup from "react-addons-transition-group";
@@ -26,10 +27,10 @@ class RhythmGame extends Component {
         return (
             <div className="page">
                 <ReactTransitionGroup component="div">
-                    {this.state.step == 1 ? <Step1 nextStep={this._nextStep} /> : null}
-                    {this.state.step == 2 ? <Step2 nextStep={this._nextStep} /> : null}
-                    {this.state.step == 3 ? <Step3 nextStep={this._nextStep} /> : null}
-                    {this.state.step == 4 ? <Step4 nextStep={this._nextStep} /> : null}
+                    {this.state.step == 1 ? <Step1 intl={this.props.intlContext} nextStep={this._nextStep} /> : null}
+                    {this.state.step == 2 ? <Step2 intl={this.props.intlContext} nextStep={this._nextStep} /> : null}
+                    {this.state.step == 3 ? <Step3 intl={this.props.intlContext} nextStep={this._nextStep} /> : null}
+                    {this.state.step == 4 ? <Step4 intl={this.props.intlContext} nextStep={this._nextStep} /> : null}
                 </ReactTransitionGroup>
                 <Background color1="#01C700" color2="#01B3EF" />
             </div>
@@ -325,7 +326,7 @@ class Step2 extends Component {
         // this.setState({
         //     bubbleActive: true
         // });
-        TweenMax.to(this.refs.btn.refs.btn, 0.25, { opacity: 0 });
+        TweenMax.to("#step2Btn", 0.25, { opacity: 0 });
         TweenMax.set([this.refs.bubble1, this.refs.bubble2], { opacity: 1 });
         TweenMax.fromTo(this.refs.bubble1, 0.5, { y: 150, scale: 0 }, { y: 0, scale: 1, ease: Back.easeOut });
         TweenMax.fromTo(
@@ -338,6 +339,8 @@ class Step2 extends Component {
                 ease: Back.easeOut,
                 delay: 1,
                 onComplete: () => {
+                    toast(this.props.intl.formatMessage({ id: "intl.notification.sentence6" }, { name: "Rachel Wang" }));
+                    toast(this.props.intl.formatMessage({ id: "intl.notification.sentence7" }));
                     setTimeout(() => {
                         this.props.nextStep();
                     }, 1000);
@@ -356,7 +359,7 @@ class Step2 extends Component {
                     </p>
                 </div>
                 <div className="page__row page__row--center">
-                    <RoundBtn ref="btn" onClick={this._showBubble} size="L" zIndexUp>
+                    <RoundBtn id="step2Btn" onClick={this._showBubble} size="L" zIndexUp>
                         <FormattedMessage id="intl.rhythmgame.step2.btn" />
                     </RoundBtn>
                 </div>

@@ -93,40 +93,93 @@ class App extends React.Component {
                 <IntlContextProvider locale={this.locale} messages={this.messages}>
                     <AppContextProvider currentCountry={this.props.match.params.country} history={this.props.history}>
                         <Header />
-                        <main className="main">
-                            <Switch>
-                                <Route path="/:country/" component={Homepage} exact />
-                                <Route path="/:country/login" component={Login} />
-                                <Route path="/:country/register" component={Register} />
-                                <Route path="/:country/st1" component={SpecialTask1} />
-                                <Route path="/:country/st2" component={SpecialTask2} />
-                                <Route path="/:country/st3" component={SpecialTask3} />
-                                <Route path="/:country/rule" component={Rule} />
-                                <Route path={`/:country/product/:pname${this.productQuery}`} component={Product} />
-                                <Route path="/:country/exchange" component={Exchange} />
-                                <Route path="/:country/record" component={Record} />
-                                {/* <Route path="/:country/task" component={Task} /> */}
-                                <Route path="/:country/rhythmGame" component={RhythmGame} />
-                                <Route component={NoMatch} />
-                            </Switch>
-                            <AppContextConsumer>
-                                {context => {
-                                    return <ReactTransitionGroup component="div">{context.task.status ? <Task /> : ""}</ReactTransitionGroup>;
-                                }}
-                            </AppContextConsumer>
-                            {/* <AppContextConsumer>
-                                {context => {
-                                    return context.task.status ? <Task /> : "";
-                                }}
-                            </AppContextConsumer> */}
-                            <AppContextConsumer>
-                                {context => {
-                                    return <ReactTransitionGroup component="div">{context.notification.status ? <Notification /> : ""}</ReactTransitionGroup>;
-                                }}
-                            </AppContextConsumer>
-
-                            <ToastContainer position="bottom-center" autoClose={2000} hideProgressBar closeOnClick draggable newestOnTop pauseOnHover />
-                        </main>
+                        <AppContextConsumer>
+                            {appContext => {
+                                return (
+                                    <IntlContextConsumer>
+                                        {intlContext => {
+                                            return (
+                                                <main className="main">
+                                                    <Switch>
+                                                        <Route
+                                                            path="/:country/"
+                                                            exact
+                                                            render={props => {
+                                                                return <Homepage appContext={appContext} intlContext={intlContext.intl} />;
+                                                            }}
+                                                        />
+                                                        <Route
+                                                            path="/:country/login"
+                                                            render={props => {
+                                                                return <Login appContext={appContext} intlContext={intlContext.intl} />;
+                                                            }}
+                                                        />
+                                                        <Route
+                                                            path="/:country/register"
+                                                            render={props => {
+                                                                return <Register appContext={appContext} intlContext={intlContext.intl} />;
+                                                            }}
+                                                        />
+                                                        <Route
+                                                            path="/:country/st1"
+                                                            render={props => {
+                                                                return <SpecialTask1 appContext={appContext} intlContext={intlContext.intl} />;
+                                                            }}
+                                                        />
+                                                        <Route
+                                                            path="/:country/st2"
+                                                            render={props => {
+                                                                return <SpecialTask2 appContext={appContext} intlContext={intlContext.intl} />;
+                                                            }}
+                                                        />
+                                                        <Route
+                                                            path="/:country/st3"
+                                                            render={props => {
+                                                                return <SpecialTask3 appContext={appContext} intlContext={intlContext.intl} />;
+                                                            }}
+                                                        />
+                                                        <Route
+                                                            path="/:country/rule"
+                                                            render={props => {
+                                                                return <Rule appContext={appContext} intlContext={intlContext.intl} />;
+                                                            }}
+                                                        />
+                                                        <Route
+                                                            path={`/:country/product/:pname${this.productQuery}`}
+                                                            render={props => {
+                                                                return <Product appContext={appContext} intlContext={intlContext.intl} />;
+                                                            }}
+                                                        />
+                                                        <Route
+                                                            path="/:country/exchange"
+                                                            render={props => {
+                                                                return <Exchange appContext={appContext} intlContext={intlContext.intl} />;
+                                                            }}
+                                                        />
+                                                        <Route
+                                                            path="/:country/record"
+                                                            render={props => {
+                                                                return <Record appContext={appContext} intlContext={intlContext.intl} />;
+                                                            }}
+                                                        />
+                                                        <Route
+                                                            path="/:country/rhythmGame"
+                                                            render={props => {
+                                                                return <RhythmGame appContext={appContext} intlContext={intlContext.intl} />;
+                                                            }}
+                                                        />
+                                                        <Route component={NoMatch} />
+                                                    </Switch>
+                                                    <ReactTransitionGroup component="div">{appContext.task.status ? <Task appContext={appContext} intlContext={intlContext.intl} /> : ""}</ReactTransitionGroup>
+                                                    <ReactTransitionGroup component="div">{appContext.notification.status ? <Notification appContext={appContext} intlContext={intlContext.intl} /> : ""}</ReactTransitionGroup>
+                                                    <ToastContainer position="bottom-center" autoClose={5000} hideProgressBar closeOnClick draggable newestOnTop pauseOnHover />
+                                                </main>
+                                            );
+                                        }}
+                                    </IntlContextConsumer>
+                                );
+                            }}
+                        </AppContextConsumer>
                     </AppContextProvider>
                 </IntlContextProvider>
             </IntlProvider>

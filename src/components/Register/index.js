@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import Select from "../Select";
 import Avatar from "../Avatar";
 import Block from "../Block";
@@ -11,7 +11,7 @@ import RoundBtn from "../RoundBtn";
 import user from "./user.png";
 import ReactTransitionGroup from "react-addons-transition-group";
 import { FormattedMessage } from "react-intl";
-// import { AppContextConsumer } from "../../AppContext";
+import { AppContextConsumer } from "../../AppContext";
 import { IntlContextConsumer } from "../../IntlContext";
 import { toast } from "react-toastify";
 import "./index.scss";
@@ -69,13 +69,15 @@ class Register extends Component {
                 >
                     Notify !
                 </button> */}
+
                 <ReactTransitionGroup component="div">
-                    {this.state.currentStep == 1 ? <Step1 nextStep={this._nextStep} userData={this.userData} /> : null}
-                    {this.state.currentStep == 2 ? <Step2 nextStep={this._nextStep} avatarGenderChange={this._avatarGenderChange} /> : null}
-                    {this.state.currentStep == 3 ? <Step3 nextStep={this._nextStep} avatarGenderChange={this._avatarGenderChange} userData={this.userData} avatarTargetChange={this._avatarTargetChange} avatarResultChange={this._avatarResultChange} avatarTarget={this.state.avatarTarget} avatarGender={this.state.avatarGender} /> : null}
-                    {this.state.currentStep == 4 ? <Step4 nextStep={this._nextStep} userData={this.userData} avatarResult={this.state.avatarResult} /> : null}
-                    {this.state.currentStep == 5 ? <Step5 nextStep={this._nextStep} avatarResult={this.state.avatarResult} /> : null}
+                    {this.state.currentStep == 1 ? <Step1 intl={this.props.intlContext} nextStep={this._nextStep} userData={this.userData} /> : null}
+                    {this.state.currentStep == 2 ? <Step2 intl={this.props.intlContext} nextStep={this._nextStep} avatarGenderChange={this._avatarGenderChange} /> : null}
+                    {this.state.currentStep == 3 ? <Step3 intl={this.props.intlContext} nextStep={this._nextStep} avatarGenderChange={this._avatarGenderChange} userData={this.userData} avatarTargetChange={this._avatarTargetChange} avatarResultChange={this._avatarResultChange} avatarTarget={this.state.avatarTarget} avatarGender={this.state.avatarGender} /> : null}
+                    {this.state.currentStep == 4 ? <Step4 intl={this.props.intlContext} nextStep={this._nextStep} userData={this.userData} avatarResult={this.state.avatarResult} /> : null}
+                    {this.state.currentStep == 5 ? <Step5 intl={this.props.intlContext} nextStep={this._nextStep} avatarResult={this.state.avatarResult} /> : null}
                 </ReactTransitionGroup>
+
                 {/* <Alert>
                     <p className="alert__text">Alert</p>
                     <div className="alert__btnRow">
@@ -207,11 +209,7 @@ class Step2 extends Component {
                     </p>
                 </div>
                 <div className="page__row page__row--flex page__row--widthM">
-                    <IntlContextConsumer>
-                        {context => {
-                            return <SquareBtnGroup onChange={this.props.avatarGenderChange} data={[{ text: context.intl.formatMessage({ id: "intl.register.step2.male" }), icon: "https://fakeimg.pl/500x500", value: "male" }, { text: context.intl.formatMessage({ id: "intl.register.step2.female" }), icon: "https://fakeimg.pl/500x500", value: "female" }]} />;
-                        }}
-                    </IntlContextConsumer>
+                    <SquareBtnGroup onChange={this.props.avatarGenderChange} data={[{ text: this.props.intl.formatMessage({ id: "intl.register.step2.male" }), icon: "https://fakeimg.pl/500x500", value: "male" }, { text: this.props.intl.formatMessage({ id: "intl.register.step2.female" }), icon: "https://fakeimg.pl/500x500", value: "female" }]} />;
                 </div>
                 <div className="page__row page__row--center">
                     <RoundBtn onClick={this.props.nextStep} size="L">
@@ -272,11 +270,7 @@ class Step3 extends Component {
 
                 <div className="page__row page__row--flex avatarUI">
                     <div className="avatarUI__left">
-                        <IntlContextConsumer>
-                            {context => {
-                                return <SquareBtnGroup defaultValue="hair" size="s" onChange={this.props.avatarTargetChange} data={[{ text: context.intl.formatMessage({ id: "intl.register.step3.hair" }), value: "hair", icon: "https://fakeimg.pl/64x64/" }, { text: context.intl.formatMessage({ id: "intl.register.step3.eye" }), value: "eye", icon: "https://fakeimg.pl/64x64/" }, { text: context.intl.formatMessage({ id: "intl.register.step3.mouth" }), value: "mouth", icon: "https://fakeimg.pl/64x64/" }]} />;
-                            }}
-                        </IntlContextConsumer>
+                        <SquareBtnGroup defaultValue="hair" size="s" onChange={this.props.avatarTargetChange} data={[{ text: this.props.intl.formatMessage({ id: "intl.register.step3.hair" }), value: "hair", icon: "https://fakeimg.pl/64x64/" }, { text: this.props.intl.formatMessage({ id: "intl.register.step3.eye" }), value: "eye", icon: "https://fakeimg.pl/64x64/" }, { text: this.props.intl.formatMessage({ id: "intl.register.step3.mouth" }), value: "mouth", icon: "https://fakeimg.pl/64x64/" }]} />;
                     </div>
                     <div className="avatarUI__right">
                         <CircleBtn
@@ -300,32 +294,6 @@ class Step3 extends Component {
                                 this.refs.avatar._random();
                             }}
                         />
-
-                        {/* <RoundBtn
-                            onClick={() => {
-                                switch (this.props.avatarGender) {
-                                    case "male":
-                                        this.props.avatarGenderChange("female");
-                                        break;
-                                    case "female":
-                                        this.props.avatarGenderChange("male");
-                                        break;
-                                }
-                            }}
-                            size="L"
-                        >
-                            <img src="https://fakeimg.pl/50x50/" />
-                        </RoundBtn>
-
-                        <RoundBtn
-                            onClick={() => {
-                                this.refs.avatar._random();
-                            }}
-                            size="L"
-                        >
-                            <img src="https://fakeimg.pl/50x50/" />
-                        </RoundBtn> */}
-
                         <RoundBtn
                             className="avatarUI__nextStep"
                             onClick={() => {
@@ -393,23 +361,19 @@ class Step4 extends Component {
                     <img className="register__result" src={this.props.avatarResult} />
                 </div>
                 <div className="page__row page__row--widthM">
-                    <IntlContextConsumer>
-                        {context => {
-                            return (
-                                <Radio
-                                    onChange={value => {
-                                        this.props.userData.greet = value;
-                                    }}
-                                    options={[{ text: context.intl.formatMessage({ id: "intl.greet1" }), value: 1 }, { text: context.intl.formatMessage({ id: "intl.greet2" }), value: 2 }]}
-                                />
-                            );
+                    <Radio
+                        onChange={value => {
+                            this.props.userData.greet = value;
                         }}
-                    </IntlContextConsumer>
+                        options={[{ text: this.props.intl.formatMessage({ id: "intl.greet1" }), value: 1 }, { text: this.props.intl.formatMessage({ id: "intl.greet2" }), value: 2 }]}
+                    />
                 </div>
                 <div className="page__row page__row--center">
                     <RoundBtn
                         onClick={() => {
                             console.log(this.props.userData);
+                            toast(this.props.intl.formatMessage({ id: "intl.notification.sentence1" }));
+                            toast(this.props.intl.formatMessage({ id: "intl.notification.sentence2" }));
                             this.props.nextStep();
                         }}
                         size="L"
@@ -455,7 +419,13 @@ class Step5 extends Component {
         });
     }
     componentDidMount() {
-        toast("恭喜你完成註冊，獲得4000點");
+        // toast("恭喜你完成註冊，獲得4000點");
+        // toast("舊友回娘家，獲得10000點");
+        // toast(
+        //     <Fragment>
+        //         <p className="Toastify__text">恭喜你完成註冊，獲得4000點</p>
+        //     </Fragment>
+        // );
     }
     render() {
         return (
@@ -480,14 +450,15 @@ class Step5 extends Component {
                     />
                 </div>
                 <div className="page__row page__row--center">
-                    <RoundBtn
-                        size="L"
-                        onClick={() => {
-                            toast("恭喜你完成註冊，獲得4000點");
+                    <AppContextConsumer>
+                        {context => {
+                            return (
+                                <RoundBtn routerLink={`/${context.currentCountry}/rhythmGame`}>
+                                    <FormattedMessage id="intl.register.step5.startgame" />
+                                </RoundBtn>
+                            );
                         }}
-                    >
-                        <FormattedMessage id="intl.register.step5.startgame" />
-                    </RoundBtn>
+                    </AppContextConsumer>
                 </div>
             </section>
         );
