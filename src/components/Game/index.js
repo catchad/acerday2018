@@ -9,7 +9,7 @@ import { toast } from "react-toastify";
 import { FormattedMessage } from "react-intl";
 import { TweenMax } from "gsap";
 import ReactTransitionGroup from "react-addons-transition-group";
-class RhythmGame extends Component {
+class Game extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -78,10 +78,10 @@ class Step1 extends Component {
             <div className="page__section" ref="section">
                 <div className="page__heading">
                     <p className="page__title">
-                        <FormattedMessage id="intl.rhythmgame.step1.title" />
+                        <FormattedMessage id="intl.game.step1.title" />
                     </p>
                     <p className="page__description">
-                        <FormattedMessage id="intl.rhythmgame.step1.desc" />
+                        <FormattedMessage id="intl.game.step1.desc" />
                     </p>
                 </div>
                 <div className="page__row page__row--flex page__row--widthM">
@@ -355,12 +355,12 @@ class Step2 extends Component {
             <div className="page__section" ref="section">
                 <div className="page__heading">
                     <p className="page__title">
-                        <FormattedMessage id="intl.rhythmgame.step2.title" />
+                        <FormattedMessage id="intl.game.step2.title" />
                     </p>
                 </div>
                 <div className="page__row page__row--center">
                     <RoundBtn id="step2Btn" onClick={this._showBubble} size="L" zIndexUp>
-                        <FormattedMessage id="intl.rhythmgame.step2.btn" />
+                        <FormattedMessage id="intl.game.step2.btn" />
                     </RoundBtn>
                 </div>
 
@@ -440,10 +440,10 @@ class Step3 extends Component {
             <div className="page__section" ref="section">
                 <div className="page__heading">
                     <p className="page__title">
-                        <FormattedMessage id="intl.rhythmgame.step3.title" />
+                        <FormattedMessage id="intl.game.step3.title" />
                     </p>
                     <p className="page__description">
-                        <FormattedMessage id="intl.rhythmgame.step3.desc" />
+                        <FormattedMessage id="intl.game.step3.desc" />
                     </p>
                 </div>
                 <div className="page__row page__row--center">
@@ -534,4 +534,6 @@ class Step4 extends Component {
     }
 }
 
-export default RhythmGame;
+export default Game;
+
+// RhythmGame

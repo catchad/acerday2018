@@ -10,7 +10,7 @@ import NoMatch from "../NoMatch";
 import Login from "../Login";
 import Rule from "../Rule";
 import Register from "../Register";
-import RhythmGame from "../RhythmGame";
+import Game from "../Game";
 import Product from "../Product";
 import Exchange from "../Exchange";
 import Record from "../Record";
@@ -163,9 +163,9 @@ class App extends React.Component {
                                                             }}
                                                         />
                                                         <Route
-                                                            path="/:country/rhythmGame"
+                                                            path="/:country/game"
                                                             render={props => {
-                                                                return <RhythmGame appContext={appContext} intlContext={intlContext.intl} />;
+                                                                return <Game appContext={appContext} intlContext={intlContext.intl} />;
                                                             }}
                                                         />
                                                         <Route component={NoMatch} />

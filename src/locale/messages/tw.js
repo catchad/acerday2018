@@ -6,7 +6,7 @@ const tw = {
 
     "intl.nav.homepage": "首頁",
     "intl.nav.task": "任務列表",
-    "intl.nav.rhythmgame": "節奏遊戲",
+    "intl.nav.game": "節奏遊戲",
     "intl.nav.rule": "活動辦法",
     "intl.nav.record": "創作記錄",
     "intl.nav.product": "產品介紹",
@@ -49,14 +49,14 @@ const tw = {
     "intl.register.step5.desc": "創角完成！",
     "intl.register.step5.startgame": "進入節奏遊戲",
 
-    "intl.rhythmgame.step1.title": "邀請好友 共同創作",
-    "intl.rhythmgame.step1.desc": "請先挑一位好友",
+    "intl.game.step1.title": "邀請好友 共同創作",
+    "intl.game.step1.desc": "請先挑一位好友",
 
-    "intl.rhythmgame.step2.title": "跟對方打聲招呼",
-    "intl.rhythmgame.step2.btn": "送出問候語",
+    "intl.game.step2.title": "跟對方打聲招呼",
+    "intl.game.step2.btn": "送出問候語",
 
-    "intl.rhythmgame.step3.title": "選擇遊戲難度",
-    "intl.rhythmgame.step3.desc": "請選擇遊戲難度，點選後即進入遊戲",
+    "intl.game.step3.title": "選擇遊戲難度",
+    "intl.game.step3.desc": "請選擇遊戲難度，點選後即進入遊戲",
 
     "intl.exchange.title": "獎項兌換",
     "intl.exchange.desc": "改變遊戲規則的曠世巨作，改變遊戲規則的曠世巨改變遊戲規則的曠世巨作改變遊戲規則的曠世巨作，改變遊戲規則的曠世巨作改變遊戲規則的曠世巨作。",

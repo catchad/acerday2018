@@ -6,7 +6,7 @@ const us = {
 
     "intl.nav.homepage": "Homepage",
     "intl.nav.task": "Task",
-    "intl.nav.rhythmgame": "Rhythm Game",
+    "intl.nav.game": "Rhythm Game",
     "intl.nav.rule": "Rule",
     "intl.nav.record": "Record",
     "intl.nav.product": "Product",
@@ -49,14 +49,14 @@ const us = {
     "intl.register.step5.desc": "Create complete!",
     "intl.register.step5.startgame": "Enter the rhythm game",
 
-    "intl.rhythmgame.step1.title": "Invite friends to co-author",
-    "intl.rhythmgame.step1.desc": "Please pick a friend first",
+    "intl.game.step1.title": "Invite friends to co-author",
+    "intl.game.step1.desc": "Please pick a friend first",
 
-    "intl.rhythmgame.step2.title": "Say hello to each other",
-    "intl.rhythmgame.step2.btn": "Send a greeting",
+    "intl.game.step2.title": "Say hello to each other",
+    "intl.game.step2.btn": "Send a greeting",
 
-    "intl.rhythmgame.step3.title": "Select game difficulty",
-    "intl.rhythmgame.step3.desc": "Please select the difficulty of the game and enter the game after clicking",
+    "intl.game.step3.title": "Select game difficulty",
+    "intl.game.step3.desc": "Please select the difficulty of the game and enter the game after clicking",
 
     "intl.exchange.title": "Exchange",
     "intl.exchange.desc": "Please select the difficulty of the game and enter the game after clicking",
