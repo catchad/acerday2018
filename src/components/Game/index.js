@@ -3,6 +3,7 @@ import Block from "../Block";
 import Select from "../Select";
 import Background from "../Background";
 import RoundBtn from "../RoundBtn";
+import RhythmGame from "../RhythmGame";
 import "./index.scss";
 import user from "./user.png";
 import { toast } from "react-toastify";
@@ -32,7 +33,7 @@ class Game extends Component {
                     {this.state.step == 3 ? <Step3 intl={this.props.intlContext} nextStep={this._nextStep} /> : null}
                     {this.state.step == 4 ? <Step4 intl={this.props.intlContext} nextStep={this._nextStep} /> : null}
                 </ReactTransitionGroup>
-                <Background color1="#01C700" color2="#01B3EF" />
+                <Background color1={this.state.step == 4 ? "#505CFF" : "#01C700"} color2={this.state.step == 4 ? "#62008B" : "#01B3EF"} />
             </div>
         );
     }
@@ -492,45 +493,38 @@ class Step4 extends Component {
     }
 
     componentWillEnter(callback) {
-        TweenMax.fromTo(
-            this.refs.section,
-            0.5,
-            {
-                autoAlpha: 0,
-                display: "none",
-                scale: 0.8
-            },
-            {
-                scale: 1,
-                rotation: 0,
-                autoAlpha: 1,
-                display: "block",
-                delay: 0.25,
-                ease: Back.easeOut.config(2),
-                onComplete: callback
-            }
-        );
+        // TweenMax.fromTo(
+        //     this.refs.section,
+        //     0.5,
+        //     {
+        //         autoAlpha: 0,
+        //         display: "none",
+        //         scale: 0.8
+        //     },
+        //     {
+        //         scale: 1,
+        //         rotation: 0,
+        //         autoAlpha: 1,
+        //         display: "block",
+        //         delay: 0.25,
+        //         ease: Back.easeOut.config(2),
+        //         onComplete: callback
+        //     }
+        // );
     }
 
     componentWillLeave(callback) {
-        TweenMax.to(this.refs.section, 0.25, {
-            autoAlpha: 0,
-            onComplete: () => {
-                window.scrollTo(0, 0);
-                callback();
-            }
-        });
+        // TweenMax.to(this.refs.section, 0.25, {
+        //     autoAlpha: 0,
+        //     onComplete: () => {
+        //         window.scrollTo(0, 0);
+        //         callback();
+        //     }
+        // });
     }
 
     render() {
-        return (
-            <div className="page__section" ref="section">
-                <div className="page__heading">
-                    <p className="page__title">遊戲</p>
-                    <p className="page__description">遊戲遊戲遊戲遊戲遊戲</p>
-                </div>
-            </div>
-        );
+        return <RhythmGame level="1" />;
     }
 }
 

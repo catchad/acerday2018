@@ -51,7 +51,7 @@ class Background extends Component {
             this.bar.beginFill(0xffffff);
             this.bar.drawRect(-5, -this.wh / 2, 10, this.wh);
             this.bar.endFill();
-            this.bar.alpha = 0.2;
+            this.bar.alpha = 0.1;
             this.bar.x = i * (10 + 8) + 5;
             this.bar.y = this.wh / 2;
             this.bar.t = Math.random() * Math.PI;
