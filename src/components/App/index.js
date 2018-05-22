@@ -147,7 +147,7 @@ class App extends React.Component {
                                                         <Route
                                                             path={`/:country/product/:pname${this.productQuery}`}
                                                             render={props => {
-                                                                return <Product appContext={appContext} intlContext={intlContext.intl} />;
+                                                                return <Product {...props} appContext={appContext} intlContext={intlContext.intl} />;
                                                             }}
                                                         />
                                                         <Route
