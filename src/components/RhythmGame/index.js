@@ -3,6 +3,7 @@ import easy from "./easy.json";
 import normal from "./normal.json";
 import hard from "./hard.json";
 import music from "./acer-demo3.m4a";
+import RoundBtn from "../RoundBtn";
 // import { THREE } from "three";
 // import { THREE } from "three/build/three.modules";
 import { Scene, PerspectiveCamera, WebGLRenderer, HemisphereLight, PlaneGeometry, MeshBasicMaterial, MeshLambertMaterial, SphereGeometry, Mesh, RingGeometry, Texture, CylinderGeometry, CircleGeometry, Group, Raycaster, Vector2, Vector3, Geometry, PointsMaterial, Points } from "three";
@@ -14,7 +15,8 @@ class RhythmGame extends Component {
         this.state = {
             combo: 0,
             totalPoint: 0,
-            isPlaying: false
+            isPlaying: false,
+            start: false
         };
         this.musicGame = null;
         this.bpm = 113;
@@ -34,6 +36,13 @@ class RhythmGame extends Component {
     componentDidMount() {
         this.MusicGame();
     }
+    componentWillUnmount() {
+        window.removeEventListener("resize", this.resize);
+        document.getElementById("game").removeEventListener("touchstart", this.touchEvent);
+        document.getElementById("game").removeEventListener("touchend", this.touchEvent);
+        window.removeEventListener("keydown", this.keyDownEvent);
+        window.removeEventListener("keyup", this.keyUpEvent);
+    }
     MusicGame = () => {
         this.showExplode = true; //是否啟用粒子
         this.showCamera = false; //是否啟用鏡頭移動
@@ -51,15 +60,15 @@ class RhythmGame extends Component {
 
         this.audio = document.createElement("audio");
         this.audio.setAttribute("preload", true);
-        this.audio.setAttribute("loop", true);
+        this.audio.setAttribute("loop", false);
         this.audio.setAttribute("autoplay", true);
         this.audio.setAttribute("muted", true);
         this.audio.muted = true;
         // console.log(this.audio.muted);
-        var source = document.createElement("source");
-        source.setAttribute("src", music);
-        source.setAttribute("type", "audio/mpeg");
-        this.audio.appendChild(source);
+        this.source = document.createElement("source");
+        this.source.setAttribute("src", music);
+        this.source.setAttribute("type", "audio/mpeg");
+        this.audio.appendChild(this.source);
 
         this.totalPoint = 0;
         this.noteColors = [0x00e7c2, 0xfdfc02, 0xfe3b3b, 0x00f80e, 0x02a0ea];
@@ -73,16 +82,10 @@ class RhythmGame extends Component {
         // threejsSetup();
 
         // threejs場景建置
-        this.scene;
-        this.camera;
-        this.noteContainer;
-        var raycaster;
-        var mouse;
-
         this.scene = new Scene();
         this.renderer = new WebGLRenderer({ canvas: document.getElementById("game"), alpha: true });
         this.renderer.setPixelRatio(window.devicePixelRatio);
-        this.renderer.setSize(window.innerWidth, window.innerHeight);
+        this.renderer.setSize(window.innerWidth, window.innerHeight - 60);
 
         this.noteContainer = new Group();
         this.scene.add(this.noteContainer);
@@ -93,11 +96,7 @@ class RhythmGame extends Component {
         // 	height: '100%'
         // });
 
-        window.addEventListener("resize", function() {
-            this.renderer.setSize(window.innerWidth, window.innerHeight);
-            this.camera.aspect = window.innerWidth / window.innerHeight;
-            this.camera.updateProjectionMatrix();
-        });
+        window.addEventListener("resize", this.resize);
 
         // $(window).on("resize",function(){
         // 	renderer.setSize( window.innerWidth, window.innerHeight );
@@ -236,8 +235,6 @@ class RhythmGame extends Component {
             }
         }
 
-        this.tick();
-
         var makeNote = (index, position, color) => {
             var geometry = new SphereGeometry(20, 16, 16);
             var material = new MeshLambertMaterial({ color: color });
@@ -340,62 +337,15 @@ class RhythmGame extends Component {
         this.hitAnimateCount = [0, 0, 0];
 
         //touch events
-        var raycaster = new Raycaster();
-        var mouse = new Vector2();
+        this.raycaster = new Raycaster();
+        this.mouse = new Vector2();
 
-        function touchEvent(event) {
-            event.preventDefault();
-            for (var i = 0; i < event.changedTouches.length; i++) {
-                mouse.x = event.changedTouches[i].clientX / window.innerWidth * 2 - 1;
-                mouse.y = -(event.changedTouches[i].clientY / window.innerHeight) * 2 + 1;
-
-                raycaster.setFromCamera(mouse, this.camera);
-                var intersects = raycaster.intersectObjects(this.scene.children);
-                if (intersects.length > 0) {
-                    intersects.forEach(function(intersect) {
-                        console.log(intersect);
-                        if (intersect.object.name.indexOf("hitInside") != -1) {
-                            if (event.type == "touchstart") {
-                                _this.hit(intersect.object.name.substring(intersect.object.name.length - 1));
-                            } else {
-                                this.release(intersect.object.name.substring(intersect.object.name.length - 1));
-                            }
-                        }
-                    });
-                }
-            }
-        }
-
-        document.getElementById("game").addEventListener("touchstart", touchEvent, false);
-        document.getElementById("game").addEventListener("touchend", touchEvent, false);
+        document.getElementById("game").addEventListener("touchstart", this.touchEvent);
+        document.getElementById("game").addEventListener("touchend", this.touchEvent);
 
         //key events
-        window.addEventListener("keydown", e => {
-            var trackNum = getTrackNumByKeyCode(e.keyCode);
-            if (trackNum != null) {
-                this.hit(trackNum);
-            }
-        });
-        window.addEventListener("keyup", e => {
-            var trackNum = getTrackNumByKeyCode(e.keyCode);
-            if (trackNum != null) {
-                this.release(trackNum);
-            }
-        });
-
-        function getTrackNumByKeyCode(keyCode) {
-            //z:90 x:88 c:67
-            //a:65 s:83 d:68
-            if (keyCode == 65) {
-                return 0;
-            } else if (keyCode == 83) {
-                return 1;
-            } else if (keyCode == 68) {
-                return 2;
-            } else {
-                return null;
-            }
-        }
+        window.addEventListener("keydown", this.keyDownEvent);
+        window.addEventListener("keyup", this.keyUpEvent);
 
         drawScore(this.score);
 
@@ -521,7 +471,6 @@ class RhythmGame extends Component {
 
     ExplodeAnimation(position, color, totalObjects, smallSpeed, scene) {
         // this.index = index;
-
         var dirs = [];
         var movementSpeed = 5;
         var objectSize = 10;
@@ -589,7 +538,19 @@ class RhythmGame extends Component {
             return texture;
         }
     }
-
+    getTrackNumByKeyCode = keyCode => {
+        //z:90 x:88 c:67
+        //a:65 s:83 d:68
+        if (keyCode == 65) {
+            return 0;
+        } else if (keyCode == 83) {
+            return 1;
+        } else if (keyCode == 68) {
+            return 2;
+        } else {
+            return null;
+        }
+    };
     scoreMoveUI = pixel => {
         this.noteContainer.position.z = pixel;
         // this.noteContainer.position.z += 100;
@@ -729,6 +690,7 @@ class RhythmGame extends Component {
             if (this.currTime[0] > this.songLength) {
                 // console.log("end");
                 this.stop();
+                this.props.onGameOver();
             }
         }
     };
@@ -740,6 +702,7 @@ class RhythmGame extends Component {
                 isPlaying: true
             },
             () => {
+                this.tick();
                 this.playAudio();
                 this.playSchedule();
             }
@@ -803,6 +766,9 @@ class RhythmGame extends Component {
         // }
     };
     _start = () => {
+        this.setState({
+            start: true
+        });
         if (this.state.isPlaying) {
             this.stop();
             // $(this).html("start");
@@ -811,8 +777,53 @@ class RhythmGame extends Component {
             // $(this).html("stop");
         }
     };
+
+    keyDownEvent = e => {
+        var trackNum = this.getTrackNumByKeyCode(e.keyCode);
+        if (trackNum != null) {
+            this.hit(trackNum);
+        }
+    };
+
+    keyUpEvent = e => {
+        var trackNum = this.getTrackNumByKeyCode(e.keyCode);
+        if (trackNum != null) {
+            this.release(trackNum);
+        }
+    };
+
+    touchEvent = event => {
+        event.preventDefault();
+        for (var i = 0; i < event.changedTouches.length; i++) {
+            this.mouse.x = event.changedTouches[i].clientX / window.innerWidth * 2 - 1;
+            this.mouse.y = -(event.changedTouches[i].clientY / window.innerHeight) * 2 + 1;
+
+            this.raycaster.setFromCamera(this.mouse, this.camera);
+            var intersects = this.raycaster.intersectObjects(this.scene.children);
+            if (intersects.length > 0) {
+                intersects.forEach(intersect => {
+                    console.log(intersect);
+                    if (intersect.object.name.indexOf("hitInside") != -1) {
+                        if (event.type == "touchstart") {
+                            this.hit(intersect.object.name.substring(intersect.object.name.length - 1));
+                        } else {
+                            this.release(intersect.object.name.substring(intersect.object.name.length - 1));
+                        }
+                    }
+                });
+            }
+        }
+    };
+
+    resize = () => {
+        this.renderer.setSize(window.innerWidth, window.innerHeight - 60);
+        this.camera.aspect = window.innerWidth / (window.innerHeight - 60);
+        this.camera.updateProjectionMatrix();
+    };
     tick = () => {
-        requestAnimationFrame(this.tick);
+        if (this.state.isPlaying) {
+            requestAnimationFrame(this.tick);
+        }
 
         var pCount = this.explodes.length;
         while (pCount--) {
@@ -823,13 +834,8 @@ class RhythmGame extends Component {
 
     render() {
         return (
-            <Fragment>
+            <div className="rhythmGame">
                 <canvas id="game" />
-                <div className="container">
-                    <button className="start" onClick={this._start}>
-                        {this.state.isPlaying ? "stop" : "start"}
-                    </button>
-                </div>
                 <div className="ui">
                     <div className="total-point">0</div>
                     <div className={`combo-container ${this.state.combo !== 0 ? "active" : ""}`}>
@@ -840,33 +846,24 @@ class RhythmGame extends Component {
                         <span>MISS!</span>
                     </div>
                 </div>
-                {/* <div className="songs">
-                    <div
-                        className="song"
-                        onClick={() => {
-                            this._selectMode(1);
-                        }}
-                    >
-                        1
+                {!this.state.start ? (
+                    <div className="rhythmGame__ready">
+                        <div className="rhythmGame__wrapper">
+                            <p className="rhythmGame__title">遊戲說明</p>
+                            <p className="rhythmGame__text">
+                                當線上的圓點達圓框時<br />按下A、S、D即可獲得分數
+                            </p>
+                            <img className="rhythmGame__gif" src="https://fakeimg.pl/400x200/" />
+                            <div>
+                                <RoundBtn onClick={this._start}>GO</RoundBtn>
+                            </div>
+                            <p className="rhythmGame__info">請打開喇叭，已獲得最佳遊戲體驗</p>
+                        </div>
                     </div>
-                    <div
-                        className="song"
-                        onClick={() => {
-                            this._selectMode(2);
-                        }}
-                    >
-                        2
-                    </div>
-                    <div
-                        className="song"
-                        onClick={() => {
-                            this._selectMode(3);
-                        }}
-                    >
-                        3
-                    </div>
-                </div> */}
-            </Fragment>
+                ) : (
+                    ""
+                )}
+            </div>
         );
     }
 }

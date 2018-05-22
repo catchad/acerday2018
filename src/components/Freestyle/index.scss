@@ -1,0 +1,42 @@
+.freestyle {
+    position: relative;
+    width: 100%;
+    height: calc(100vh - 60px);
+    // transform: translate(-50%, -50%);
+
+    &__cdContainer {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 0;
+        max-width: 700px;
+        width: 100%;
+    }
+    &__cd {
+        width: 100%;        
+        height: auto;
+    }
+    &__note {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 10%;
+        height: auto;
+        transform: translate(-50%, -50%);
+    }
+    &__p1 {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 300px;
+        transform: translate(-230%, -50%);
+    }
+    &__p2 {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 300px;
+        transform: translate(130%, -50%);
+    }
+}

@@ -4,6 +4,7 @@ import Select from "../Select";
 import Background from "../Background";
 import RoundBtn from "../RoundBtn";
 import RhythmGame from "../RhythmGame";
+import Freestyle from "../Freestyle";
 import "./index.scss";
 import user from "./user.png";
 import { toast } from "react-toastify";
@@ -14,7 +15,7 @@ class Game extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            step: 1
+            step: 5
         };
     }
 
@@ -28,12 +29,13 @@ class Game extends Component {
         return (
             <div className="page">
                 <ReactTransitionGroup component="div">
-                    {this.state.step == 1 ? <Step1 intl={this.props.intlContext} nextStep={this._nextStep} /> : null}
-                    {this.state.step == 2 ? <Step2 intl={this.props.intlContext} nextStep={this._nextStep} /> : null}
-                    {this.state.step == 3 ? <Step3 intl={this.props.intlContext} nextStep={this._nextStep} /> : null}
-                    {this.state.step == 4 ? <Step4 intl={this.props.intlContext} nextStep={this._nextStep} /> : null}
+                    {this.state.step == 1 ? <Step1 intl={this.props.intlContext} nextStep={this._nextStep} /> : ""}
+                    {this.state.step == 2 ? <Step2 intl={this.props.intlContext} nextStep={this._nextStep} /> : ""}
+                    {this.state.step == 3 ? <Step3 intl={this.props.intlContext} nextStep={this._nextStep} /> : ""}
+                    {this.state.step == 4 ? <Step4 intl={this.props.intlContext} nextStep={this._nextStep} /> : ""}
+                    {this.state.step == 5 ? <Step5 intl={this.props.intlContext} nextStep={this._nextStep} /> : ""}
                 </ReactTransitionGroup>
-                <Background color1={this.state.step == 4 ? "#505CFF" : "#01C700"} color2={this.state.step == 4 ? "#62008B" : "#01B3EF"} />
+                <Background color1={this.state.step == 4 || this.state.step == 5 ? "#505CFF" : "#9AEF00"} color2={this.state.step == 4 || this.state.step == 5 ? "#62008B" : "#6F9F0F"} />
             </div>
         );
     }
@@ -181,6 +183,7 @@ class Step1 extends Component {
                     <Block
                         type="list"
                         onClick={this.props.nextStep}
+                        randomColor
                         data={[
                             {
                                 id: "",
@@ -492,42 +495,19 @@ class Step4 extends Component {
         super(props);
     }
 
-    componentWillEnter(callback) {
-        // TweenMax.fromTo(
-        //     this.refs.section,
-        //     0.5,
-        //     {
-        //         autoAlpha: 0,
-        //         display: "none",
-        //         scale: 0.8
-        //     },
-        //     {
-        //         scale: 1,
-        //         rotation: 0,
-        //         autoAlpha: 1,
-        //         display: "block",
-        //         delay: 0.25,
-        //         ease: Back.easeOut.config(2),
-        //         onComplete: callback
-        //     }
-        // );
+    render() {
+        return <RhythmGame level="1" onGameOver={this.props.nextStep} />;
     }
+}
 
-    componentWillLeave(callback) {
-        // TweenMax.to(this.refs.section, 0.25, {
-        //     autoAlpha: 0,
-        //     onComplete: () => {
-        //         window.scrollTo(0, 0);
-        //         callback();
-        //     }
-        // });
+class Step5 extends Component {
+    constructor(props) {
+        super(props);
     }
 
     render() {
-        return <RhythmGame level="1" />;
+        return <Freestyle />;
     }
 }
 
 export default Game;
-
-// RhythmGame
