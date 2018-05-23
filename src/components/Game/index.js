@@ -15,13 +15,19 @@ class Game extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            step: 5
+            step: 1
         };
     }
 
     _nextStep = () => {
         this.setState({
             step: this.state.step + 1
+        });
+    };
+
+    _restart = () => {
+        this.setState({
+            step: 1
         });
     };
 
@@ -33,7 +39,7 @@ class Game extends Component {
                     {this.state.step == 2 ? <Step2 intl={this.props.intlContext} nextStep={this._nextStep} /> : ""}
                     {this.state.step == 3 ? <Step3 intl={this.props.intlContext} nextStep={this._nextStep} /> : ""}
                     {this.state.step == 4 ? <Step4 intl={this.props.intlContext} nextStep={this._nextStep} /> : ""}
-                    {this.state.step == 5 ? <Step5 intl={this.props.intlContext} nextStep={this._nextStep} /> : ""}
+                    {this.state.step == 5 ? <Step5 intl={this.props.intlContext} nextStep={this._nextStep} restart={this._restart} /> : ""}
                 </ReactTransitionGroup>
                 <Background color1={this.state.step == 4 || this.state.step == 5 ? "#505CFF" : "#9AEF00"} color2={this.state.step == 4 || this.state.step == 5 ? "#62008B" : "#6F9F0F"} />
             </div>
@@ -189,20 +195,20 @@ class Step1 extends Component {
                                 id: "",
                                 name: "Ray Su",
                                 country: "Taiwan",
-                                img: user,
+                                img: "https://fakeimg.pl/300x450/282828/eae0d0",
                                 greet: "讓我們用音樂 Cool together"
                             },
                             {
                                 id: "",
                                 name: "Kanokporn Sopontaweesab",
-                                img: user,
+                                img: "https://fakeimg.pl/300x450/282828/eae0d0",
                                 country: "Taiwan",
                                 greet: "讓我們用音樂 Cool together"
                             },
                             {
                                 id: "",
                                 name: "Anis Aiz Sllu Tersenyum",
-                                img: user,
+                                img: "https://fakeimg.pl/300x450/282828/eae0d0",
                                 country: "Taiwan",
                                 greet: "讓我們用音樂 Cool together"
                             },
@@ -210,41 +216,41 @@ class Step1 extends Component {
                                 id: "",
                                 name: "Isaac chuang",
                                 country: "Taiwan",
-                                img: user,
+                                img: "https://fakeimg.pl/300x450/282828/eae0d0",
                                 greet: "讓我們用音樂 Cool together"
                             },
                             {
                                 id: "",
                                 name: "Rachel Wang",
                                 country: "Taiwan",
-                                img: user,
+                                img: "https://fakeimg.pl/300x450/282828/eae0d0",
                                 greet: "讓我們用音樂 Cool together"
                             },
                             {
                                 id: "",
                                 name: "莊育銘",
                                 country: "Taiwan",
-                                img: user,
+                                img: "https://fakeimg.pl/300x450/282828/eae0d0",
                                 greet: "讓我們用音樂 Cool together"
                             },
                             {
                                 id: "",
                                 name: "Ray Su",
                                 country: "Taiwan",
-                                img: user,
+                                img: "https://fakeimg.pl/300x450/282828/eae0d0",
                                 greet: "讓我們用音樂 Cool together"
                             },
                             {
                                 id: "",
                                 name: "Kanokporn Sopontaweesab",
-                                img: user,
+                                img: "https://fakeimg.pl/300x450/282828/eae0d0",
                                 country: "Taiwan",
                                 greet: "讓我們用音樂 Cool together"
                             },
                             {
                                 id: "",
                                 name: "Anis Aiz Sllu Tersenyum",
-                                img: user,
+                                img: "https://fakeimg.pl/300x450/282828/eae0d0",
                                 country: "Taiwan",
                                 greet: "讓我們用音樂 Cool together"
                             },
@@ -252,21 +258,21 @@ class Step1 extends Component {
                                 id: "",
                                 name: "Isaac chuang",
                                 country: "Taiwan",
-                                img: user,
+                                img: "https://fakeimg.pl/300x450/282828/eae0d0",
                                 greet: "讓我們用音樂 Cool together"
                             },
                             {
                                 id: "",
                                 name: "Rachel Wang",
                                 country: "Taiwan",
-                                img: user,
+                                img: "https://fakeimg.pl/300x450/282828/eae0d0",
                                 greet: "讓我們用音樂 Cool together"
                             },
                             {
                                 id: "",
                                 name: "莊育銘",
                                 country: "Taiwan",
-                                img: user,
+                                img: "https://fakeimg.pl/300x450/282828/eae0d0",
                                 greet: "讓我們用音樂 Cool together"
                             }
                         ]}
@@ -506,7 +512,7 @@ class Step5 extends Component {
     }
 
     render() {
-        return <Freestyle />;
+        return <Freestyle score="2970" restart={this.props.restart} />;
     }
 }
 

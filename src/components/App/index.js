@@ -14,6 +14,7 @@ import Game from "../Game";
 import Product from "../Product";
 import Exchange from "../Exchange";
 import Record from "../Record";
+import Creation from "../Creation";
 import SpecialTask1 from "../SpecialTask1";
 import SpecialTask2 from "../SpecialTask2";
 import SpecialTask3 from "../SpecialTask3";
@@ -118,6 +119,12 @@ class App extends React.Component {
                                                             path="/:country/register"
                                                             render={props => {
                                                                 return <Register appContext={appContext} intlContext={intlContext.intl} />;
+                                                            }}
+                                                        />
+                                                        <Route
+                                                            path="/:country/creation/:cid"
+                                                            render={props => {
+                                                                return <Creation {...props} appContext={appContext} intlContext={intlContext.intl} />;
                                                             }}
                                                         />
                                                         <Route

@@ -52,7 +52,9 @@ class Avatar extends Component {
         window.addEventListener("resize", this._resizeHandler);
     }
 
-    componentWillUnmount() {}
+    componentWillUnmount() {
+        window.removeEventListener("resize", this._resizeHandler);
+    }
 
     _prev = () => {
         this._move(-1);
