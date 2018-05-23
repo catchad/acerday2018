@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 
 class Global extends Component {
     constructor(props) {
@@ -9,6 +10,9 @@ class Global extends Component {
         return (
             <div>
                 <p>Global</p>
+                <Link to="/tw">tw</Link>
+                <br />
+                <Link to="/us">us</Link>
             </div>
         );
     }

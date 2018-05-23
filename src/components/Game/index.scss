@@ -1,0 +1,34 @@
+.bubble {
+    position: relative;
+    width: 100%;
+    // background-color: rgba(255, 255, 255, 0.4);
+    // border: 1px solid #ffffff;
+    // border-radius: 10px;
+    // background-image: url(https://fakeimg.pl/300x200/);
+    // background-size: 100% auto;
+    font-size: 16px;
+    margin-bottom: 20px;
+
+    &::before {
+        content: "";
+        display: block;
+        padding-top: 66.66666%;
+    }
+
+    &__text {
+        position: absolute;
+        top: 50%;
+        left: 0;
+        width: 100%;
+        box-sizing: border-box;
+        padding: 25px;
+        font-size: 1.5em;
+        transform: translateY(-50%);
+        text-align: center;
+        line-height: 1.3em;
+        @media screen and (max-width: 1024px) {
+            padding: 5px;
+            font-size: 0.8em;
+        }
+    }
+}

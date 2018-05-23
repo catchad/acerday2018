@@ -57,8 +57,8 @@ class Nav extends Component {
                                             <Link onClick={this._closeNav} className="nav__link" to={`/${appContext.currentCountry}`}>
                                                 <FormattedMessage id="intl.nav.homepage" />
                                             </Link>
-                                            <Link onClick={this._closeNav} className="nav__link" to={`/${appContext.currentCountry}/rhythmGame`}>
-                                                <FormattedMessage id="intl.nav.rhythmgame" />
+                                            <Link onClick={this._closeNav} className="nav__link" to={`/${appContext.currentCountry}/game`}>
+                                                <FormattedMessage id="intl.nav.game" />
                                             </Link>
                                             <Link onClick={this._closeNav} className="nav__link" to={`/${appContext.currentCountry}/rule`}>
                                                 <FormattedMessage id="intl.nav.rule" />

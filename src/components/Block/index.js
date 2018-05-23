@@ -1,6 +1,5 @@
 import React, { Component, Fragment } from "react";
 import "./index.scss";
-
 import laptop from "./laptop.png";
 import chunk from "lodash/chunk";
 class Block extends Component {

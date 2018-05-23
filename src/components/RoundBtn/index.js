@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import classNames from "classnames";
 import PropTypes from "prop-types";
 import "./index.scss";
@@ -22,8 +23,12 @@ class RoundBtn extends Component {
         });
     };
     render() {
-        return (
-            <a ref="btn" className={this.classnames} href={this.props.disabled ? null : this.props.href} target={this.props.target} onClick={this.props.disabled ? null : this.props.onClick} style={this.props.disabled || this.props.secondary ? null : { background: `linear-gradient(45deg, ${this.props.color2}, ${this.props.color1})` }}>
+        return this.props.routerLink ? (
+            <Link ref="btn" id={this.props.id} to={this.props.routerLink} className={this.classnames} onClick={this.props.disabled ? null : this.props.onClick} style={this.props.disabled || this.props.secondary ? null : { background: `linear-gradient(45deg, ${this.props.color2}, ${this.props.color1})` }}>
+                {this.props.children}
+            </Link>
+        ) : (
+            <a ref="btn" id={this.props.id} className={this.classnames} href={this.props.disabled ? null : this.props.href} target={this.props.target} onClick={this.props.disabled ? null : this.props.onClick} style={this.props.disabled || this.props.secondary ? null : { background: `linear-gradient(45deg, ${this.props.color2}, ${this.props.color1})` }}>
                 {this.props.children}
             </a>
         );

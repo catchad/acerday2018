@@ -3,7 +3,6 @@ import "./index.scss";
 import Background from "../Background";
 import SquareBtnGroup from "../SquareBtnGroup";
 import RoundBtn from "../RoundBtn";
-import { IntlContextConsumer } from "../../IntlContext";
 import { FormattedMessage } from "react-intl";
 
 class Login extends Component {
@@ -22,14 +21,10 @@ class Login extends Component {
                         </p>
                     </div>
                     <div className="page__row page__row--flex page__row--widthM">
-                        <IntlContextConsumer>
-                            {context => {
-                                return <SquareBtnGroup data={[{ text: context.intl.formatMessage({ id: "intl.login.facebook" }), icon: "https://fakeimg.pl/500x500", value: "facebook" }, { text: context.intl.formatMessage({ id: "intl.login.twitter" }), icon: "https://fakeimg.pl/500x500", value: "twitter" }]} />;
-                            }}
-                        </IntlContextConsumer>
+                        <SquareBtnGroup data={[{ text: this.props.intlContext.formatMessage({ id: "intl.login.facebook" }), icon: "https://fakeimg.pl/500x500", value: "facebook" }, { text: this.props.intlContext.formatMessage({ id: "intl.login.twitter" }), icon: "https://fakeimg.pl/500x500", value: "twitter" }]} />;
                     </div>
                     <div className="page__row page__row--center">
-                        <RoundBtn size="L">
+                        <RoundBtn size="L" routerLink={`/${this.props.appContext.currentCountry}/register`}>
                             <FormattedMessage id="intl.login.btn" />
                         </RoundBtn>
                     </div>

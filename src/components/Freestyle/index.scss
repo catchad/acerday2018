@@ -1,0 +1,176 @@
+.freestyle {
+    // position: relative;
+    // width: 100%;
+    // height: calc(100vh - 60px);
+    // overflow: hidden;
+
+    position: fixed;
+    width: 100%;
+    height: calc(100% - 60px);
+    overflow: hidden;
+    // transform: translate(-50%, -50%);
+
+    &__vinylRecordContainer {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 100%;
+        max-width: 700px;
+
+        @media screen and (max-width: 1024px) {
+            max-width: 550px;
+        }
+        @media screen and (max-width: 768px) {
+            transform: translate(-50%, -65%);
+            z-index: auto;
+        }
+        @media screen and (max-width: 600px) {
+            transform: translate(-50%, -50%);
+        }
+    }
+    &__score {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        font-size: 4em;
+        color: #ffffff;
+        font-weight: 1000;
+        text-shadow: 0px 0px 5px #ffffff;
+
+        @media screen and (max-width: 600px) {
+            top: 15px;
+            right: 15px;
+            font-size: 3em;
+        }
+    }
+    &__note {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 10%;
+        height: auto;
+        transform: translate(-50%, -50%);
+    }
+    &__p1 {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 300px;
+        transform: translate(-230%, -50%);
+        pointer-events: none;
+
+        @media screen and (max-width: 1400px) {
+            width: 250px;
+            transform: translate(-240%, -50%);
+        }
+
+        @media screen and (max-width: 1024px) {
+            width: 220px;
+            transform: translate(-220%, -50%);
+        }
+
+        @media screen and (max-width: 768px) {
+            width: 45%;
+            transform: translate(3%, 5%);
+        }
+
+        @media screen and (max-width: 600px) {
+            width: 40%;
+            transform: translate(8%, 20%);
+        }
+    }
+    &__p2 {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 300px;
+        transform: translate(130%, -50%);
+        pointer-events: none;
+
+        @media screen and (max-width: 1400px) {
+            width: 250px;
+            transform: translate(140%, -50%);
+        }
+        @media screen and (max-width: 1024px) {
+            width: 220px;
+            transform: translate(120%, -50%);
+        }
+        @media screen and (max-width: 768px) {
+            width: 45%;
+            transform: translate(-103%, 5%);
+        }
+        @media screen and (max-width: 600px) {
+            width: 40%;
+            transform: translate(-108%, 20%);
+        }
+    }
+
+    .block__name {
+        @media screen and (max-width: 768px) {
+            font-size: 2em;
+            padding-bottom: 10px;
+            margin-bottom: 8px;
+        }
+        @media screen and (max-width: 600px) {
+            font-size: 1em;
+            padding-bottom: 5px;
+            margin-bottom: 5px;
+        }
+    }
+
+    .block__country {
+        @media screen and (max-width: 768px) {
+            font-size: 1.5em;
+        }
+        @media screen and (max-width: 600px) {
+            font-size: 0.75em;
+        }
+    }
+
+    .block__greet {
+        @media screen and (max-width: 768px) {
+            font-size: 1.5em;
+        }
+        @media screen and (max-width: 600px) {
+            font-size: 0.75em;
+        }
+    }
+}
+
+.gameComplete {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 1200;
+    &__wrapper {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        // width: 100%;
+        // max-width: 900px;
+        border-radius: 15px;
+        border: 1px solid #ffffff;
+        box-sizing: border-box;
+        background: linear-gradient(45deg, #029fee, #01f965);
+        text-align: center;
+        padding: 40px;
+    }
+    &__title {
+        font-size: 2em;
+        font-weight: 600;
+        margin-bottom: 10px;
+    }
+    &__text {
+        font-size: 1.2em;
+        line-height: 1.3em;
+        margin-bottom: 20px;
+    }
+    &__row {
+        margin: 10px 0;
+    }
+}

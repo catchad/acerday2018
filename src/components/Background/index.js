@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { createPortal } from "react-dom";
 import PropTypes from "prop-types";
+// import classNames from "classnames";
 import "./index.scss";
 // import music from "./music.mp3";
 import * as PIXI from "pixi.js";
@@ -10,6 +11,10 @@ class Background extends Component {
         super(props);
 
         this.hData = [0.19, 0.43, 0.56, 0.65, 0.32, 0.47, 0.63, 0.78, 0.91, 1, 0.81, 0.67, 0.6, 0.5, 0.42, 0.33, 0.23, 0.37, 0.21, 0.11, 0.18, 0.28, 0.39, 0.47, 0.63, 0.76, 0.59, 0.51, 0.43, 0.33, 0.49, 0.56, 0.68, 0.84, 0.57, 0.49, 0.41, 0.28, 0.33, 0.44, 0.6, 0.71, 0.84, 0.72, 0.63, 0.44, 0.37, 0.58, 0.46, 0.36, 0.56, 0.7, 0.81, 0.88, 0.72, 0.6, 0.42, 0.51, 0.6, 0.36, 0.41, 0.31, 0.21, 0.39, 0.46, 0.33, 0.39, 0.25, 0.28, 0.15, 0.25, 0.51, 0.66, 0.39, 0.56, 0.3, 0.22, 0.57, 0.37, 0.63, 0.36, 0.72, 0.79, 0.94, 0.69, 0.51, 0.28, 0.47, 0.79, 0.47, 0.43, 0.31, 0.44, 0.69, 0.59, 0.39, 0.44, 0.28, 0.43, 0.32];
+        // this.classNames = classNames("gradientBtn");
+    }
+    componentWillUpdate() {
+        // this.classnNames = classNames("gradientBtn");
     }
     componentDidMount() {
         this.ww = this.refs.bg.clientWidth;
@@ -46,7 +51,7 @@ class Background extends Component {
             this.bar.beginFill(0xffffff);
             this.bar.drawRect(-5, -this.wh / 2, 10, this.wh);
             this.bar.endFill();
-            this.bar.alpha = 0.2;
+            this.bar.alpha = 0.1;
             this.bar.x = i * (10 + 8) + 5;
             this.bar.y = this.wh / 2;
             this.bar.t = Math.random() * Math.PI;
@@ -66,7 +71,7 @@ class Background extends Component {
 
     render() {
         return createPortal(
-            <div ref="bg" className="background" style={{ background: `linear-gradient(225deg, ${this.props.color1}, ${this.props.color2})` }}>
+            <div ref="bg" className="background" style={this.props.transparent ? { zIndex: this.props.zIndex } : { background: `linear-gradient(225deg, ${this.props.color1}, ${this.props.color2})`, zIndex: this.props.zIndex }}>
                 <canvas ref="pixiCanvas" className="background__wave" />
             </div>,
             document.getElementById("portal")
@@ -76,12 +81,14 @@ class Background extends Component {
 
 Background.propTypes = {
     color1: PropTypes.string,
-    color2: PropTypes.string
+    color2: PropTypes.string,
+    zIndex: PropTypes.string
 };
 
 Background.defaultProps = {
     color1: "#00fbe8",
-    color2: "#016ecd"
+    color2: "#016ecd",
+    zIndex: "-1000"
 };
 
 export default Background;

@@ -110,9 +110,9 @@
         position: absolute;
         top: 50%;
         left: 50%;
-        width: 60%;
+        width: 50%;
         transition: all 0.2s ease-out;
-        transform: translate(-50%, -145%);
+        transform: translate(-50%, -140%);
         // transform: translate3d(-50%, -145%, 300px); // for ios bug
         z-index: 100;
     }

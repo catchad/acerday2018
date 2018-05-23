@@ -6,7 +6,7 @@ const us = {
 
     "intl.nav.homepage": "Homepage",
     "intl.nav.task": "Task",
-    "intl.nav.rhythmgame": "Rhythm Game",
+    "intl.nav.game": "Rhythm Game",
     "intl.nav.rule": "Rule",
     "intl.nav.record": "Record",
     "intl.nav.product": "Product",
@@ -49,14 +49,14 @@ const us = {
     "intl.register.step5.desc": "Create complete!",
     "intl.register.step5.startgame": "Enter the rhythm game",
 
-    "intl.rhythmgame.step1.title": "Invite friends to co-author",
-    "intl.rhythmgame.step1.desc": "Please pick a friend first",
+    "intl.game.step1.title": "Invite friends to co-author",
+    "intl.game.step1.desc": "Please pick a friend first",
 
-    "intl.rhythmgame.step2.title": "Say hello to each other",
-    "intl.rhythmgame.step2.btn": "Send a greeting",
+    "intl.game.step2.title": "Say hello to each other",
+    "intl.game.step2.btn": "Send a greeting",
 
-    "intl.rhythmgame.step3.title": "Select game difficulty",
-    "intl.rhythmgame.step3.desc": "Please select the difficulty of the game and enter the game after clicking",
+    "intl.game.step3.title": "Select game difficulty",
+    "intl.game.step3.desc": "Please select the difficulty of the game and enter the game after clicking",
 
     "intl.exchange.title": "Exchange",
     "intl.exchange.desc": "Please select the difficulty of the game and enter the game after clicking",
@@ -112,6 +112,21 @@ const us = {
     "intl.product.helios300.content": "Perfect Performance and Control <br /> The Acer Nitro 5 is equipped with the latest generation of graphics cards. The speed of drawing operations is greatly enhanced, and it supports more detailed light and shadow details and textures, allowing players to fully immerse themselves in the ultimate pleasure brought by the bright picture. Players also enjoy the amazing performance of the latest generation of processors, no matter how smooth the game, content creation or multi-application. Acer Nitro 5 is equipped with the latest generation of graphics cards. The speed of drawing operations is greatly enhanced, and it supports more detailed light and shadow details and textures, allowing players to fully immerse themselves in the ultimate pleasure brought by the vivid picture. Players also enjoy the amazing performance of the latest generation of processors, no matter how smooth the game, content creation or multi-application. Acer Nitro 5 is equipped with the latest generation of graphics cards. The speed of drawing operations is greatly enhanced, and it supports more detailed light and shadow details and textures, allowing players to fully immerse themselves in the ultimate pleasure brought by the vivid picture. Players also enjoy the amazing performance of the latest generation of processors, no matter how smooth the game, content creation or multi-application. <br /><br />The top cover of the Nitro 5 is laser-engraved for elegant surface treatment, giving this eSports Notebook a striking and detailed look.",
     "intl.product.swtich7.content": "Spin 5 is lightweight, easy to carry, with reversible bearings and metal housing, suitable for fashion professionals who need to cope with a variety of work environments and switching modes, but also have entertainment. Spin 5 adopts a reversible multi-functional design that allows users to smoothly switch between different modes such as laptops, tablets, watches and tents, and is therefore the perfect platform for creativity and content sharing. <br/><br/>Lightweight, easy to carry, with reversible bearings and metal housing, Spin 5 is suitable for fashion professionals who need to cope with a variety of work environments and switching modes, but also have entertainment. Spin 5 adopts a reversible multi-functional design that allows users to smoothly switch between different modes such as laptops, tablets, watches and tents, and is therefore the perfect platform for creativity and content sharing. <br/><br/>Lightweight, easy to carry, with reversible bearings and metal housing, Spin 5 is suitable for fashion professionals who need to cope with a variety of work environments and switching modes, but also have entertainment. Spin 5 adopts a reversible multi-functional design that allows users to smoothly switch between different modes such as laptops, tablets, watches and tents, and is therefore the perfect platform for creativity and content sharing.",
     "intl.product.swift5.content": "Perfect Performance and Control <br /> The Acer Nitro 5 is equipped with the latest generation of graphics cards. The speed of drawing operations is greatly enhanced, and it supports more detailed light and shadow details and textures, allowing players to fully immerse themselves in the ultimate pleasure brought by the bright picture. Players also enjoy the amazing performance of the latest generation of processors, no matter how smooth the game, content creation or multi-application. Acer Nitro 5 is equipped with the latest generation of graphics cards. The speed of drawing operations is greatly enhanced, and it supports more detailed light and shadow details and textures, allowing players to fully immerse themselves in the ultimate pleasure brought by the vivid picture. Players also enjoy the amazing performance of the latest generation of processors, no matter how smooth the game, content creation or multi-application. Acer Nitro 5 is equipped with the latest generation of graphics cards. The speed of drawing operations is greatly enhanced, and it supports more detailed light and shadow details and textures, allowing players to fully immerse themselves in the ultimate pleasure brought by the vivid picture. Players also enjoy the amazing performance of the latest generation of processors, no matter how smooth the game, content creation or multi-application. <br /><br />The top cover of the Nitro 5 is laser-engraved for elegant surface treatment, giving this eSports Notebook a striking and detailed look.",
+
+    "intl.notification.sentence1": "恭喜你完成註冊，獲得4000點",
+    "intl.notification.sentence2": "舊友回娘家，獲得10000點",
+    "intl.notification.sentence3": "歡迎回到AcerDay，獲得800點",
+    "intl.notification.sentence4": "你連續登錄網站3天，獲得2000點",
+    "intl.notification.sentence5": "你連續登錄網站8天，獲得4000點",
+    "intl.notification.sentence6": "你今天向{name}打招呼，獲得1000點",
+    "intl.notification.sentence7": "你連續8天進站向朋友打招呼，獲得5000點",
+    "intl.notification.sentence8": "你今天完成節奏遊戲，獲得1000點",
+    "intl.notification.sentence9": "你接受{name}的創作邀請，獲得600點",
+    "intl.notification.sentence10": "你完成與{name}的共同創作，獲得1500點",
+    "intl.notification.sentence11": "你分享與{name}的共同創作，獲得500點",
+    "intl.notification.sentence12": "你完成7/23的限定任務，獲得2000點",
+    "intl.notification.sentence13": "你完成7/27的限定任務，獲得2000點",
+    "intl.notification.sentence14": "你完成7/31的限定任務，獲得2000點",
 
     config: {
         products: ["nitro5", "spin5"],

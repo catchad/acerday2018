@@ -1,34 +1,149 @@
-.bubble {
+.rhythmGame {
     position: relative;
     width: 100%;
-    // background-color: rgba(255, 255, 255, 0.4);
-    // border: 1px solid #ffffff;
-    // border-radius: 10px;
-    // background-image: url(https://fakeimg.pl/300x200/);
-    // background-size: 100% auto;
-    font-size: 16px;
-    margin-bottom: 20px;
-
-    &::before {
-        content: "";
-        display: block;
-        padding-top: 66.66666%;
-    }
-
-    &__text {
-        position: absolute;
-        top: 50%;
+    height: calc(100vh - 60px);
+    overflow: hidden;
+    &__ready {
+        position: fixed;
+        top: 0;
         left: 0;
         width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.6);
+    }
+    &__wrapper {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        // width: 100%;
+        // max-width: 900px;
+        border-radius: 15px;
+        border: 1px solid #ffffff;
         box-sizing: border-box;
-        padding: 25px;
-        font-size: 1.5em;
-        transform: translateY(-50%);
+        background: linear-gradient(45deg, #029fee, #01f965);
         text-align: center;
+        padding: 40px;
+    }
+    &__title {
+        font-size: 2em;
+        font-weight: 600;
+        margin-bottom: 10px;
+    }
+    &__text {
+        font-size: 1.2em;
         line-height: 1.3em;
-        @media screen and (max-width: 1024px) {
-            padding: 5px;
-            font-size: 0.8em;
+        margin-bottom: 20px;
+    }
+    &__info {
+        color: #ffffff;
+        font-size: 1.2em;
+    }
+    &__gif {
+        margin-bottom: 20px;
+    }
+    .gradientBtn {
+        margin-bottom: 50px;
+    }
+}
+
+#game {
+    width: 100%;
+    height: 100%;
+}
+.container {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    // background-color: #fff;
+    display: flex;
+    align-items: center;
+    padding: 10px 10px;
+    button {
+        width: 50px;
+        height: 50px;
+        border-radius: 100%;
+        border: 1px solid #000;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 0 10px;
+        flex: 0 0 auto;
+    }
+}
+.ui {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    // display: flex
+    // justify-content: center
+    // align-items: center
+    pointer-events: none;
+    .total-point {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        color: #fff;
+        font-size: 2em;
+        font-weight: 700;
+    }
+    .combo-container {
+        position: absolute;
+        top: 30%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color: #fff;
+        display: none;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        font-weight: 700;
+        &.active {
+            display: flex;
+        }
+        span {
+            font-size: 1.3em;
+        }
+        .combo {
+            font-size: 3em;
+        }
+    }
+    .miss-container {
+        position: absolute;
+        top: 30%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color: #fff;
+        font-size: 2em;
+        display: none;
+        font-weight: 700;
+        &.active {
+            display: block;
+        }
+    }
+}
+.songs {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    background-color: #fff;
+    display: flex;
+    align-items: center;
+    padding: 10px 10px;
+    .song {
+        width: 50px;
+        height: 50px;
+        border-radius: 100%;
+        border: 1px solid #000;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 0 10px;
+        flex: 0 0 auto;
+        &.active {
+            background-color: #ccc;
         }
     }
 }
