@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import { createPortal } from "react-dom";
 import CircleBtn from "../CircleBtn/";
 import RoundBtn from "../RoundBtn";
@@ -12,6 +12,81 @@ class Notification extends Component {
         super(props);
         const doc = window.document;
         this.node = doc.getElementById("portal");
+
+        this.state = {
+            data: {}
+        };
+
+        setTimeout(() => {
+            this.setState({
+                data: {
+                    // 邀請
+                    invite: [
+                        {
+                            id: "wehewhaweh",
+                            name: "Rachel Wang"
+                        },
+                        {
+                            id: "wehewhaweh",
+                            name: "Rachel Wang"
+                        },
+                        {
+                            id: "wehewhaweh",
+                            name: "Rachel Wang"
+                        },
+                        {
+                            id: "wehewhaweh",
+                            name: "Rachel Wang"
+                        }
+                    ],
+                    // 通知
+                    notification: [
+                        {
+                            date: "2018/7/25",
+                            sentence: [
+                                {
+                                    id: 10,
+                                    values: {
+                                        name: "Melody"
+                                    }
+                                },
+                                {
+                                    id: 11,
+                                    values: {
+                                        name: "Melody"
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            date: "2018/7/24",
+                            sentence: [
+                                {
+                                    id: 6,
+                                    values: {
+                                        name: "Melody"
+                                    }
+                                },
+                                {
+                                    id: 7
+                                }
+                            ]
+                        },
+                        {
+                            date: "2018/7/23",
+                            sentence: [
+                                {
+                                    id: 1
+                                },
+                                {
+                                    id: 2
+                                }
+                            ]
+                        }
+                    ]
+                }
+            });
+        }, 1000);
     }
     componentWillEnter(callback) {
         TweenMax.fromTo(this.refs.task, 0.25, { autoAlpha: 0 }, { autoAlpha: 1 });
@@ -37,58 +112,47 @@ class Notification extends Component {
                         <p className="notification__title">
                             <FormattedMessage id="intl.notification.title" />
                         </p>
-                        <TaskItemGroup name="共同創作邀請" desc="展開看誰邀請你完成創作">
-                            <div className="notification__invite">
-                                <div className="notification__inviteLeft">
-                                    <img className="notification__icon" src="https://fakeimg.pl/50x50/" />
-                                    <p className="notification__name">Rachel Wang 邀請你</p>
+
+                        {this.state.data.invite ? (
+                            <Fragment>
+                                <TaskItemGroup name="共同創作邀請" desc="展開看誰邀請你完成創作">
+                                    {this.state.data.invite.map((el, id) => {
+                                        return (
+                                            <div className="notification__invite">
+                                                <div className="notification__inviteLeft">
+                                                    <img className="notification__icon" src="https://fakeimg.pl/50x50/" />
+                                                    <p className="notification__name">{el.name} 邀請你</p>
+                                                </div>
+                                                <div className="notification__inviteRight">
+                                                    <RoundBtn size="S">GO</RoundBtn>
+                                                </div>
+                                            </div>
+                                        );
+                                    })}
+                                </TaskItemGroup>
+
+                                <div className="notification__list">
+                                    {this.state.data.notification.map((el, id) => {
+                                        return (
+                                            <div className="notification__item">
+                                                <p className="notification__date">{el.date}</p>
+                                                <ul className="notification__msgList">
+                                                    {el.sentence.map((el2, id2) => {
+                                                        return (
+                                                            <li className="notification__msg">
+                                                                <FormattedMessage id={`intl.notification.sentence${el2.id}`} values={el2.values} />
+                                                            </li>
+                                                        );
+                                                    })}
+                                                </ul>
+                                            </div>
+                                        );
+                                    })}
                                 </div>
-                                <div className="notification__inviteRight">
-                                    <RoundBtn size="S">GO</RoundBtn>
-                                </div>
-                            </div>
-                            <div className="notification__invite">
-                                <div className="notification__inviteLeft">
-                                    <img className="notification__icon" src="https://fakeimg.pl/50x50/" />
-                                    <p className="notification__name">Rachel Wang 邀請你</p>
-                                </div>
-                                <div className="notification__inviteRight">
-                                    <RoundBtn size="S">GO</RoundBtn>
-                                </div>
-                            </div>
-                            <div className="notification__invite">
-                                <div className="notification__inviteLeft">
-                                    <img className="notification__icon" src="https://fakeimg.pl/50x50/" />
-                                    <p className="notification__name">Rachel Wang 邀請你</p>
-                                </div>
-                                <div className="notification__inviteRight">
-                                    <RoundBtn size="S">GO</RoundBtn>
-                                </div>
-                            </div>
-                        </TaskItemGroup>
-                        <div className="notification__list">
-                            <div className="notification__item">
-                                <p className="notification__date">2018/07/23</p>
-                                <ul className="notification__msgList">
-                                    <li className="notification__msg">你從註冊日起連續登錄網站第三天，獲得 2000 點。</li>
-                                </ul>
-                            </div>
-                            <div className="notification__item">
-                                <p className="notification__date">2018/07/22</p>
-                                <ul className="notification__msgList">
-                                    <li className="notification__msg">分享了與 Issac Chuang 的共同創作，獲得 500 點。</li>
-                                    <li className="notification__msg">Issac Chuang 完成與你的共同創作，獲得 1500 點。</li>
-                                    <li className="notification__msg">你今天第一次打招呼的對象是 Issac Chuang，獲得 1000 點。</li>
-                                </ul>
-                            </div>
-                            <div className="notification__item">
-                                <p className="notification__date">2018/07/21</p>
-                                <ul className="notification__msgList">
-                                    <li className="notification__msg">舊友回娘家，獲得 10000 點。</li>
-                                    <li className="notification__msg">恭喜你完成註冊，獲得 4000 點。</li>
-                                </ul>
-                            </div>
-                        </div>
+                            </Fragment>
+                        ) : (
+                            <p>Loading...</p>
+                        )}
                     </div>
                     <CircleBtn
                         className="notification__close"

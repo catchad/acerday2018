@@ -149,13 +149,14 @@
         padding: 30px 0;
         // margin-bottom: 20px;
         // cursor: pointer;
-        &--comingsoon {
+        .task__name,
+        .task__desc {
+            color: #000000;
+        }
+        &--active {
             .task__name,
             .task__desc {
-                color: #000000;
-            }
-            .task__specialRightBtnWrap {
-                display: none;
+                color: #ffffff;
             }
         }
         &::before {

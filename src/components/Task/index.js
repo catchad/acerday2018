@@ -19,7 +19,81 @@ class Task extends Component {
 
         const doc = window.document;
         this.node = doc.getElementById("portal");
-        // doc.body.appendChild(this.node);
+
+        this.state = {};
+        // this.taskNames = ["rhythmGame", "acceptInvite", "completeCreation", "shareCreation", "login", "greet", "loginEveryday3", "loginEveryday8", "greetEveryday"];
+        // this.specialTaskNames = [{ name: "specialTask1", open: true }, { name: "specialTask2", open: true }, { name: "specialTask3", open: false }];
+        setTimeout(() => {
+            this.setState({
+                data: {
+                    specialTask: [{ active: true }, { active: true }, { active: false }],
+                    normalTask: [
+                        {
+                            name: "rhythmGame",
+                            point: 1000,
+                            finish: 2,
+                            limit: 8
+                        },
+                        {
+                            // 接受邀請
+                            name: "acceptInvite",
+                            point: 600,
+                            finish: 1,
+                            limit: 8
+                        },
+                        {
+                            // 完成共同創作
+                            name: "completeCreation",
+                            point: 1500,
+                            finish: 3,
+                            limit: 8
+                        },
+                        {
+                            // 分享共同創作
+                            name: "shareCreation",
+                            point: 500,
+                            finish: 2,
+                            limit: 16
+                        },
+                        {
+                            // 每天登入網站
+                            name: "login",
+                            point: 800,
+                            finish: 1,
+                            limit: 14
+                        },
+                        {
+                            // 打招呼
+                            name: "greet",
+                            point: 1000,
+                            finish: 1,
+                            limit: 8
+                        },
+                        {
+                            // 連續登入網站3天
+                            name: "loginEveryday3",
+                            point: 2000,
+                            finish: 0,
+                            limit: 1
+                        },
+                        {
+                            // 連續登入網站8天
+                            name: "loginEveryday8",
+                            point: 4000,
+                            finish: 0,
+                            limit: 1
+                        },
+                        {
+                            // 限時8天內交友
+                            name: "greetEveryday",
+                            point: 5000,
+                            finish: 0,
+                            limit: 1
+                        }
+                    ]
+                }
+            });
+        }, 1000);
     }
     componentWillEnter(callback) {
         TweenMax.fromTo(this.refs.task, 0.25, { autoAlpha: 0 }, { autoAlpha: 1 });
@@ -45,34 +119,31 @@ class Task extends Component {
                         <p className="task__title">
                             <FormattedMessage id="intl.task.title" />
                         </p>
-                        {/* <hr className="task__hr" /> */}
-                        <div className="task__list">
-                            <TaskItemGroup name="限定任務" desc="任務於指定日期開啟，完成即可獲得額外點數">
-                                {/* <div className="task__item">
-                                    <p className="task__name">看影片回答問題1，2,000</p>
-                                    <p className="task__desc">回答問題就可獲得2,000點，1月25日開啟任務</p>
-                                </div> */}
-                                <SpecialTask name="完成任務1獲得2000點" desc="看影片找答案即可獲得點數" comingsoontext="7/21開啟任務" link="st1" />
-                                <SpecialTask name="完成任務2獲得4000點" desc="看影片找答案即可獲得點數" comingsoontext="7/27開啟任務" link="st2" />
-                                <SpecialTask name="完成任務3獲得2000點" desc="看影片找答案即可獲得點數" comingsoontext="7/31開啟任務" link="st3" />
-                            </TaskItemGroup>
+                        {this.state.data ? (
+                            <div className="task__list">
+                                <TaskItemGroup name="限定任務" desc="任務於指定日期開啟，完成即可獲得額外點數">
+                                    {this.state.data.specialTask.map((el, id) => {
+                                        return <SpecialTask icon={el.active ? "https://fakeimg.pl/70x70/" : "https://fakeimg.pl/70x70/282828/eae0d0/"} name={this.props.intlContext.formatMessage({ id: `intl.task.specialTask${id + 1}.name` })} activeText={this.props.intlContext.formatMessage({ id: `intl.task.specialTask${id + 1}.active` })} unactiveText={this.props.intlContext.formatMessage({ id: `intl.task.specialTask${id + 1}.unactive` })} link={`st${id + 1}`} active={el.active} />;
+                                    })}
+                                </TaskItemGroup>
 
-                            <div className="task__item">
-                                <p className="task__name">玩節奏遊戲，1,000/天</p>
-                                <p className="task__desc">每日可獲得1,000點，最高8天可獲得8,000點</p>
-                                <TaskProgress molecular="5000" denominator="8000" unit="1000" />
+                                {this.state.data.normalTask.map((el, id) => {
+                                    return (
+                                        <div className="task__item">
+                                            <p className="task__name">
+                                                <FormattedMessage id={`intl.task.${el.name}.name`} />
+                                            </p>
+                                            <p className="task__desc">
+                                                <FormattedMessage id={`intl.task.${el.name}.desc`} />
+                                            </p>
+                                            <TaskProgress molecular={el.point * el.finish} denominator={el.point * el.limit} unit={el.point} />
+                                        </div>
+                                    );
+                                })}
                             </div>
-                            <div className="task__item">
-                                <p className="task__name">接受創作邀請，600/天</p>
-                                <p className="task__desc">每日可獲得600點，最高8天可獲得4,800點</p>
-                                <TaskProgress molecular="3600" denominator="4800" unit="600" />
-                            </div>
-                            <div className="task__item">
-                                <p className="task__name">完成共同創作，1,500/天</p>
-                                <p className="task__desc">每日可獲得1,500點，最高可獲得12,000點</p>
-                                <TaskProgress molecular="3000" denominator="12000" unit="1500" />
-                            </div>
-                        </div>
+                        ) : (
+                            <p>Loading...</p>
+                        )}
                     </div>
                     <CircleBtn
                         className="task__close"
@@ -94,31 +165,35 @@ class SpecialTask extends Component {
 
     render() {
         return (
-            <div className={`task__special ${this.props.commingsoon ? "task__special--comingsoon" : ""}`}>
+            <div className={`task__special ${this.props.active ? "task__special--active" : ""}`}>
                 <div className="task__specialLeft">
-                    <img className="task__specialLeftIcon" src="https://fakeimg.pl/70x70/" />
+                    <img className="task__specialLeftIcon" src={this.props.icon} />
                 </div>
                 <div className="task__specialRight">
                     <div className="task__specialRightTextWrap">
                         <p className="task__name">{this.props.name}</p>
-                        {this.props.commingsoon ? <p className="task__desc">{this.props.comingsoontext}</p> : <p className="task__desc">{this.props.desc}</p>}
+                        {this.props.active ? <p className="task__desc">{this.props.activeText}</p> : <p className="task__desc">{this.props.unactiveText}</p>}
                     </div>
                     <div className="task__specialRightBtnWrap">
-                        <AppContextConsumer>
-                            {appContext => {
-                                return (
-                                    <RoundBtn
-                                        onClick={() => {
-                                            appContext.task.toggle();
-                                        }}
-                                        size="S"
-                                        routerLink={`/${appContext.currentCountry}/${this.props.link}`}
-                                    >
-                                        GO
-                                    </RoundBtn>
-                                );
-                            }}
-                        </AppContextConsumer>
+                        {this.props.active ? (
+                            <AppContextConsumer>
+                                {appContext => {
+                                    return (
+                                        <RoundBtn
+                                            onClick={() => {
+                                                appContext.task.toggle();
+                                            }}
+                                            size="S"
+                                            routerLink={`/${appContext.currentCountry}/${this.props.link}`}
+                                        >
+                                            GO
+                                        </RoundBtn>
+                                    );
+                                }}
+                            </AppContextConsumer>
+                        ) : (
+                            ""
+                        )}
                     </div>
                 </div>
             </div>

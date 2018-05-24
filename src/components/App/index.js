@@ -170,7 +170,7 @@ class App extends React.Component {
                                                             }}
                                                         />
                                                         <Route
-                                                            path="/:country/game"
+                                                            path="/:country/game:cid?"
                                                             render={props => {
                                                                 return <Game appContext={appContext} intlContext={intlContext.intl} />;
                                                             }}
