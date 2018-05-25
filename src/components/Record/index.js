@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { FormattedMessage } from "react-intl";
 import Background from "../Background";
 import RoundBtn from "../RoundBtn";
 import arrow from "./arrow.svg";
@@ -7,6 +8,33 @@ import "./index.scss";
 class Record extends Component {
     constructor(props) {
         super(props);
+
+        this.state = {};
+
+        setTimeout(() => {
+            this.setState({
+                data: [
+                    {
+                        from: "Ray Su",
+                        to: "Isaac Chuang",
+                        id: "qwerasdzxc",
+                        complete: false
+                    },
+                    {
+                        from: "Rachel Wang",
+                        to: "Ray Su",
+                        id: "rtyfghvbn",
+                        complete: true
+                    },
+                    {
+                        from: "Ray Su",
+                        to: "Isaac Chuang",
+                        id: "yukfghwef",
+                        complete: true
+                    }
+                ]
+            });
+        }, 100);
     }
 
     render() {
@@ -14,18 +42,19 @@ class Record extends Component {
             <div className="page">
                 <div className="page__section">
                     <div className="page__heading">
-                        <p className="page__title">創作記錄</p>
+                        <p className="page__title">
+                            <FormattedMessage id="intl.record.title" />
+                        </p>
                     </div>
-                    <div className="record">
-                        <RecordItem appContext={this.props.appContext} name1="Ray Su" name2="Isaac Chuang" singleLink="abcdefg" />
-                        <RecordItem appContext={this.props.appContext} name1="Ray Su" name2="Rachel Wang" singleLink="abcdefg" multipleLink="ggggggg" />
-                        <RecordItem appContext={this.props.appContext} name1="Ray Su" name2="Ray Su" singleLink="abcdefg" multipleLink="ggggggg" />
-                        <RecordItem appContext={this.props.appContext} name1="Rachel Wang" name2="Ray Su" singleLink="abcdefg" multipleLink="ggggggg" />
-                        <RecordItem appContext={this.props.appContext} name1="Ray Su" name2="Rachel Wang" singleLink="abcdefg" />
-                        <RecordItem appContext={this.props.appContext} name1="Ray Su" name2="Rachel Wang" singleLink="abcdefg" multipleLink="ggggggg" />
-                        <RecordItem appContext={this.props.appContext} name1="Ray Su" name2="Rachel Wang" singleLink="abcdefg" multipleLink="ggggggg" />
-                        <RecordItem appContext={this.props.appContext} name1="Ray Su" name2="Rachel Wang" singleLink="abcdefg" multipleLink="ggggggg" />
-                    </div>
+                    {this.state.data ? (
+                        <div className="record">
+                            {this.state.data.map((el, id) => {
+                                return <RecordItem key={id} appContext={this.props.appContext} from={el.from} to={el.to} cid={el.id} complete={el.complete} />;
+                            })}
+                        </div>
+                    ) : (
+                        ""
+                    )}
                 </div>
                 <Background />
             </div>
@@ -42,21 +71,25 @@ class RecordItem extends Component {
         return (
             <div className="record__item">
                 <div className="record__left">
-                    <p className="record__name1">{this.props.name1}</p>
+                    <p className="record__name1">{this.props.from}</p>
                     <img className="record__arrow" src={arrow} />
-                    <p className="record__name2">{this.props.name2}</p>
+                    <p className="record__name2">{this.props.to}</p>
                 </div>
                 <div className="record__right">
                     <div className="record__single">
-                        <p className="record__singleText">單軌</p>
-                        <RoundBtn routerLink={`/${this.props.appContext.currentCountry}/creation/${this.props.singleLink}`} target="_blank" size="M" fixedSize="S" disabled={this.props.singleLink ? false : true}>
-                            {this.props.singleLink ? "PLAY" : "等待完成"}
+                        <p className="record__singleText">
+                            <FormattedMessage id="intl.record.single" />
+                        </p>
+                        <RoundBtn routerLink={`/${this.props.appContext.currentCountry}/creation/${this.props.cid}`} size="M" fixedSize="S">
+                            {this.props.cid ? <FormattedMessage id="intl.record.play" /> : <FormattedMessage id="intl.record.waiting" />}
                         </RoundBtn>
                     </div>
                     <div className="record__multiple">
-                        <p className="record__multipleText">雙軌</p>
-                        <RoundBtn routerLink={`/${this.props.appContext.currentCountry}/creation/${this.props.multipleLink}`} target="_blank" size="M" fixedSize="S" disabled={this.props.multipleLink ? false : true}>
-                            {this.props.multipleLink ? "PLAY" : "等待完成"}
+                        <p className="record__multipleText">
+                            <FormattedMessage id="intl.record.multiple" />
+                        </p>
+                        <RoundBtn routerLink={this.props.complete ? `/${this.props.appContext.currentCountry}/creation/${this.props.cid}/complete` : ""} size="M" fixedSize="S" disabled={this.props.complete ? false : true}>
+                            {this.props.complete ? <FormattedMessage id="intl.record.play" /> : <FormattedMessage id="intl.record.waiting" />}
                         </RoundBtn>
                     </div>
                 </div>

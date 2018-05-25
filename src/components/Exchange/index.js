@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import ReactTransitionGroup from "react-addons-transition-group";
-import { FormattedMessage } from "react-intl";
 import { createPortal } from "react-dom";
 import Background from "../Background";
 import CircleBtn from "../CircleBtn";
 import RoundBtn from "../RoundBtn";
+import { FormattedMessage, FormattedHTMLMessage } from "react-intl";
 import "./index.scss";
 
 class Exchange extends Component {
@@ -12,12 +12,20 @@ class Exchange extends Component {
         super(props);
         this.state = {
             showConfirm: false,
-            step: 1
+            step: 1,
+            confirmPrize: "",
+            confirmPoint: "",
+            name: "",
+            phone: "",
+            email: "",
+            address: ""
         };
     }
-    _showConfirm = () => {
+    _showConfirm = (prize, point) => {
         this.setState({
-            showConfirm: true
+            showConfirm: true,
+            confirmPrize: prize,
+            confirmPoint: point
         });
     };
 
@@ -33,7 +41,13 @@ class Exchange extends Component {
         });
     };
 
-    _confirmOK = () => {};
+    _send = () => {
+        console.log(this.state.name, this.state.phone, this.state.email, this.state.address);
+    };
+
+    _inputChange = (field, value) => {
+        this.setState({ [field]: value });
+    };
 
     render() {
         return (
@@ -54,11 +68,23 @@ class Exchange extends Component {
                                     <img className="prize__photo" src="https://fakeimg.pl/300x200/" />
                                 </div>
                                 <div className="prize__right">
-                                    <p className="prize__name">旅遊大獎</p>
-                                    <p className="prize__point">點數: 10,000</p>
-                                    <p className="prize__desc">補充說明文字可以放這裡。</p>
-                                    <RoundBtn size="S" onClick={this._showConfirm} noMargin>
-                                        我要兌換
+                                    <p className="prize__name">
+                                        <FormattedMessage id="intl.exchange.prize1.name" />
+                                    </p>
+                                    <p className="prize__point">
+                                        <FormattedMessage id="intl.exchange.prize1.point" />
+                                    </p>
+                                    <p className="prize__desc">
+                                        <FormattedMessage id="intl.exchange.prize1.desc" />
+                                    </p>
+                                    <RoundBtn
+                                        size="S"
+                                        onClick={() => {
+                                            this._showConfirm(this.props.intlContext.formatMessage({ id: "intl.exchange.prize1.name" }), "10000");
+                                        }}
+                                        noMargin
+                                    >
+                                        <FormattedMessage id="intl.exchange.btn" />
                                     </RoundBtn>
                                 </div>
                             </div>
@@ -67,11 +93,23 @@ class Exchange extends Component {
                                     <img className="prize__photo" src="https://fakeimg.pl/300x500/" />
                                 </div>
                                 <div className="prize__right">
-                                    <p className="prize__name">Spotify 一年份</p>
-                                    <p className="prize__point">點數: 10,000</p>
-                                    <p className="prize__desc">補充說明文字可以放這裡。補充說明文字可以放這裡。補充說明文字可以放這裡。</p>
-                                    <RoundBtn size="S" onClick={this._showConfirm} noMargin>
-                                        我要兌換
+                                    <p className="prize__name">
+                                        <FormattedMessage id="intl.exchange.prize2.name" />
+                                    </p>
+                                    <p className="prize__point">
+                                        <FormattedMessage id="intl.exchange.prize2.point" />
+                                    </p>
+                                    <p className="prize__desc">
+                                        <FormattedMessage id="intl.exchange.prize2.desc" />
+                                    </p>
+                                    <RoundBtn
+                                        size="S"
+                                        onClick={() => {
+                                            this._showConfirm(this.props.intlContext.formatMessage({ id: "intl.exchange.prize2.name" }), "10000");
+                                        }}
+                                        noMargin
+                                    >
+                                        <FormattedMessage id="intl.exchange.btn" />
                                     </RoundBtn>
                                 </div>
                             </div>
@@ -80,11 +118,23 @@ class Exchange extends Component {
                                     <img className="prize__photo" src="https://fakeimg.pl/500x300/" />
                                 </div>
                                 <div className="prize__right">
-                                    <p className="prize__name">Acer 筆電</p>
-                                    <p className="prize__point">點數: 10,000</p>
-                                    <p className="prize__desc">補充說明文字可以放這裡。補充說明文字可以放這裡。補充說明文字可以放這裡。補充說明文字可以放這裡。補充說明文字可以放這裡。補充說明文字可以放這裡。</p>
-                                    <RoundBtn size="S" onClick={this._showConfirm} noMargin>
-                                        我要兌換
+                                    <p className="prize__name">
+                                        <FormattedMessage id="intl.exchange.prize3.name" />
+                                    </p>
+                                    <p className="prize__point">
+                                        <FormattedMessage id="intl.exchange.prize3.point" />
+                                    </p>
+                                    <p className="prize__desc">
+                                        <FormattedMessage id="intl.exchange.prize3.desc" />
+                                    </p>
+                                    <RoundBtn
+                                        size="S"
+                                        onClick={() => {
+                                            this._showConfirm(this.props.intlContext.formatMessage({ id: "intl.exchange.prize3.name" }), "10000");
+                                        }}
+                                        noMargin
+                                    >
+                                        <FormattedMessage id="intl.exchange.btn" />
                                     </RoundBtn>
                                 </div>
                             </div>
@@ -93,11 +143,23 @@ class Exchange extends Component {
                                     <img className="prize__photo" src="https://fakeimg.pl/300x200/" />
                                 </div>
                                 <div className="prize__right">
-                                    <p className="prize__name">Acer 一年保固</p>
-                                    <p className="prize__point">點數: 10,000</p>
-                                    <p className="prize__desc">補充說明文字可以放這裡。</p>
-                                    <RoundBtn size="S" onClick={this._showConfirm} noMargin>
-                                        我要兌換
+                                    <p className="prize__name">
+                                        <FormattedMessage id="intl.exchange.prize4.name" />
+                                    </p>
+                                    <p className="prize__point">
+                                        <FormattedMessage id="intl.exchange.prize4.point" />
+                                    </p>
+                                    <p className="prize__desc">
+                                        <FormattedMessage id="intl.exchange.prize4.desc" />
+                                    </p>
+                                    <RoundBtn
+                                        size="S"
+                                        onClick={() => {
+                                            this._showConfirm(this.props.intlContext.formatMessage({ id: "intl.exchange.prize4.name" }), "10000");
+                                        }}
+                                        noMargin
+                                    >
+                                        <FormattedMessage id="intl.exchange.btn" />
                                     </RoundBtn>
                                 </div>
                             </div>
@@ -108,22 +170,60 @@ class Exchange extends Component {
                 {this.state.step == 2 ? (
                     <div className="page__section">
                         <div className="page__heading">
-                            <p className="page__title">兌獎資料填寫</p>
-                            <p className="page__description">請審慎填寫下列資料，資料送出後即不可修改。</p>
+                            <p className="page__title">
+                                <FormattedMessage id="intl.exchange.form.title" />
+                            </p>
+                            <p className="page__description">
+                                <FormattedMessage id="intl.exchange.form.desc" />
+                            </p>
                         </div>
                         <div className="page__row page__row--widthM">
-                            <input className="page__inputtext" placeholder="姓名" type="text" />
-                            <input className="page__inputtext" placeholder="電話" type="text" />
-                            <input className="page__inputtext" placeholder="信箱" type="text" />
-                            <input className="page__inputtext" placeholder="地址" type="text" />
+                            <input
+                                className="page__inputtext"
+                                placeholder={this.props.intlContext.formatMessage({ id: "intl.exchange.form.name" })}
+                                type="text"
+                                value={this.state.name}
+                                onChange={e => {
+                                    this._inputChange("name", e.target.value);
+                                }}
+                            />
+                            <input
+                                className="page__inputtext"
+                                placeholder={this.props.intlContext.formatMessage({ id: "intl.exchange.form.phone" })}
+                                type="text"
+                                value={this.state.phone}
+                                onChange={e => {
+                                    this._inputChange("phone", e.target.value);
+                                }}
+                            />
+                            <input
+                                className="page__inputtext"
+                                placeholder={this.props.intlContext.formatMessage({ id: "intl.exchange.form.email" })}
+                                type="text"
+                                value={this.state.email}
+                                onChange={e => {
+                                    this._inputChange("email", e.target.value);
+                                }}
+                            />
+                            <input
+                                className="page__inputtext"
+                                placeholder={this.props.intlContext.formatMessage({ id: "intl.exchange.form.address" })}
+                                type="text"
+                                value={this.state.address}
+                                onChange={e => {
+                                    this._inputChange("address", e.target.value);
+                                }}
+                            />
                         </div>
                         <div className="page__row page__row--center">
-                            <RoundBtn size="L">我要兌換</RoundBtn>
+                            <RoundBtn size="L" onClick={this._send}>
+                                <FormattedMessage id="intl.exchange.form.btn.send" />
+                            </RoundBtn>
                         </div>
                     </div>
                 ) : null}
 
-                <ReactTransitionGroup component="div">{this.state.showConfirm ? <Confirm nextStep={this._nextStep} hideConfirm={this._hideConfirm} /> : null}</ReactTransitionGroup>
+                <ReactTransitionGroup component="div">{this.state.showConfirm ? <Confirm appContext={this.props.appContext} nextStep={this._nextStep} hideConfirm={this._hideConfirm} prize={this.state.confirmPrize} point={this.state.confirmPoint} /> : null}</ReactTransitionGroup>
                 <Background />
             </div>
         );
@@ -154,18 +254,22 @@ class Confirm extends Component {
             <div className="confirm" ref="lightbox">
                 <div className="confirm__outerWrapper" ref="wrap">
                     <div className="confirm__innerWrapper">
-                        <p className="confirm__point">你目前點數：83,000點</p>
-                        <p className="confirm__title">旅遊大獎抽獎機會</p>
+                        <p className="confirm__point">
+                            <FormattedMessage id="intl.exchange.confirm.userpoint" values={{ point: this.props.appContext.point }} />
+                        </p>
+                        <p className="confirm__title">
+                            <FormattedMessage id="intl.exchange.confirm.title" values={{ prize: this.props.prize }} />
+                        </p>
                         <p className="confirm__desc">
-                            確定要扣除 10,000 點<br />兌換旅遊大獎的抽獎機會嗎？
+                            <FormattedHTMLMessage id="intl.exchange.confirm.text" values={{ prize: this.props.prize, point: this.props.point }} />
                         </p>
 
                         <RoundBtn onClick={this.props.hideConfirm} size="L" secondary>
-                            取消
+                            <FormattedMessage id="intl.exchange.confirm.btn.cancel" />
                         </RoundBtn>
 
                         <RoundBtn onClick={this.props.nextStep} size="L">
-                            確認送出
+                            <FormattedMessage id="intl.exchange.confirm.btn.send" />
                         </RoundBtn>
                     </div>
                     <CircleBtn className="confirm__close" onClick={this.props.hideConfirm} />

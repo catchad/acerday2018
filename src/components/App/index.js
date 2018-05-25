@@ -2,7 +2,6 @@ import React, { Fragment } from "react";
 import ReactTransitionGroup from "react-addons-transition-group";
 // react component
 import Header from "../Header";
-import Page1 from "../Page1";
 import Task from "../Task";
 import Notification from "../Notification";
 import Homepage from "../Homepage";
@@ -18,6 +17,7 @@ import Creation from "../Creation";
 import SpecialTask1 from "../SpecialTask1";
 import SpecialTask2 from "../SpecialTask2";
 import SpecialTask3 from "../SpecialTask3";
+import Bgm from "../Bgm";
 // redux
 import { connect } from "react-redux";
 
@@ -122,7 +122,7 @@ class App extends React.Component {
                                                             }}
                                                         />
                                                         <Route
-                                                            path="/:country/creation/:cid"
+                                                            path="/:country/creation/:cid/:complete?"
                                                             render={props => {
                                                                 return <Creation {...props} appContext={appContext} intlContext={intlContext.intl} />;
                                                             }}
@@ -170,9 +170,9 @@ class App extends React.Component {
                                                             }}
                                                         />
                                                         <Route
-                                                            path="/:country/game:cid?"
+                                                            path="/:country/game/:cid?"
                                                             render={props => {
-                                                                return <Game appContext={appContext} intlContext={intlContext.intl} />;
+                                                                return <Game {...props} appContext={appContext} intlContext={intlContext.intl} />;
                                                             }}
                                                         />
                                                         <Route component={NoMatch} />
@@ -180,6 +180,7 @@ class App extends React.Component {
                                                     <ReactTransitionGroup component="div">{appContext.task.status ? <Task appContext={appContext} intlContext={intlContext.intl} /> : ""}</ReactTransitionGroup>
                                                     <ReactTransitionGroup component="div">{appContext.notification.status ? <Notification appContext={appContext} intlContext={intlContext.intl} /> : ""}</ReactTransitionGroup>
                                                     <ToastContainer position="bottom-center" autoClose={5000} hideProgressBar closeOnClick draggable newestOnTop pauseOnHover />
+                                                    <Bgm play={appContext.bgm} forceMuted={appContext.bgmForceMuted} />
                                                 </main>
                                             );
                                         }}

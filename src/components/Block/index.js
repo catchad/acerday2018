@@ -2,6 +2,8 @@ import React, { Component, Fragment } from "react";
 import "./index.scss";
 import laptop from "./laptop.png";
 import chunk from "lodash/chunk";
+import greets from "../../locale/greets";
+
 class Block extends Component {
     constructor(props) {
         super(props);
@@ -23,9 +25,9 @@ class Block extends Component {
         });
     };
 
-    _blockClick = (event, id) => {
+    _blockClick = values => {
         // alert(id);
-        this.props.onClick();
+        this.props.onClick(values);
     };
 
     render() {
@@ -128,19 +130,26 @@ class Block extends Component {
                                                     className="block__item block__item--user"
                                                     key={id}
                                                     onClick={e => {
-                                                        this._blockClick(e, el.name);
+                                                        this._blockClick({
+                                                            id: el.id,
+                                                            name: el.name,
+                                                            country: el.country,
+                                                            countryFullName: el.countryFullName,
+                                                            greet: el.greet,
+                                                            character: el.character
+                                                        });
                                                     }}
                                                 >
                                                     <div className="block__wrapper">
                                                         <div className="block__surface block__surface--a" />
                                                         <div className="block__surface block__surface--b">
                                                             <p className="block__name">{el.name}</p>
-                                                            <p className="block__country">{el.country}</p>
+                                                            <p className="block__country">{el.countryFullName}</p>
                                                         </div>
                                                         <div className="block__surface block__surface--c">
-                                                            <p className="block__greet">{el.greet}</p>
+                                                            <p className="block__greet">{greets[el.country][el.greet]}</p>
                                                         </div>
-                                                        <img className="block__userPhoto" src={el.img} />
+                                                        <img className="block__userPhoto" src={el.character} />
                                                     </div>
                                                 </div>
                                             );
@@ -184,18 +193,18 @@ class Block extends Component {
         if (!Array.isArray(this.props.data)) {
             return (
                 <div className="block">
-                    <div className="block__group" style={{ marginTop: "98%" }}>
+                    <div className="block__group" style={{ marginTop: "72%" }}>
                         <div className="block__item block__item--noHover">
                             <div className="block__wrapper">
                                 <div className="block__surface block__surface--a" />
                                 <div className="block__surface block__surface--b">
                                     <p className="block__name">{this.props.data.name}</p>
-                                    <p className="block__country">{this.props.data.country}</p>
+                                    <p className="block__country">{this.props.data.countryFullName}</p>
                                 </div>
                                 <div className="block__surface block__surface--c">
-                                    <p className="block__greet">{this.props.data.greet}</p>
+                                    <p className="block__greet">{greets[this.props.data.country][this.props.data.greet]}</p>
                                 </div>
-                                <img className="block__userPhoto" src={this.props.data.img} />
+                                <img className="block__userPhoto" src={this.props.data.character} />
                             </div>
                         </div>
                     </div>

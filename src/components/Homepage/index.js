@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from "react";
-import { FormattedMessage, intlShape, IntlProvider } from "react-intl";
+import { FormattedMessage, FormattedHTMLMessage } from "react-intl";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import Background from "../Background";
@@ -22,14 +22,7 @@ class Homepage extends Component {
     }
 
     componentDidMount() {
-        // console.log(this.refs.homepage.childNodes);
-        // console.log(this.refs.homepage.childNodes.querySelectorAll(".homepage__slide"));
-
-        // document.querySelectorAll(".homepage__slide").forEach((el, id) => {
-        //     this.slides.push(el);
-        // });
         this.sliderNum = document.querySelectorAll(".homepage__slide").length - 1;
-        // this._loop();
         this.myReq = requestAnimationFrame(this._loop);
 
         toast(
@@ -113,10 +106,12 @@ class Homepage extends Component {
                 <div className="homepage__content">
                     <img className="homepage__logo" src="https://fakeimg.pl/400x250/" />
                     <p className="homepage__text">
-                        每天都好玩！一起玩音樂！玩創作！<br />集點酷！抽大獎！
+                        <FormattedHTMLMessage id="intl.homepage.text" />
                     </p>
                     <RoundBtn color1="#00D8EF" color2="#0097FF" routerLink={`/${this.props.appContext.currentCountry}/login`}>
-                        <p>登錄</p>
+                        <p>
+                            <FormattedMessage id="intl.homepage.btn" />
+                        </p>
                     </RoundBtn>
                 </div>
                 <div className="homepage__bg homepage__bg--1" style={this.state.currentID == 0 ? { opacity: 1, zIndex: 10 } : { opacity: 0, zIndex: 5 }} />

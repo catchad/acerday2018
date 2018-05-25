@@ -118,7 +118,7 @@ class Notification extends Component {
                                 <TaskItemGroup name="共同創作邀請" desc="展開看誰邀請你完成創作">
                                     {this.state.data.invite.map((el, id) => {
                                         return (
-                                            <div className="notification__invite">
+                                            <div className="notification__invite" key={id}>
                                                 <div className="notification__inviteLeft">
                                                     <img className="notification__icon" src="https://fakeimg.pl/50x50/" />
                                                     <p className="notification__name">{el.name} 邀請你</p>
@@ -134,12 +134,12 @@ class Notification extends Component {
                                 <div className="notification__list">
                                     {this.state.data.notification.map((el, id) => {
                                         return (
-                                            <div className="notification__item">
+                                            <div className="notification__item" key={id}>
                                                 <p className="notification__date">{el.date}</p>
                                                 <ul className="notification__msgList">
                                                     {el.sentence.map((el2, id2) => {
                                                         return (
-                                                            <li className="notification__msg">
+                                                            <li className="notification__msg" key={id2}>
                                                                 <FormattedMessage id={`intl.notification.sentence${el2.id}`} values={el2.values} />
                                                             </li>
                                                         );

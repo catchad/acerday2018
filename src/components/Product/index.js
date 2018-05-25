@@ -3,7 +3,6 @@ import Background from "../Background";
 import SquareBtnGroup from "../SquareBtnGroup";
 import RoundBtn from "../RoundBtn";
 import ColorRect from "../ColorRect";
-import Loading from "../Loading";
 import { FormattedMessage, FormattedHTMLMessage } from "react-intl";
 import { Link } from "react-router-dom";
 import ReactTransitionGroup from "react-addons-transition-group";
@@ -86,7 +85,9 @@ class Nitro5 extends Component {
             <div className="page__section">
                 <div className="page__heading page__heading--w800">
                     <p className="page__title page__title--alignLeft">Nitro 5</p>
-                    <p className="page__description page__description--alignLeft">改變遊戲規則的曠世巨作</p>
+                    <p className="page__description page__description--alignLeft">
+                        <FormattedHTMLMessage id="intl.product.nitro5.desc" />
+                    </p>
                 </div>
                 {/* {this.state.ready ? "" : ""} */}
                 <div className="laptop" style={this.state.ready ? { opacity: "1" } : { opacity: "0" }}>
@@ -113,7 +114,9 @@ class Nitro5 extends Component {
                     </p>
                 </div>
                 <div className="page__row page__row--w800 page__row--center">
-                    <RoundBtn size="L">了解更多</RoundBtn>
+                    <RoundBtn size="L">
+                        <FormattedMessage id="intl.product.more" />
+                    </RoundBtn>
                 </div>
             </div>
         );
@@ -144,7 +147,9 @@ class Spin5 extends Component {
             <div className="page__section">
                 <div className="page__heading page__heading--w800">
                     <p className="page__title page__title--alignLeft">Spin 5</p>
-                    <p className="page__description page__description--alignLeft">輕鬆變形</p>
+                    <p className="page__description page__description--alignLeft">
+                        <FormattedHTMLMessage id="intl.product.spin5.desc" />
+                    </p>
                 </div>
                 <div className="laptop" style={this.state.ready ? { opacity: "1" } : { opacity: "0" }}>
                     <ColorRect ref="r1" x="117" y="-183" width="23" ratio="0.55" bgColor="#2842D7" />
@@ -165,7 +170,9 @@ class Spin5 extends Component {
                     </p>
                 </div>
                 <div className="page__row page__row--w800 page__row--center">
-                    <RoundBtn size="L">了解更多</RoundBtn>
+                    <RoundBtn size="L">
+                        <FormattedMessage id="intl.product.more" />
+                    </RoundBtn>
                 </div>
             </div>
         );
@@ -196,7 +203,9 @@ class Helios300 extends Component {
             <div className="page__section">
                 <div className="page__heading page__heading--w800">
                     <p className="page__title page__title--alignLeft">Helios 300</p>
-                    <p className="page__description page__description--alignLeft">火力全開依舊冷靜鎮定</p>
+                    <p className="page__description page__description--alignLeft">
+                        <FormattedHTMLMessage id="intl.product.helios300.desc" />
+                    </p>
                 </div>
                 <div className="laptop" style={this.state.ready ? { opacity: "1" } : { opacity: "0" }}>
                     <ColorRect ref="r1" x="117" y="-183" width="23" ratio="0.55" bgColor="#2842D7" />
@@ -217,7 +226,9 @@ class Helios300 extends Component {
                     </p>
                 </div>
                 <div className="page__row page__row--w800 page__row--center">
-                    <RoundBtn size="L">了解更多</RoundBtn>
+                    <RoundBtn size="L">
+                        <FormattedMessage id="intl.product.more" />
+                    </RoundBtn>
                 </div>
             </div>
         );
@@ -248,7 +259,9 @@ class Switch7 extends Component {
             <div className="page__section">
                 <div className="page__heading page__heading--w800">
                     <p className="page__title page__title--alignLeft">Switch 7 Black Edition</p>
-                    <p className="page__description page__description--alignLeft">世界首款無風扇獨立顯卡二合一筆電</p>
+                    <p className="page__description page__description--alignLeft">
+                        <FormattedHTMLMessage id="intl.product.swtich7.desc" />
+                    </p>
                 </div>
                 <div className="laptop" style={this.state.ready ? { opacity: "1" } : { opacity: "0" }}>
                     <ColorRect ref="r1" x="117" y="-183" width="23" ratio="0.55" bgColor="#2842D7" />
@@ -269,7 +282,9 @@ class Switch7 extends Component {
                     </p>
                 </div>
                 <div className="page__row page__row--w800 page__row--center">
-                    <RoundBtn size="L">了解更多</RoundBtn>
+                    <RoundBtn size="L">
+                        <FormattedMessage id="intl.product.more" />
+                    </RoundBtn>
                 </div>
             </div>
         );
@@ -300,7 +315,9 @@ class Swift5 extends Component {
             <div className="page__section">
                 <div className="page__heading page__heading--w800">
                     <p className="page__title page__title--alignLeft">Swift 5</p>
-                    <p className="page__description page__description--alignLeft">保持優雅易如反掌</p>
+                    <p className="page__description page__description--alignLeft">
+                        <FormattedHTMLMessage id="intl.product.swift5.desc" />
+                    </p>
                 </div>
                 <div className="laptop" style={this.state.ready ? { opacity: "1" } : { opacity: "0" }}>
                     <ColorRect ref="r1" x="117" y="-183" width="23" ratio="0.55" bgColor="#2842D7" />
@@ -321,7 +338,9 @@ class Swift5 extends Component {
                     </p>
                 </div>
                 <div className="page__row page__row--w800 page__row--center">
-                    <RoundBtn size="L">了解更多</RoundBtn>
+                    <RoundBtn size="L">
+                        <FormattedMessage id="intl.product.more" />
+                    </RoundBtn>
                 </div>
             </div>
         );

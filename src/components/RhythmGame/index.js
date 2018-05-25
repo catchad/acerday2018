@@ -1,4 +1,5 @@
 import React, { Component, Fragment } from "react";
+import { FormattedMessage, FormattedHTMLMessage } from "react-intl";
 import easy from "./easy.json";
 import normal from "./normal.json";
 import hard from "./hard.json";
@@ -690,7 +691,7 @@ class RhythmGame extends Component {
             if (this.currTime[0] > this.songLength) {
                 // console.log("end");
                 this.stop();
-                this.props.onGameOver();
+                this.props.onGameOver(this.state.totalPoint);
             }
         }
     };
@@ -836,8 +837,8 @@ class RhythmGame extends Component {
         return (
             <div className="rhythmGame">
                 <canvas id="game" />
+                <p className="rhythmGame__score">{this.state.totalPoint}</p>
                 <div className="ui">
-                    <div className="total-point">0</div>
                     <div className={`combo-container ${this.state.combo !== 0 ? "active" : ""}`}>
                         <span className="combo">{this.state.combo}</span>
                         <span>combo</span>
@@ -846,18 +847,25 @@ class RhythmGame extends Component {
                         <span>MISS!</span>
                     </div>
                 </div>
+
                 {!this.state.start ? (
                     <div className="rhythmGame__ready">
                         <div className="rhythmGame__wrapper">
-                            <p className="rhythmGame__title">遊戲說明</p>
+                            <p className="rhythmGame__title">
+                                <FormattedMessage id="intl.rhythmgame.confrim.title" />
+                            </p>
                             <p className="rhythmGame__text">
-                                當線上的圓點達圓框時<br />按下A、S、D即可獲得分數
+                                <FormattedHTMLMessage id="intl.rhythmgame.confrim.text" />
                             </p>
                             <img className="rhythmGame__gif" src="https://fakeimg.pl/400x200/" />
                             <div>
-                                <RoundBtn onClick={this._start}>GO</RoundBtn>
+                                <RoundBtn onClick={this._start}>
+                                    <FormattedMessage id="intl.rhythmgame.confrim.btn" />
+                                </RoundBtn>
                             </div>
-                            <p className="rhythmGame__info">請打開喇叭，已獲得最佳遊戲體驗</p>
+                            <p className="rhythmGame__info">
+                                <FormattedMessage id="intl.rhythmgame.confrim.opensound" />
+                            </p>
                         </div>
                     </div>
                 ) : (

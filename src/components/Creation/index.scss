@@ -1,7 +1,25 @@
 .creation {
+    overflow: hidden;
     &__vinylRecordContainer {
         width: 100%;
         max-width: 700px;
         margin: 0 auto;
+    }
+    &__ui {
+        position: relative;
+        width: 100%;
+        max-width: 700px;
+        text-align: center;
+        margin: 0 auto;
+    }
+    &__btn {
+        display: inline-block;
+        margin: 0 20px;
+        color: #ffffff;
+        text-decoration: none;
+        cursor: pointer;
+    }
+    &__icon {
+        margin-bottom: 10px;
     }
 }

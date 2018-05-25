@@ -1,5 +1,3 @@
-import * as PIXI from "pixi.js";
-
 import hair1 from "./hair1.png";
 import hair2 from "./hair2.png";
 import hair3 from "./hair3.png";

@@ -146,7 +146,8 @@ class VinylRecord extends Component {
     };
     gameOver = () => {
         this.setMode("disable");
-        this.props.onGameover();
+        console.log(this.melody);
+        this.props.onGameover(this.melody);
     };
     setMode = modeName => {
         switch (modeName) {

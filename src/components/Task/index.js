@@ -26,9 +26,10 @@ class Task extends Component {
         setTimeout(() => {
             this.setState({
                 data: {
-                    specialTask: [{ active: true }, { active: true }, { active: false }],
+                    specialTask: [true, true, false],
                     normalTask: [
                         {
+                            // 玩節奏遊戲
                             name: "rhythmGame",
                             point: 1000,
                             finish: 2,
@@ -123,13 +124,13 @@ class Task extends Component {
                             <div className="task__list">
                                 <TaskItemGroup name="限定任務" desc="任務於指定日期開啟，完成即可獲得額外點數">
                                     {this.state.data.specialTask.map((el, id) => {
-                                        return <SpecialTask icon={el.active ? "https://fakeimg.pl/70x70/" : "https://fakeimg.pl/70x70/282828/eae0d0/"} name={this.props.intlContext.formatMessage({ id: `intl.task.specialTask${id + 1}.name` })} activeText={this.props.intlContext.formatMessage({ id: `intl.task.specialTask${id + 1}.active` })} unactiveText={this.props.intlContext.formatMessage({ id: `intl.task.specialTask${id + 1}.unactive` })} link={`st${id + 1}`} active={el.active} />;
+                                        return <SpecialTask key={id} icon={el ? "https://fakeimg.pl/70x70/" : "https://fakeimg.pl/70x70/282828/eae0d0/"} name={this.props.intlContext.formatMessage({ id: `intl.task.specialTask${id + 1}.name` })} activeText={this.props.intlContext.formatMessage({ id: `intl.task.specialTask${id + 1}.active` })} unactiveText={this.props.intlContext.formatMessage({ id: `intl.task.specialTask${id + 1}.unactive` })} link={`st${id + 1}`} active={el} />;
                                     })}
                                 </TaskItemGroup>
 
                                 {this.state.data.normalTask.map((el, id) => {
                                     return (
-                                        <div className="task__item">
+                                        <div className="task__item" key={id}>
                                             <p className="task__name">
                                                 <FormattedMessage id={`intl.task.${el.name}.name`} />
                                             </p>

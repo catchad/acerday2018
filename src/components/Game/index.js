@@ -11,20 +11,58 @@ import { toast } from "react-toastify";
 import { FormattedMessage } from "react-intl";
 import { TweenMax } from "gsap";
 import ReactTransitionGroup from "react-addons-transition-group";
+import greets from "../../locale/greets";
+
 class Game extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            step: 1
+            step: props.match.params.cid ? 4 : 1,
+            invite: props.match.params.cid
+                ? {
+                      id: "99999",
+                      name: "Test",
+                      country: "tw",
+                      countryFullName: "Taiwan",
+                      greet: 0,
+                      character: "https://fakeimg.pl/300x450/282828/eae0d0"
+                  }
+                : {
+                      id: "",
+                      name: "",
+                      country: "",
+                      countryFullName: "",
+                      greet: 0,
+                      character: ""
+                  },
+            score: 0
         };
+        console.log(props);
+        console.log(props.match.params.cid ? 4 : 1);
+        // console.log(this.props.appContext);
     }
 
+    _setInvite = values => {
+        this.setState({
+            step: this.state.step + 1,
+            invite: {
+                id: values.id,
+                name: values.name,
+                country: values.country,
+                countryFullName: values.countryFullName,
+                greet: values.greet,
+                character: values.character
+            }
+        });
+    };
     _nextStep = () => {
         this.setState({
             step: this.state.step + 1
         });
     };
-
+    _updateScore = value => {
+        this.setState({ step: this.state.step + 1, score: value });
+    };
     _restart = () => {
         this.setState({
             step: 1
@@ -35,11 +73,11 @@ class Game extends Component {
         return (
             <div className="page">
                 <ReactTransitionGroup component="div">
-                    {this.state.step == 1 ? <Step1 intl={this.props.intlContext} nextStep={this._nextStep} /> : ""}
-                    {this.state.step == 2 ? <Step2 intl={this.props.intlContext} nextStep={this._nextStep} /> : ""}
-                    {this.state.step == 3 ? <Step3 intl={this.props.intlContext} nextStep={this._nextStep} /> : ""}
-                    {this.state.step == 4 ? <Step4 intl={this.props.intlContext} nextStep={this._nextStep} /> : ""}
-                    {this.state.step == 5 ? <Step5 intl={this.props.intlContext} nextStep={this._nextStep} restart={this._restart} /> : ""}
+                    {this.state.step == 1 ? <Step1 intl={this.props.intlContext} appContext={this.props.appContext} nextStep={this._nextStep} setInvite={this._setInvite} /> : ""}
+                    {this.state.step == 2 ? <Step2 intl={this.props.intlContext} invite={this.state.invite} appContext={this.props.appContext} nextStep={this._nextStep} /> : ""}
+                    {this.state.step == 3 ? <Step3 intl={this.props.intlContext} invite={this.state.invite} appContext={this.props.appContext} nextStep={this._nextStep} /> : ""}
+                    {this.state.step == 4 ? <Step4 intl={this.props.intlContext} invite={this.state.invite} appContext={this.props.appContext} nextStep={this._nextStep} updateScore={this._updateScore} /> : ""}
+                    {this.state.step == 5 ? <Step5 intl={this.props.intlContext} invite={this.state.invite} appContext={this.props.appContext} nextStep={this._nextStep} restart={this._restart} cid={this.props.match.params.cid} score={this.state.score} /> : ""}
                 </ReactTransitionGroup>
                 <Background color1={this.state.step == 4 || this.state.step == 5 ? "#505CFF" : "#9AEF00"} color2={this.state.step == 4 || this.state.step == 5 ? "#62008B" : "#6F9F0F"} />
             </div>
@@ -188,92 +226,104 @@ class Step1 extends Component {
                 <div className="page__row page__row--fullWidth">
                     <Block
                         type="list"
-                        onClick={this.props.nextStep}
+                        onClick={this.props.setInvite}
                         randomColor
                         data={[
                             {
                                 id: "",
                                 name: "Ray Su",
-                                country: "Taiwan",
-                                img: "https://fakeimg.pl/300x450/282828/eae0d0",
-                                greet: "讓我們用音樂 Cool together"
+                                country: "tw",
+                                countryFullName: "Taiwan",
+                                character: "https://fakeimg.pl/300x450/282828/eae0d0",
+                                greet: 0
                             },
                             {
                                 id: "",
                                 name: "Kanokporn Sopontaweesab",
-                                img: "https://fakeimg.pl/300x450/282828/eae0d0",
-                                country: "Taiwan",
-                                greet: "讓我們用音樂 Cool together"
+                                character: "https://fakeimg.pl/300x450/282828/eae0d0",
+                                country: "tw",
+                                countryFullName: "Taiwan",
+                                greet: 0
                             },
                             {
                                 id: "",
                                 name: "Anis Aiz Sllu Tersenyum",
-                                img: "https://fakeimg.pl/300x450/282828/eae0d0",
-                                country: "Taiwan",
-                                greet: "讓我們用音樂 Cool together"
+                                character: "https://fakeimg.pl/300x450/282828/eae0d0",
+                                country: "us",
+                                countryFullName: "United States",
+                                greet: 1
                             },
                             {
                                 id: "",
                                 name: "Isaac chuang",
-                                country: "Taiwan",
-                                img: "https://fakeimg.pl/300x450/282828/eae0d0",
-                                greet: "讓我們用音樂 Cool together"
+                                country: "tw",
+                                countryFullName: "Taiwan",
+                                character: "https://fakeimg.pl/300x450/282828/eae0d0",
+                                greet: 0
                             },
                             {
                                 id: "",
                                 name: "Rachel Wang",
-                                country: "Taiwan",
-                                img: "https://fakeimg.pl/300x450/282828/eae0d0",
-                                greet: "讓我們用音樂 Cool together"
+                                country: "tw",
+                                countryFullName: "Taiwan",
+                                character: "https://fakeimg.pl/300x450/282828/eae0d0",
+                                greet: 1
                             },
                             {
                                 id: "",
                                 name: "莊育銘",
-                                country: "Taiwan",
-                                img: "https://fakeimg.pl/300x450/282828/eae0d0",
-                                greet: "讓我們用音樂 Cool together"
+                                country: "tw",
+                                countryFullName: "Taiwan",
+                                character: "https://fakeimg.pl/300x450/282828/eae0d0",
+                                greet: 1
                             },
                             {
                                 id: "",
                                 name: "Ray Su",
-                                country: "Taiwan",
-                                img: "https://fakeimg.pl/300x450/282828/eae0d0",
-                                greet: "讓我們用音樂 Cool together"
+                                country: "tw",
+                                countryFullName: "Taiwan",
+                                character: "https://fakeimg.pl/300x450/282828/eae0d0",
+                                greet: 0
                             },
                             {
                                 id: "",
                                 name: "Kanokporn Sopontaweesab",
-                                img: "https://fakeimg.pl/300x450/282828/eae0d0",
-                                country: "Taiwan",
-                                greet: "讓我們用音樂 Cool together"
+                                character: "https://fakeimg.pl/300x450/282828/eae0d0",
+                                country: "tw",
+                                countryFullName: "Taiwan",
+                                greet: 1
                             },
                             {
                                 id: "",
                                 name: "Anis Aiz Sllu Tersenyum",
-                                img: "https://fakeimg.pl/300x450/282828/eae0d0",
-                                country: "Taiwan",
-                                greet: "讓我們用音樂 Cool together"
+                                character: "https://fakeimg.pl/300x450/282828/eae0d0",
+                                country: "tw",
+                                countryFullName: "Taiwan",
+                                greet: 0
                             },
                             {
                                 id: "",
                                 name: "Isaac chuang",
-                                country: "Taiwan",
-                                img: "https://fakeimg.pl/300x450/282828/eae0d0",
-                                greet: "讓我們用音樂 Cool together"
+                                country: "tw",
+                                countryFullName: "Taiwan",
+                                character: "https://fakeimg.pl/300x450/282828/eae0d0",
+                                greet: 1
                             },
                             {
                                 id: "",
                                 name: "Rachel Wang",
-                                country: "Taiwan",
-                                img: "https://fakeimg.pl/300x450/282828/eae0d0",
-                                greet: "讓我們用音樂 Cool together"
+                                country: "tw",
+                                countryFullName: "Taiwan",
+                                character: "https://fakeimg.pl/300x450/282828/eae0d0",
+                                greet: 0
                             },
                             {
                                 id: "",
                                 name: "莊育銘",
-                                country: "Taiwan",
-                                img: "https://fakeimg.pl/300x450/282828/eae0d0",
-                                greet: "讓我們用音樂 Cool together"
+                                country: "tw",
+                                countryFullName: "Taiwan",
+                                character: "https://fakeimg.pl/300x450/282828/eae0d0",
+                                greet: 1
                             }
                         ]}
                     />
@@ -377,29 +427,31 @@ class Step2 extends Component {
                 <div className="page__row page__row--widthM page__row--flex" style={{ marginTop: "-5%" }}>
                     <div className="page__column">
                         <div ref="bubble1" className="bubble">
-                            <p className="bubble__text">讓我們用音樂 Cool together</p>
+                            <p className="bubble__text">{greets[this.props.appContext.country][this.props.appContext.greet]}</p>
                         </div>
                         <Block
                             data={{
-                                id: "",
-                                name: "Ray Su",
-                                country: "Taiwan",
-                                img: "https://fakeimg.pl/300x450/282828/eae0d0",
-                                greet: "讓我們用音樂 Cool together"
+                                id: this.props.appContext.id,
+                                name: this.props.appContext.name,
+                                country: this.props.appContext.country,
+                                countryFullName: this.props.appContext.countryFullName,
+                                character: this.props.appContext.character,
+                                greet: this.props.appContext.greet
                             }}
                         />
                     </div>
                     <div className="page__column">
                         <div ref="bubble2" className="bubble">
-                            <p className="bubble__text">跟我一起創作出最 Cool 的 free style</p>
+                            <p className="bubble__text">{greets[this.props.invite.country][this.props.invite.greet]}</p>
                         </div>
                         <Block
                             data={{
-                                id: "",
-                                name: "Ray Su",
-                                country: "Taiwan",
-                                img: "https://fakeimg.pl/300x450/282828/eae0d0",
-                                greet: "讓我們用音樂 Cool together"
+                                id: this.props.invite.id,
+                                name: this.props.invite.name,
+                                country: this.props.invite.country,
+                                countryFullName: this.props.invite.countryFullName,
+                                character: this.props.invite.character,
+                                greet: this.props.invite.greet
                             }}
                         />
                     </div>
@@ -472,21 +524,23 @@ class Step3 extends Component {
                         <Block
                             data={{
                                 id: "",
-                                name: "Ray Su",
-                                country: "Taiwan",
-                                img: "https://fakeimg.pl/300x450/282828/eae0d0",
-                                greet: "讓我們用音樂 Cool together"
+                                name: this.props.appContext.name,
+                                country: this.props.appContext.country,
+                                countryFullName: this.props.appContext.countryFullName,
+                                character: this.props.appContext.character,
+                                greet: this.props.appContext.greet
                             }}
                         />
                     </div>
                     <div className="page__column">
                         <Block
                             data={{
-                                id: "",
-                                name: "Ray Su",
-                                country: "Taiwan",
-                                img: "https://fakeimg.pl/300x450/282828/eae0d0",
-                                greet: "讓我們用音樂 Cool together"
+                                id: this.props.invite.id,
+                                name: this.props.invite.name,
+                                country: this.props.invite.country,
+                                countryFullName: this.props.invite.countryFullName,
+                                character: this.props.invite.character,
+                                greet: this.props.invite.greet
                             }}
                         />
                     </div>
@@ -499,10 +553,11 @@ class Step3 extends Component {
 class Step4 extends Component {
     constructor(props) {
         super(props);
+        props.appContext.toggleBgmForceMuted(true);
     }
 
     render() {
-        return <RhythmGame level="1" onGameOver={this.props.nextStep} />;
+        return <RhythmGame level="1" onGameOver={this.props.updateScore} />;
     }
 }
 
@@ -512,7 +567,7 @@ class Step5 extends Component {
     }
 
     render() {
-        return <Freestyle score="2970" restart={this.props.restart} />;
+        return <Freestyle score={this.props.score} restart={this.props.restart} appContext={this.props.appContext} invite={this.props.invite} cid={this.props.cid} />;
     }
 }
 

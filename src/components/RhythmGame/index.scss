@@ -42,6 +42,21 @@
     &__gif {
         margin-bottom: 20px;
     }
+    &__score {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        font-size: 4em;
+        color: #ffffff;
+        font-weight: 1000;
+        text-shadow: 0px 0px 5px #ffffff;
+
+        @media screen and (max-width: 600px) {
+            top: 15px;
+            right: 15px;
+            font-size: 3em;
+        }
+    }
     .gradientBtn {
         margin-bottom: 50px;
     }

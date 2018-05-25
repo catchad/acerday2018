@@ -441,11 +441,12 @@ class Step5 extends Component {
                 <div className="page__row page__row--widthS">
                     <Block
                         data={{
-                            id: "",
-                            name: "Ray Su",
-                            country: "Taiwan",
-                            img: this.props.avatarResult,
-                            greet: "讓我們用音樂 Cool together"
+                            id: "9999999",
+                            name: "Melody",
+                            country: "tw",
+                            countryFullName: "Taiwan",
+                            character: this.props.avatarResult,
+                            greet: 0
                         }}
                     />
                 </div>
@@ -453,7 +454,7 @@ class Step5 extends Component {
                     <AppContextConsumer>
                         {context => {
                             return (
-                                <RoundBtn routerLink={`/${context.currentCountry}/rhythmGame`}>
+                                <RoundBtn routerLink={`/${context.currentCountry}/game`}>
                                     <FormattedMessage id="intl.register.step5.startgame" />
                                 </RoundBtn>
                             );

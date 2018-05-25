@@ -1,8 +1,8 @@
 const tw = {
-    "intl.hello": "你好",
-    "intl.name": "我的名字是 {name}",
-    "intl.page1.text": "我是頁面1 測試",
     "intl.nomatch.text": "頁面不存在",
+
+    "intl.homepage.text": "每天都好玩！一起玩音樂！玩創作！<br/>集點酷！抽大獎！",
+    "intl.homepage.btn": "登錄",
 
     "intl.nav.homepage": "首頁",
     "intl.nav.task": "任務列表",
@@ -60,6 +60,31 @@ const tw = {
 
     "intl.exchange.title": "獎項兌換",
     "intl.exchange.desc": "改變遊戲規則的曠世巨作，改變遊戲規則的曠世巨改變遊戲規則的曠世巨作改變遊戲規則的曠世巨作，改變遊戲規則的曠世巨作改變遊戲規則的曠世巨作。",
+    "intl.exchange.prize1.name": "旅遊大獎",
+    "intl.exchange.prize1.point": "點數: 10000",
+    "intl.exchange.prize1.desc": "四天三夜之旅等你拿",
+    "intl.exchange.prize2.name": "Spotify一年份",
+    "intl.exchange.prize2.point": "點數: 10000",
+    "intl.exchange.prize2.desc": "免費一年的好音樂",
+    "intl.exchange.prize3.name": "Acer產品",
+    "intl.exchange.prize3.point": "點數: 10000",
+    "intl.exchange.prize3.desc": "各種Acer筆電及最棒商品",
+    "intl.exchange.prize4.name": "Acer一年保固",
+    "intl.exchange.prize4.point": "點數: 10000",
+    "intl.exchange.prize4.desc": "讓你的產品受到Acer的專業照顧",
+    "intl.exchange.btn": "我要兌換",
+    "intl.exchange.confirm.userpoint": "你目前的點數：{point}點",
+    "intl.exchange.confirm.title": "{prize}抽獎機會",
+    "intl.exchange.confirm.text": "確定要扣除 {point} 點<br/>兌換{prize}的抽獎機會嗎？",
+    "intl.exchange.confirm.btn.send": "確認送出",
+    "intl.exchange.confirm.btn.cancel": "取消",
+    "intl.exchange.form.title": "兌獎資料填寫",
+    "intl.exchange.form.desc": "請審慎填寫下列資料，資料送出後即不可修改。",
+    "intl.exchange.form.name": "姓名",
+    "intl.exchange.form.phone": "電話",
+    "intl.exchange.form.email": "信箱",
+    "intl.exchange.form.address": "地址",
+    "intl.exchange.form.btn.send": "確認送出",
 
     "intl.task.title": "任務列表",
 
@@ -107,11 +132,17 @@ const tw = {
     "intl.specialtask3.btn": "確認送出",
 
     "intl.product.safetext": "商品機型僅供參考，各國實際販售機種請參考acer官網 http://www.acer.com",
+    "intl.product.nitro5.desc": "改變遊戲規則的曠世巨作",
     "intl.product.nitro5.content": "完美的效能與操控<br />Acer Nitro 5 搭載最新一代的顯示卡，繪圖運算速度大幅提升，並支援更為細膩的光影細節與質地，讓玩家可以完全沉浸於鮮明畫面帶來的極致快感。玩家還可享受最新一代處理器帶來的驚人效能，無論遊戲、內容創作或多工應用皆無比流暢。Acer Nitro 5 搭載最新一代的顯示卡，繪圖運算速度大幅提升，並支援更為細膩的光影細節與質地，讓玩家可以完全沉浸於鮮明畫面帶來的極致快感。玩家還可享受最新一代處理器帶來的驚人效能，無論遊戲、內容創作或多工應用皆無比流暢。Acer Nitro 5 搭載最新一代的顯示卡，繪圖運算速度大幅提升，並支援更為細膩的光影細節與質地，讓玩家可以完全沉浸於鮮明畫面帶來的極致快感。玩家還可享受最新一代處理器帶來的驚人效能，無論遊戲、內容創作或多工應用皆無比流暢。<br /><br />Nitro 5 的上蓋以雷射雕刻進行優雅表面處理，為這款電競筆電帶來顯眼細緻風格。",
+    "intl.product.spin5.desc": "輕鬆變形",
     "intl.product.spin5.content": "Spin 5 輕盈、易攜帶，搭配可翻轉軸承與金屬外殼，適合需要應付各種工作環境與切換模式、又能兼具娛樂的時尚專業人士。Spin 5採可翻轉多功能設計，讓使用者能流暢切換筆電、平板、觀賞與帳篷等不同模式，因此是發揮創造力和分享內容的完美平台。<br/><br/>Spin 5 輕盈、易攜帶，搭配可翻轉軸承與金屬外殼，適合需要應付各種工作環境與切換模式、又能兼具娛樂的時尚專業人士。Spin 5採可翻轉多功能設計，讓使用者能流暢切換筆電、平板、觀賞與帳篷等不同模式，因此是發揮創造力和分享內容的完美平台。<br/><br/>Spin 5 輕盈、易攜帶，搭配可翻轉軸承與金屬外殼，適合需要應付各種工作環境與切換模式、又能兼具娛樂的時尚專業人士。Spin 5採可翻轉多功能設計，讓使用者能流暢切換筆電、平板、觀賞與帳篷等不同模式，因此是發揮創造力和分享內容的完美平台。",
+    "intl.product.helios300.desc": "火力全開依舊冷靜鎮定",
     "intl.product.helios300.content": "完美的效能與操控<br />Acer Nitro 5 搭載最新一代的顯示卡，繪圖運算速度大幅提升，並支援更為細膩的光影細節與質地，讓玩家可以完全沉浸於鮮明畫面帶來的極致快感。玩家還可享受最新一代處理器帶來的驚人效能，無論遊戲、內容創作或多工應用皆無比流暢。Acer Nitro 5 搭載最新一代的顯示卡，繪圖運算速度大幅提升，並支援更為細膩的光影細節與質地，讓玩家可以完全沉浸於鮮明畫面帶來的極致快感。玩家還可享受最新一代處理器帶來的驚人效能，無論遊戲、內容創作或多工應用皆無比流暢。Acer Nitro 5 搭載最新一代的顯示卡，繪圖運算速度大幅提升，並支援更為細膩的光影細節與質地，讓玩家可以完全沉浸於鮮明畫面帶來的極致快感。玩家還可享受最新一代處理器帶來的驚人效能，無論遊戲、內容創作或多工應用皆無比流暢。<br /><br />Nitro 5 的上蓋以雷射雕刻進行優雅表面處理，為這款電競筆電帶來顯眼細緻風格。",
+    "intl.product.swtich7.desc": "世界首款無風扇獨立顯卡二合一筆電",
     "intl.product.swtich7.content": "Spin 5 輕盈、易攜帶，搭配可翻轉軸承與金屬外殼，適合需要應付各種工作環境與切換模式、又能兼具娛樂的時尚專業人士。Spin 5採可翻轉多功能設計，讓使用者能流暢切換筆電、平板、觀賞與帳篷等不同模式，因此是發揮創造力和分享內容的完美平台。<br/><br/>Spin 5 輕盈、易攜帶，搭配可翻轉軸承與金屬外殼，適合需要應付各種工作環境與切換模式、又能兼具娛樂的時尚專業人士。Spin 5採可翻轉多功能設計，讓使用者能流暢切換筆電、平板、觀賞與帳篷等不同模式，因此是發揮創造力和分享內容的完美平台。<br/><br/>Spin 5 輕盈、易攜帶，搭配可翻轉軸承與金屬外殼，適合需要應付各種工作環境與切換模式、又能兼具娛樂的時尚專業人士。Spin 5採可翻轉多功能設計，讓使用者能流暢切換筆電、平板、觀賞與帳篷等不同模式，因此是發揮創造力和分享內容的完美平台。",
+    "intl.product.swift5.desc": "保持優雅易如反掌",
     "intl.product.swift5.content": "完美的效能與操控<br />Acer Nitro 5 搭載最新一代的顯示卡，繪圖運算速度大幅提升，並支援更為細膩的光影細節與質地，讓玩家可以完全沉浸於鮮明畫面帶來的極致快感。玩家還可享受最新一代處理器帶來的驚人效能，無論遊戲、內容創作或多工應用皆無比流暢。Acer Nitro 5 搭載最新一代的顯示卡，繪圖運算速度大幅提升，並支援更為細膩的光影細節與質地，讓玩家可以完全沉浸於鮮明畫面帶來的極致快感。玩家還可享受最新一代處理器帶來的驚人效能，無論遊戲、內容創作或多工應用皆無比流暢。Acer Nitro 5 搭載最新一代的顯示卡，繪圖運算速度大幅提升，並支援更為細膩的光影細節與質地，讓玩家可以完全沉浸於鮮明畫面帶來的極致快感。玩家還可享受最新一代處理器帶來的驚人效能，無論遊戲、內容創作或多工應用皆無比流暢。<br /><br />Nitro 5 的上蓋以雷射雕刻進行優雅表面處理，為這款電競筆電帶來顯眼細緻風格。",
+    "intl.product.more": "了解更多",
 
     "intl.notification.sentence1": "恭喜你完成註冊，獲得4000點",
     "intl.notification.sentence2": "舊友回娘家，獲得10000點",
@@ -156,6 +187,28 @@ const tw = {
     "intl.task.loginEveryday8.desc": "連續登錄網站8天,可獲得2000點",
     "intl.task.greetEveryday.name": "連續8天完成交友獲得5000點",
     "intl.task.greetEveryday.desc": "連續8天進站完成打招呼動作可獲得5000點",
+
+    "intl.creation.back": "上一頁",
+    "intl.creation.play": "播放",
+    "intl.creation.pause": "暫停",
+    "intl.creation.share": "分享",
+
+    "intl.record.title": "創作記錄",
+    "intl.record.single": "單軌",
+    "intl.record.multiple": "雙軌",
+    "intl.record.play": "PLAY",
+    "intl.record.waiting": "等待完成",
+
+    "intl.rhythmgame.confrim.title": "遊戲說明",
+    "intl.rhythmgame.confrim.text": "當線上的圓點達圓框時<br />按下A、S、D即可獲得分數",
+    "intl.rhythmgame.confrim.btn": "GO",
+    "intl.rhythmgame.confrim.opensound": "請打開喇叭，已獲得最佳遊戲體驗",
+
+    "intl.freestyle.confrim.title": "遊戲完成",
+    "intl.freestyle.confrim.text": "請等待朋友完成共同創作",
+    "intl.freestyle.confrim.share": "分享音樂",
+    "intl.freestyle.confrim.preview": "再聽一次",
+    "intl.freestyle.confrim.restart": "繼續其他創作",
 
     config: {
         products: ["nitro5", "spin5", "helios300", "switch7", "swift5"],
