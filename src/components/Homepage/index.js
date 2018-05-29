@@ -103,8 +103,8 @@ class Homepage extends Component {
                 </p>
             </Fragment>
         );
-        toast("歡迎回到AcerDay，獲得800點");
-        toast("你連續登錄網站3天，獲得2000點");
+        toast(<FormattedHTMLMessage id="intl.notification.sentence3" />);
+        toast(<FormattedHTMLMessage id="intl.notification.sentence4" />);
         // toast("你連續登錄網站8天，獲得4000點");
     }
 
