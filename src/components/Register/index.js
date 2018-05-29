@@ -365,7 +365,7 @@ class Step4 extends Component {
                         onChange={value => {
                             this.props.userData.greet = value;
                         }}
-                        options={[{ text: this.props.intl.formatMessage({ id: "intl.greet1" }), value: 1 }, { text: this.props.intl.formatMessage({ id: "intl.greet2" }), value: 2 }]}
+                        options={[{ text: this.props.intl.formatMessage({ id: "intl.register.step4.greet1" }), value: 0 }, { text: this.props.intl.formatMessage({ id: "intl.register.step4.greet2" }), value: 1 }]}
                     />
                 </div>
                 <div className="page__row page__row--center">

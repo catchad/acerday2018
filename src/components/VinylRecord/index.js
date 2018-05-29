@@ -14,6 +14,12 @@ class VinylRecord extends Component {
         this.state = {};
         this.currentPosition = 0;
         this.melody = [0, 0];
+        // [
+        //             [0, 0, 0],
+        //             [0, 0, 0],
+        //             [0, 0, 0],
+        //             [0, 0, 0]
+        //         ];
 
         // this.mode = 1; // 1 = freestyle, 2 = cdplayer, 3 = none
         this.checker = 0;

@@ -30,19 +30,16 @@
         height: 100%;
         max-width: 800px;
         max-height: 750px;
+
+        border: 1px solid #ffffff;
+        box-sizing: border-box;
+        background: linear-gradient(45deg, #9532cd, #ff68f3);
+        border-radius: 15px;
     }
     &__innerWrapper {
         position: relative;
-        width: 100%;
-        height: 100%;
-        border: 1px solid #ffffff;
-        box-sizing: border-box;
-        border-radius: 15px;
-        background: linear-gradient(45deg, #9532cd, #ff68f3);
         box-sizing: border-box;
         padding: 0 50px 20px 50px;
-        overflow: auto;
-        -webkit-overflow-scrolling: touch;
         @media screen and (max-width: 1024px) {
             padding: 0 15px 15px 15px;
         }

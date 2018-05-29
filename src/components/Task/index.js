@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from "react";
 import { createPortal } from "react-dom";
+import { Scrollbars } from "react-custom-scrollbars";
 import { connect } from "react-redux";
 import { FormattedMessage } from "react-intl";
 import { Link } from "react-router-dom";
@@ -116,36 +117,38 @@ class Task extends Component {
         return createPortal(
             <div className="task" ref="task">
                 <div className="task__outerWrapper" ref="taskWrap">
-                    <div className="task__innerWrapper">
-                        <p className="task__title">
-                            <FormattedMessage id="intl.task.title" />
-                        </p>
-                        {this.state.data ? (
-                            <div className="task__list">
-                                <TaskItemGroup name="限定任務" desc="任務於指定日期開啟，完成即可獲得額外點數">
-                                    {this.state.data.specialTask.map((el, id) => {
-                                        return <SpecialTask key={id} icon={el ? "https://fakeimg.pl/70x70/" : "https://fakeimg.pl/70x70/282828/eae0d0/"} name={this.props.intlContext.formatMessage({ id: `intl.task.specialTask${id + 1}.name` })} activeText={this.props.intlContext.formatMessage({ id: `intl.task.specialTask${id + 1}.active` })} unactiveText={this.props.intlContext.formatMessage({ id: `intl.task.specialTask${id + 1}.unactive` })} link={`st${id + 1}`} active={el} />;
-                                    })}
-                                </TaskItemGroup>
+                    <Scrollbars>
+                        <div className="task__innerWrapper">
+                            <p className="task__title">
+                                <FormattedMessage id="intl.task.title" />
+                            </p>
+                            {this.state.data ? (
+                                <div className="task__list">
+                                    <TaskItemGroup name={this.props.intlContext.formatMessage({ id: "intl.task.specialTask.title" })} desc={this.props.intlContext.formatMessage({ id: "intl.task.specialTask.desc" })}>
+                                        {this.state.data.specialTask.map((el, id) => {
+                                            return <SpecialTask key={id} icon={el ? "https://fakeimg.pl/70x70/" : "https://fakeimg.pl/70x70/282828/eae0d0/"} name={this.props.intlContext.formatMessage({ id: `intl.task.specialTask${id + 1}.name` })} activeText={this.props.intlContext.formatMessage({ id: `intl.task.specialTask${id + 1}.active` })} unactiveText={this.props.intlContext.formatMessage({ id: `intl.task.specialTask${id + 1}.unactive` })} link={`st${id + 1}`} active={el} />;
+                                        })}
+                                    </TaskItemGroup>
 
-                                {this.state.data.normalTask.map((el, id) => {
-                                    return (
-                                        <div className="task__item" key={id}>
-                                            <p className="task__name">
-                                                <FormattedMessage id={`intl.task.${el.name}.name`} />
-                                            </p>
-                                            <p className="task__desc">
-                                                <FormattedMessage id={`intl.task.${el.name}.desc`} />
-                                            </p>
-                                            <TaskProgress molecular={el.point * el.finish} denominator={el.point * el.limit} unit={el.point} />
-                                        </div>
-                                    );
-                                })}
-                            </div>
-                        ) : (
-                            <p>Loading...</p>
-                        )}
-                    </div>
+                                    {this.state.data.normalTask.map((el, id) => {
+                                        return (
+                                            <div className="task__item" key={id}>
+                                                <p className="task__name">
+                                                    <FormattedMessage id={`intl.task.${el.name}.name`} />
+                                                </p>
+                                                <p className="task__desc">
+                                                    <FormattedMessage id={`intl.task.${el.name}.desc`} />
+                                                </p>
+                                                <TaskProgress molecular={el.point * el.finish} denominator={el.point * el.limit} unit={el.point} />
+                                            </div>
+                                        );
+                                    })}
+                                </div>
+                            ) : (
+                                <p>Loading...</p>
+                            )}
+                        </div>
+                    </Scrollbars>
                     <CircleBtn
                         className="task__close"
                         onClick={() => {

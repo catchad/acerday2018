@@ -6,7 +6,7 @@ import RoundBtn from "../RoundBtn";
 import RhythmGame from "../RhythmGame";
 import Freestyle from "../Freestyle";
 import "./index.scss";
-import user from "./user.png";
+import user from "./testuser.png";
 import { toast } from "react-toastify";
 import { FormattedMessage } from "react-intl";
 import { TweenMax } from "gsap";
@@ -37,6 +37,7 @@ class Game extends Component {
                   },
             score: 0
         };
+
         console.log(props);
         console.log(props.match.params.cid ? 4 : 1);
         // console.log(this.props.appContext);
@@ -222,7 +223,11 @@ class Step1 extends Component {
                             }
                         ]}
                     />
+                    <RoundBtn size="L">
+                        <FormattedMessage id="intl.game.step1.btn.search" />
+                    </RoundBtn>
                 </div>
+
                 <div className="page__row page__row--fullWidth">
                     <Block
                         type="list"
@@ -234,13 +239,13 @@ class Step1 extends Component {
                                 name: "Ray Su",
                                 country: "tw",
                                 countryFullName: "Taiwan",
-                                character: "https://fakeimg.pl/300x450/282828/eae0d0",
+                                character: user,
                                 greet: 0
                             },
                             {
                                 id: "",
                                 name: "Kanokporn Sopontaweesab",
-                                character: "https://fakeimg.pl/300x450/282828/eae0d0",
+                                character: user,
                                 country: "tw",
                                 countryFullName: "Taiwan",
                                 greet: 0
@@ -248,7 +253,7 @@ class Step1 extends Component {
                             {
                                 id: "",
                                 name: "Anis Aiz Sllu Tersenyum",
-                                character: "https://fakeimg.pl/300x450/282828/eae0d0",
+                                character: user,
                                 country: "us",
                                 countryFullName: "United States",
                                 greet: 1
@@ -258,7 +263,7 @@ class Step1 extends Component {
                                 name: "Isaac chuang",
                                 country: "tw",
                                 countryFullName: "Taiwan",
-                                character: "https://fakeimg.pl/300x450/282828/eae0d0",
+                                character: user,
                                 greet: 0
                             },
                             {
@@ -266,7 +271,7 @@ class Step1 extends Component {
                                 name: "Rachel Wang",
                                 country: "tw",
                                 countryFullName: "Taiwan",
-                                character: "https://fakeimg.pl/300x450/282828/eae0d0",
+                                character: user,
                                 greet: 1
                             },
                             {
@@ -274,7 +279,7 @@ class Step1 extends Component {
                                 name: "莊育銘",
                                 country: "tw",
                                 countryFullName: "Taiwan",
-                                character: "https://fakeimg.pl/300x450/282828/eae0d0",
+                                character: user,
                                 greet: 1
                             },
                             {
@@ -282,13 +287,13 @@ class Step1 extends Component {
                                 name: "Ray Su",
                                 country: "tw",
                                 countryFullName: "Taiwan",
-                                character: "https://fakeimg.pl/300x450/282828/eae0d0",
+                                character: user,
                                 greet: 0
                             },
                             {
                                 id: "",
                                 name: "Kanokporn Sopontaweesab",
-                                character: "https://fakeimg.pl/300x450/282828/eae0d0",
+                                character: user,
                                 country: "tw",
                                 countryFullName: "Taiwan",
                                 greet: 1
@@ -296,7 +301,7 @@ class Step1 extends Component {
                             {
                                 id: "",
                                 name: "Anis Aiz Sllu Tersenyum",
-                                character: "https://fakeimg.pl/300x450/282828/eae0d0",
+                                character: user,
                                 country: "tw",
                                 countryFullName: "Taiwan",
                                 greet: 0
@@ -306,7 +311,7 @@ class Step1 extends Component {
                                 name: "Isaac chuang",
                                 country: "tw",
                                 countryFullName: "Taiwan",
-                                character: "https://fakeimg.pl/300x450/282828/eae0d0",
+                                character: user,
                                 greet: 1
                             },
                             {
@@ -314,7 +319,7 @@ class Step1 extends Component {
                                 name: "Rachel Wang",
                                 country: "tw",
                                 countryFullName: "Taiwan",
-                                character: "https://fakeimg.pl/300x450/282828/eae0d0",
+                                character: user,
                                 greet: 0
                             },
                             {
@@ -322,7 +327,7 @@ class Step1 extends Component {
                                 name: "莊育銘",
                                 country: "tw",
                                 countryFullName: "Taiwan",
-                                character: "https://fakeimg.pl/300x450/282828/eae0d0",
+                                character: user,
                                 greet: 1
                             }
                         ]}
@@ -553,11 +558,11 @@ class Step3 extends Component {
 class Step4 extends Component {
     constructor(props) {
         super(props);
-        props.appContext.toggleBgmForceMuted(true);
+        // props.appContext.toggleBgmForceMuted(true);
     }
 
     render() {
-        return <RhythmGame level="1" onGameOver={this.props.updateScore} />;
+        return <RhythmGame level="1" appContext={this.props.appContext} onGameOver={this.props.updateScore} />;
     }
 }
 

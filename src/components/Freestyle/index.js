@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Block from "../Block";
 import RoundBtn from "../RoundBtn";
 import VinylRecord from "../VinylRecord";
+import { Scrollbars } from "react-custom-scrollbars";
 import { FormattedMessage } from "react-intl";
 import greets from "../../locale/greets";
 
@@ -10,10 +11,18 @@ class Freestyle extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            start: false,
             openConfrim: false
         };
+        this.props.appContext.toggleBgmForceMuted(false);
     }
-    preview = () => {
+    _start = () => {
+        this.setState({
+            start: true
+        });
+        this.props.appContext.toggleBgmForceMuted(true);
+    };
+    _preview = () => {
         this.refs.vinylRecord.setMode("cdplayer");
         this.refs.vinylRecord.play();
         this.setState({
@@ -77,6 +86,31 @@ class Freestyle extends Component {
                         }}
                     />
                 </div>
+                {!this.state.start ? (
+                    <div className="freestyleReady">
+                        <div className="freestyleReady__wrapper">
+                            <Scrollbars>
+                                <div className="freestyleReady__contentWrapper">
+                                    <p className="freestyleReady__title">
+                                        <FormattedMessage id="intl.freestyle.ready.title" />
+                                    </p>
+                                    <p className="freestyleReady__text">
+                                        <FormattedMessage id="intl.freestyle.ready.desc" />
+                                    </p>
+                                    <img className="freestyleReady__gif" src="http://via.placeholder.com/400x400" />
+                                    <div>
+                                        <RoundBtn onClick={this._start}>
+                                            <FormattedMessage id="intl.rhythmgame.confrim.btn" />
+                                        </RoundBtn>
+                                    </div>
+                                </div>
+                            </Scrollbars>
+                        </div>
+                    </div>
+                ) : (
+                    ""
+                )}
+
                 {this.state.openConfrim ? (
                     <div className="gameComplete">
                         <div className="gameComplete__wrapper">
@@ -92,7 +126,7 @@ class Freestyle extends Component {
                                 </RoundBtn>
                             </div>
                             <div className="gameComplete__row">
-                                <RoundBtn fixedSize="M" secondary onClick={this.preview}>
+                                <RoundBtn fixedSize="M" secondary onClick={this._preview}>
                                     <FormattedMessage id="intl.freestyle.confrim.preview" />
                                 </RoundBtn>
                             </div>

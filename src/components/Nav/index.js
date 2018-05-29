@@ -6,6 +6,11 @@ import { FormattedMessage } from "react-intl";
 import { AppContextConsumer } from "../../AppContext";
 import { IntlContextConsumer } from "../../IntlContext";
 import Background from "../Background";
+import { Scrollbars } from "react-custom-scrollbars";
+import icon_notification from "./icon-notification.svg";
+import icon_task from "./icon-task.svg";
+import icon_bgm_open from "./icon-bgm-open.svg";
+import icon_bgm_close from "./icon-bgm-close.svg";
 
 class Nav extends Component {
     constructor(props) {
@@ -50,77 +55,78 @@ class Nav extends Component {
                                 return (
                                     <Fragment>
                                         <nav className={`nav ${classNames({ "nav--active": this.state.navOpen })}`}>
-                                            {appContext.id ? (
-                                                <div className="userInfo">
-                                                    <p className="userInfo__name">{appContext.name}</p>
-                                                    <p className="userInfo__acerID">Acer ID: {appContext.id}</p>
-                                                    <p className="userInfo__point">{appContext.point} 點</p>
+                                            <Scrollbars>
+                                                <div className="nav__wrapper">
+                                                    {appContext.id ? (
+                                                        <div className="userInfo">
+                                                            <p className="userInfo__name">{appContext.name}</p>
+                                                            <p className="userInfo__acerID">Acer ID: {appContext.id}</p>
+                                                            <p className="userInfo__point">{appContext.point} 點</p>
+                                                        </div>
+                                                    ) : (
+                                                        ""
+                                                    )}
+
+                                                    {appContext.id ? (
+                                                        <Link onClick={this._closeNav} className="nav__link" to={`/${appContext.currentCountry}/game`}>
+                                                            <FormattedMessage id="intl.nav.game" />
+                                                        </Link>
+                                                    ) : (
+                                                        ""
+                                                    )}
+
+                                                    <Link onClick={this._closeNav} className="nav__link" to={`/${appContext.currentCountry}/rule`}>
+                                                        <FormattedMessage id="intl.nav.rule" />
+                                                    </Link>
+
+                                                    {appContext.id ? (
+                                                        <Link onClick={this._closeNav} className="nav__link" to={`/${appContext.currentCountry}/record`}>
+                                                            <FormattedMessage id="intl.nav.record" />
+                                                        </Link>
+                                                    ) : (
+                                                        ""
+                                                    )}
+
+                                                    <div className="nav__group">
+                                                        <p className="nav__link">
+                                                            <FormattedMessage id="intl.nav.product" />
+                                                        </p>
+                                                        <nav className="nav__subNav">
+                                                            <Fragment>
+                                                                {intlContext.intl.messages.config.products.map((el, id) => {
+                                                                    return (
+                                                                        <Link key={id} onClick={this._closeNav} className="nav__subLink" to={`/${appContext.currentCountry}/product/${el}`}>
+                                                                            {el}
+                                                                        </Link>
+                                                                    );
+                                                                })}
+                                                            </Fragment>
+                                                        </nav>
+                                                    </div>
+
+                                                    {appContext.id ? (
+                                                        <Link onClick={this._closeNav} className="nav__link" to={`/${appContext.currentCountry}/exchange`}>
+                                                            <FormattedMessage id="intl.nav.exchange" />
+                                                        </Link>
+                                                    ) : (
+                                                        ""
+                                                    )}
+
+                                                    <a className="nav__link" href={intlContext.intl.formatMessage({ id: "intl.nav.promote.link" })} target="_blank">
+                                                        <FormattedMessage id="intl.nav.promote" />
+                                                    </a>
                                                 </div>
-                                            ) : (
-                                                ""
-                                            )}
-
-                                            <Link onClick={this._closeNav} className="nav__link" to={`/${appContext.currentCountry}`}>
-                                                <FormattedMessage id="intl.nav.homepage" />
-                                            </Link>
-                                            {appContext.id ? (
-                                                <Link onClick={this._closeNav} className="nav__link" to={`/${appContext.currentCountry}/game`}>
-                                                    <FormattedMessage id="intl.nav.game" />
-                                                </Link>
-                                            ) : (
-                                                ""
-                                            )}
-
-                                            <Link onClick={this._closeNav} className="nav__link" to={`/${appContext.currentCountry}/rule`}>
-                                                <FormattedMessage id="intl.nav.rule" />
-                                            </Link>
-
-                                            {appContext.id ? (
-                                                <Link onClick={this._closeNav} className="nav__link" to={`/${appContext.currentCountry}/record`}>
-                                                    <FormattedMessage id="intl.nav.record" />
-                                                </Link>
-                                            ) : (
-                                                ""
-                                            )}
-
-                                            <div className="nav__group">
-                                                <p className="nav__link">
-                                                    <FormattedMessage id="intl.nav.product" />
-                                                </p>
-                                                <nav className="nav__subNav">
-                                                    <Fragment>
-                                                        {intlContext.intl.messages.config.products.map((el, id) => {
-                                                            return (
-                                                                <Link key={id} onClick={this._closeNav} className="nav__subLink" to={`/${appContext.currentCountry}/product/${el}`}>
-                                                                    {el}
-                                                                </Link>
-                                                            );
-                                                        })}
-                                                    </Fragment>
-                                                </nav>
-                                            </div>
-
-                                            {appContext.id ? (
-                                                <Link onClick={this._closeNav} className="nav__link" to={`/${appContext.currentCountry}/exchange`}>
-                                                    <FormattedMessage id="intl.nav.exchange" />
-                                                </Link>
-                                            ) : (
-                                                ""
-                                            )}
-
-                                            <a className="nav__link" href={intlContext.intl.formatMessage({ id: "intl.nav.promote.link" })} target="_blank">
-                                                <FormattedMessage id="intl.nav.promote" />
-                                            </a>
+                                            </Scrollbars>
                                         </nav>
+
                                         <div className="headerIcon">
                                             <a
                                                 className="headerIcon__link"
                                                 onClick={() => {
                                                     appContext.toggleBgm();
                                                 }}
-                                                style={{ opacity: appContext.bgm ? 1 : 0.6 }}
                                             >
-                                                <img className="headerIcon__img" src="https://fakeimg.pl/30x30/" />
+                                                {appContext.bgm ? <img className="headerIcon__img" src={icon_bgm_open} /> : <img className="headerIcon__img" src={icon_bgm_close} />}
                                             </a>
 
                                             {appContext.id ? (
@@ -131,7 +137,7 @@ class Nav extends Component {
                                                         this._closeNav();
                                                     }}
                                                 >
-                                                    <img className="headerIcon__img" src="https://fakeimg.pl/30x30/" />
+                                                    <img className="headerIcon__img" src={icon_task} />
                                                 </a>
                                             ) : (
                                                 ""
@@ -145,7 +151,7 @@ class Nav extends Component {
                                                         this._closeNav();
                                                     }}
                                                 >
-                                                    <img className="headerIcon__img" src="https://fakeimg.pl/30x30/" />
+                                                    <img className="headerIcon__img" src={icon_notification} />
                                                 </a>
                                             ) : (
                                                 ""

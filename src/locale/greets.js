@@ -1,6 +1,6 @@
 var greets = {
-    tw: ["我是招呼語1", "我是招呼語2"],
-    us: ["I am greet 1", "I am greet 2"]
+    tw: ["讓我們一起用音樂嗨翻這個世界", "來跟我一起玩音樂吧"],
+    us: ["Let us use music to rock this world!", "Come and play music with me!"]
 };
 
 export default greets;

@@ -139,7 +139,15 @@ table {
     border-collapse: collapse;
     border-spacing: 0;
 }
-
+html,
+body {
+    height: 100%;
+    -webkit-overflow-scrolling: auto;
+}
+#root {
+    height: 100%;
+    overflow: hidden;
+}
 html {
     font-family: "Noto Sans TC", "微軟正黑體";
     font-size: 16px;
@@ -149,6 +157,7 @@ html {
 body {
     background-color: #e0e3da;
     color: #000000;
+    overflow: hidden;
 }
 .body--hideScrollbar {
     height: 100%;
@@ -157,9 +166,11 @@ body {
 .main {
     position: relative;
     width: 100%;
-    // height: calc(100vh - 60px);
+    height: calc(100% - 0px);
     padding-top: 60px;
     box-sizing: border-box;
+    overflow: hidden;
+    // border: 5px solid #cccccc;
     // overflow: auto;
     // padding-top: 10px;
 }

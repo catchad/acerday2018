@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from "react";
 import { FormattedMessage, FormattedHTMLMessage } from "react-intl";
+import { Scrollbars } from "react-custom-scrollbars";
 import easy from "./easy.json";
 import normal from "./normal.json";
 import hard from "./hard.json";
@@ -21,6 +22,7 @@ class RhythmGame extends Component {
         };
         this.musicGame = null;
         this.bpm = 113;
+        this.ticker = null;
         switch (this.props.level) {
             case "1":
                 this.score = easy;
@@ -38,6 +40,11 @@ class RhythmGame extends Component {
         this.MusicGame();
     }
     componentWillUnmount() {
+        this.audio.pause();
+        cancelAnimationFrame(this.ticker);
+        this.scene = null;
+        this.renderer = null;
+        this.camera = null;
         window.removeEventListener("resize", this.resize);
         document.getElementById("game").removeEventListener("touchstart", this.touchEvent);
         document.getElementById("game").removeEventListener("touchend", this.touchEvent);
@@ -703,7 +710,7 @@ class RhythmGame extends Component {
                 isPlaying: true
             },
             () => {
-                this.tick();
+                this.ticker = requestAnimationFrame(this.tick);
                 this.playAudio();
                 this.playSchedule();
             }
@@ -770,6 +777,7 @@ class RhythmGame extends Component {
         this.setState({
             start: true
         });
+        this.props.appContext.toggleBgmForceMuted(true);
         if (this.state.isPlaying) {
             this.stop();
             // $(this).html("start");
@@ -823,7 +831,7 @@ class RhythmGame extends Component {
     };
     tick = () => {
         if (this.state.isPlaying) {
-            requestAnimationFrame(this.tick);
+            this.ticker = requestAnimationFrame(this.tick);
         }
 
         var pCount = this.explodes.length;
@@ -851,21 +859,25 @@ class RhythmGame extends Component {
                 {!this.state.start ? (
                     <div className="rhythmGame__ready">
                         <div className="rhythmGame__wrapper">
-                            <p className="rhythmGame__title">
-                                <FormattedMessage id="intl.rhythmgame.confrim.title" />
-                            </p>
-                            <p className="rhythmGame__text">
-                                <FormattedHTMLMessage id="intl.rhythmgame.confrim.text" />
-                            </p>
-                            <img className="rhythmGame__gif" src="https://fakeimg.pl/400x200/" />
-                            <div>
-                                <RoundBtn onClick={this._start}>
-                                    <FormattedMessage id="intl.rhythmgame.confrim.btn" />
-                                </RoundBtn>
-                            </div>
-                            <p className="rhythmGame__info">
-                                <FormattedMessage id="intl.rhythmgame.confrim.opensound" />
-                            </p>
+                            <Scrollbars>
+                                <div className="rhythmGame__contentWrapper">
+                                    <p className="rhythmGame__title">
+                                        <FormattedMessage id="intl.rhythmgame.confrim.title" />
+                                    </p>
+                                    <p className="rhythmGame__text">
+                                        <FormattedHTMLMessage id="intl.rhythmgame.confrim.text" />
+                                    </p>
+                                    <img className="rhythmGame__gif" src="http://via.placeholder.com/400x200" />
+                                    <div>
+                                        <RoundBtn onClick={this._start}>
+                                            <FormattedMessage id="intl.rhythmgame.confrim.btn" />
+                                        </RoundBtn>
+                                    </div>
+                                    <p className="rhythmGame__info">
+                                        <FormattedMessage id="intl.rhythmgame.confrim.opensound" />
+                                    </p>
+                                </div>
+                            </Scrollbars>
                         </div>
                     </div>
                 ) : (

@@ -22,6 +22,15 @@ class AppContext extends Component {
             // point: 14000,
 
             // currentCountry: this.props.currentCountry,
+
+            id: 0,
+            name: "",
+            country: "tw",
+            countryFullName: "Taiwan",
+            greet: 0,
+            character: "",
+            point: 0,
+
             bgm: false,
             bgmForceMuted: false,
             toggleBgm: status => {

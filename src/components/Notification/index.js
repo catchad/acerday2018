@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from "react";
 import { createPortal } from "react-dom";
+import { Scrollbars } from "react-custom-scrollbars";
 import CircleBtn from "../CircleBtn/";
 import RoundBtn from "../RoundBtn";
 import TaskItemGroup from "../TaskItemGroup";
@@ -108,52 +109,65 @@ class Notification extends Component {
         return createPortal(
             <div className="notification" ref="task">
                 <div className="notification__outerWrapper" ref="taskWrap">
-                    <div className="notification__innerWrapper">
-                        <p className="notification__title">
-                            <FormattedMessage id="intl.notification.title" />
-                        </p>
+                    <Scrollbars>
+                        <div className="notification__innerWrapper">
+                            <p className="notification__title">
+                                <FormattedMessage id="intl.notification.title" />
+                            </p>
 
-                        {this.state.data.invite ? (
-                            <Fragment>
-                                <TaskItemGroup name="共同創作邀請" desc="展開看誰邀請你完成創作">
-                                    {this.state.data.invite.map((el, id) => {
-                                        return (
-                                            <div className="notification__invite" key={id}>
-                                                <div className="notification__inviteLeft">
-                                                    <img className="notification__icon" src="https://fakeimg.pl/50x50/" />
-                                                    <p className="notification__name">{el.name} 邀請你</p>
+                            {this.state.data.invite ? (
+                                <Fragment>
+                                    <TaskItemGroup name={this.props.intlContext.formatMessage({ id: "intl.notification.invite.title" })} desc={this.props.intlContext.formatMessage({ id: "intl.notification.invite.desc" })}>
+                                        {this.state.data.invite.map((el, id) => {
+                                            return (
+                                                <div className="notification__invite" key={id}>
+                                                    <div className="notification__inviteLeft">
+                                                        <img className="notification__icon" src="https://fakeimg.pl/50x50/" />
+                                                        <p className="notification__name">
+                                                            <FormattedMessage id="intl.notification.invite.action" values={{ name: el.name }} />{" "}
+                                                        </p>
+                                                    </div>
+                                                    <div className="notification__inviteRight">
+                                                        <RoundBtn
+                                                            size="S"
+                                                            routerLink={`/${this.props.appContext.currentCountry}/game/${el.id}`}
+                                                            onClick={() => {
+                                                                this.props.appContext.notification.toggle();
+                                                            }}
+                                                        >
+                                                            GO
+                                                        </RoundBtn>
+                                                    </div>
                                                 </div>
-                                                <div className="notification__inviteRight">
-                                                    <RoundBtn size="S">GO</RoundBtn>
-                                                </div>
-                                            </div>
-                                        );
-                                    })}
-                                </TaskItemGroup>
+                                            );
+                                        })}
+                                    </TaskItemGroup>
 
-                                <div className="notification__list">
-                                    {this.state.data.notification.map((el, id) => {
-                                        return (
-                                            <div className="notification__item" key={id}>
-                                                <p className="notification__date">{el.date}</p>
-                                                <ul className="notification__msgList">
-                                                    {el.sentence.map((el2, id2) => {
-                                                        return (
-                                                            <li className="notification__msg" key={id2}>
-                                                                <FormattedMessage id={`intl.notification.sentence${el2.id}`} values={el2.values} />
-                                                            </li>
-                                                        );
-                                                    })}
-                                                </ul>
-                                            </div>
-                                        );
-                                    })}
-                                </div>
-                            </Fragment>
-                        ) : (
-                            <p>Loading...</p>
-                        )}
-                    </div>
+                                    <div className="notification__list">
+                                        {this.state.data.notification.map((el, id) => {
+                                            return (
+                                                <div className="notification__item" key={id}>
+                                                    <p className="notification__date">{el.date}</p>
+                                                    <ul className="notification__msgList">
+                                                        {el.sentence.map((el2, id2) => {
+                                                            return (
+                                                                <li className="notification__msg" key={id2}>
+                                                                    <FormattedMessage id={`intl.notification.sentence${el2.id}`} values={el2.values} />
+                                                                </li>
+                                                            );
+                                                        })}
+                                                    </ul>
+                                                </div>
+                                            );
+                                        })}
+                                    </div>
+                                </Fragment>
+                            ) : (
+                                <p>Loading...</p>
+                            )}
+                        </div>
+                    </Scrollbars>
+
                     <CircleBtn
                         className="notification__close"
                         onClick={() => {

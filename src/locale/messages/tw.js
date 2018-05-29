@@ -4,7 +4,6 @@ const tw = {
     "intl.homepage.text": "每天都好玩！一起玩音樂！玩創作！<br/>集點酷！抽大獎！",
     "intl.homepage.btn": "登錄",
 
-    "intl.nav.homepage": "首頁",
     "intl.nav.task": "任務列表",
     "intl.nav.game": "節奏遊戲",
     "intl.nav.rule": "活動辦法",
@@ -14,12 +13,10 @@ const tw = {
     "intl.nav.promote": "促銷活動",
     "intl.nav.promote.link": "http://www.google.com.tw/",
 
-    "intl.greet1": "讓我們用音樂 COOL TOGETHER",
-    "intl.greet2": "跟我一起創作出最 COOL 的 FREE STYLE",
-
     "intl.select.default": "請選擇",
 
     "intl.login.title": "選擇登入方式",
+    "intl.login.readme": "我已閱讀並同意隱私權條款政策",
     "intl.login.facebook": "FACEBOOK",
     "intl.login.twitter": "TWITTER",
     "intl.login.btn": "確認送出",
@@ -43,6 +40,8 @@ const tw = {
 
     "intl.register.step4.title": "選擇一個招呼語",
     "intl.register.step4.desc": "加入 AcerDay 第二步！",
+    "intl.register.step4.greet1": "讓我們一起用音樂嗨翻這個世界",
+    "intl.register.step4.greet2": "來跟我一起玩音樂吧",
     "intl.register.step4.confirm": "確認送出",
 
     "intl.register.step5.title": "歡迎加入 AcerDay",
@@ -51,6 +50,7 @@ const tw = {
 
     "intl.game.step1.title": "邀請好友 共同創作",
     "intl.game.step1.desc": "請先挑一位好友",
+    "intl.game.step1.btn.search": "搜尋",
 
     "intl.game.step2.title": "跟對方打聲招呼",
     "intl.game.step2.btn": "送出問候語",
@@ -59,7 +59,7 @@ const tw = {
     "intl.game.step3.desc": "請選擇遊戲難度，點選後即進入遊戲",
 
     "intl.exchange.title": "獎項兌換",
-    "intl.exchange.desc": "改變遊戲規則的曠世巨作，改變遊戲規則的曠世巨改變遊戲規則的曠世巨作改變遊戲規則的曠世巨作，改變遊戲規則的曠世巨作改變遊戲規則的曠世巨作。",
+    "intl.exchange.desc": "使用你的點數，兌換多項好禮的抽獎券",
     "intl.exchange.prize1.name": "旅遊大獎",
     "intl.exchange.prize1.point": "點數: 10000",
     "intl.exchange.prize1.desc": "四天三夜之旅等你拿",
@@ -85,10 +85,6 @@ const tw = {
     "intl.exchange.form.email": "信箱",
     "intl.exchange.form.address": "地址",
     "intl.exchange.form.btn.send": "確認送出",
-
-    "intl.task.title": "任務列表",
-
-    "intl.notification.title": "活動通知",
 
     "intl.specialtask1.title": "看影片回答問題",
     "intl.specialtask1.q1": "Q1.請問影片中場景發生在哪裡？",
@@ -144,6 +140,10 @@ const tw = {
     "intl.product.swift5.content": "完美的效能與操控<br />Acer Nitro 5 搭載最新一代的顯示卡，繪圖運算速度大幅提升，並支援更為細膩的光影細節與質地，讓玩家可以完全沉浸於鮮明畫面帶來的極致快感。玩家還可享受最新一代處理器帶來的驚人效能，無論遊戲、內容創作或多工應用皆無比流暢。Acer Nitro 5 搭載最新一代的顯示卡，繪圖運算速度大幅提升，並支援更為細膩的光影細節與質地，讓玩家可以完全沉浸於鮮明畫面帶來的極致快感。玩家還可享受最新一代處理器帶來的驚人效能，無論遊戲、內容創作或多工應用皆無比流暢。Acer Nitro 5 搭載最新一代的顯示卡，繪圖運算速度大幅提升，並支援更為細膩的光影細節與質地，讓玩家可以完全沉浸於鮮明畫面帶來的極致快感。玩家還可享受最新一代處理器帶來的驚人效能，無論遊戲、內容創作或多工應用皆無比流暢。<br /><br />Nitro 5 的上蓋以雷射雕刻進行優雅表面處理，為這款電競筆電帶來顯眼細緻風格。",
     "intl.product.more": "了解更多",
 
+    "intl.notification.title": "活動通知",
+    "intl.notification.invite.title": "共同創作邀請",
+    "intl.notification.invite.desc": "展開看誰邀請你一起完成創作",
+    "intl.notification.invite.action": "{name} 邀請你",
     "intl.notification.sentence1": "恭喜你完成註冊，獲得4000點",
     "intl.notification.sentence2": "舊友回娘家，獲得10000點",
     "intl.notification.sentence3": "歡迎回到 AcerDay，獲得800點",
@@ -159,6 +159,12 @@ const tw = {
     "intl.notification.sentence13": "你完成 7/27 的限定任務，獲得2000點",
     "intl.notification.sentence14": "你完成 7/31 的限定任務，獲得2000點",
 
+    "intl.toast.specialTaskOpen.title": "限定任務即將開啟",
+    "intl.toast.specialTaskOpen.desc": "想獲得更多點數嗎？確認你的任務列表了解更多",
+
+    "intl.task.title": "任務列表",
+    "intl.task.specialTask.title": "限定任務",
+    "intl.task.specialTask.desc": "任務於指定日期開啟，完成即可獲得額外點數",
     "intl.task.specialTask1.name": "完成任務1獲得2000點",
     "intl.task.specialTask1.unactive": "7/23開啟任務",
     "intl.task.specialTask1.active": "看影片找答案獲得2000點",
@@ -183,8 +189,8 @@ const tw = {
     "intl.task.login.desc": "每日可獲得800點,最多獲得11200點",
     "intl.task.loginEveryday3.name": "連續登錄網站3天獲得2000點",
     "intl.task.loginEveryday3.desc": "連續登錄網站3天,可獲得2000點",
-    "intl.task.loginEveryday8.name": "連續登錄網站8天獲得2000點",
-    "intl.task.loginEveryday8.desc": "連續登錄網站8天,可獲得2000點",
+    "intl.task.loginEveryday8.name": "連續登錄網站8天獲得4000點",
+    "intl.task.loginEveryday8.desc": "連續登錄網站8天,可獲得4000點",
     "intl.task.greetEveryday.name": "連續8天完成交友獲得5000點",
     "intl.task.greetEveryday.desc": "連續8天進站完成打招呼動作可獲得5000點",
 
@@ -201,11 +207,15 @@ const tw = {
 
     "intl.rhythmgame.confrim.title": "遊戲說明",
     "intl.rhythmgame.confrim.text": "當線上的圓點達圓框時<br />按下A、S、D即可獲得分數",
+    "intl.rhythmgame.confrim.text.mobile": "當線上的圓點到達圓框時,點擊即可獲得分數",
     "intl.rhythmgame.confrim.btn": "GO",
     "intl.rhythmgame.confrim.opensound": "請打開喇叭，已獲得最佳遊戲體驗",
 
+    "intl.freestyle.ready.title": "即將進入FREESTYLE階段",
+    "intl.freestyle.ready.desc": "快速轉動唱盤，創作屬於你的音樂",
     "intl.freestyle.confrim.title": "遊戲完成",
     "intl.freestyle.confrim.text": "請等待朋友完成共同創作",
+    "intl.freestyle.confrim.text.muti": "完成共同創作，換你創作音樂吧",
     "intl.freestyle.confrim.share": "分享音樂",
     "intl.freestyle.confrim.preview": "再聽一次",
     "intl.freestyle.confrim.restart": "繼續其他創作",

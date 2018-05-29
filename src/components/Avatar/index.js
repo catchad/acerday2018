@@ -65,26 +65,26 @@ class Avatar extends Component {
 
     _random = () => {
         this.setState({
-            currentHairID: Math.floor(Math.random() * (assets.male.hair.length - 1)),
-            currentEyeID: Math.floor(Math.random() * (assets.male.eye.length - 1)),
-            currentMouthID: Math.floor(Math.random() * (assets.male.mouth.length - 1))
+            currentHairID: Math.floor(Math.random() * (assets[this.props.gender].hair.length - 1)),
+            currentEyeID: Math.floor(Math.random() * (assets[this.props.gender].eye.length - 1)),
+            currentMouthID: Math.floor(Math.random() * (assets[this.props.gender].mouth.length - 1))
         });
     };
     _move = value => {
         switch (this.props.target) {
             case "hair":
                 this.setState({
-                    currentHairID: Math.min(Math.max(this.state.currentHairID + value, 0), assets.male.hair.length - 1)
+                    currentHairID: Math.min(Math.max(this.state.currentHairID + value, 0), assets[this.props.gender].hair.length - 1)
                 });
                 break;
             case "eye":
                 this.setState({
-                    currentEyeID: Math.min(Math.max(this.state.currentEyeID + value, 0), assets.male.eye.length - 1)
+                    currentEyeID: Math.min(Math.max(this.state.currentEyeID + value, 0), assets[this.props.gender].eye.length - 1)
                 });
                 break;
             case "mouth":
                 this.setState({
-                    currentMouthID: Math.min(Math.max(this.state.currentMouthID + value, 0), assets.male.mouth.length - 1)
+                    currentMouthID: Math.min(Math.max(this.state.currentMouthID + value, 0), assets[this.props.gender].mouth.length - 1)
                 });
                 break;
         }
@@ -142,20 +142,53 @@ class Avatar extends Component {
                 break;
         }
     }
-    componentDidUpdate() {
-        TweenMax.to(this.refs.hair, 0.5, { x: -this.state.currentHairID * this.state.assetWidth });
-        TweenMax.to(this.refs.eye, 0.5, { x: -this.state.currentEyeID * this.state.assetWidth });
-        TweenMax.to(this.refs.mouth, 0.5, { x: -this.state.currentMouthID * this.state.assetWidth });
+    componentDidUpdate(prevProps, prevState) {
+        if (prevProps.gender == this.props.gender) {
+            if (prevState.currentHairID !== this.state.currentHairID) {
+                TweenMax.to(this.refs.hair, 0.5, { x: -this.state.currentHairID * this.state.assetWidth });
+            }
+            if (prevState.currentEyeID !== this.state.currentEyeID) {
+                TweenMax.to(this.refs.eye, 0.5, { x: -this.state.currentEyeID * this.state.assetWidth });
+            }
+            if (prevState.currentMouthID !== this.state.currentMouthID) {
+                TweenMax.to(this.refs.mouth, 0.5, { x: -this.state.currentMouthID * this.state.assetWidth });
+            }
+            TweenMax.to(this.refs.hair.childNodes, 0.5, { opacity: this.props.target == "hair" ? 0.4 : 0 });
+            TweenMax.to(this.refs.hair.childNodes[this.state.currentHairID], 0.5, { opacity: 1 });
+            TweenMax.to(this.refs.eye.childNodes, 0.5, { opacity: this.props.target == "eye" ? 0.4 : 0 });
+            TweenMax.to(this.refs.eye.childNodes[this.state.currentEyeID], 0.5, { opacity: 1 });
+            TweenMax.to(this.refs.mouth.childNodes, 0.5, { opacity: this.props.target == "mouth" ? 0.4 : 0 });
+            TweenMax.to(this.refs.mouth.childNodes[this.state.currentMouthID], 0.5, { opacity: 1 });
+            this.updateTargetZone();
+        } else {
+            this.setState({
+                currentHairID: 0,
+                currentEyeID: 0,
+                currentMouthID: 0
+            });
+            TweenMax.set(this.refs.hair, { x: 0 });
+            TweenMax.set(this.refs.hair.childNodes, { opacity: this.props.target == "hair" ? 0.4 : 0 });
+            TweenMax.set(this.refs.hair.childNodes[0], { opacity: 1 });
+            TweenMax.set(this.refs.eye, { x: 0 });
+            TweenMax.set(this.refs.eye.childNodes, { opacity: this.props.target == "eye" ? 0.4 : 0 });
+            TweenMax.set(this.refs.eye.childNodes[0], { opacity: 1 });
+            TweenMax.set(this.refs.mouth, { x: 0 });
+            TweenMax.set(this.refs.mouth.childNodes, { opacity: this.props.target == "mouth" ? 0.4 : 0 });
+            TweenMax.set(this.refs.mouth.childNodes[0], { opacity: 1 });
+        }
+        // TweenMax.to(this.refs.hair, 0.5, { x: -this.state.currentHairID * this.state.assetWidth });
+        // TweenMax.to(this.refs.eye, 0.5, { x: -this.state.currentEyeID * this.state.assetWidth });
+        // TweenMax.to(this.refs.mouth, 0.5, { x: -this.state.currentMouthID * this.state.assetWidth });
 
-        TweenMax.to(this.refs.hair.childNodes, 0.5, { opacity: this.props.target == "hair" ? 0.4 : 0 });
-        TweenMax.to(this.refs.eye.childNodes, 0.5, { opacity: this.props.target == "eye" ? 0.4 : 0 });
-        TweenMax.to(this.refs.mouth.childNodes, 0.5, { opacity: this.props.target == "mouth" ? 0.4 : 0 });
+        // TweenMax.to(this.refs.hair.childNodes, 0.5, { opacity: this.props.target == "hair" ? 0.4 : 0 });
+        // TweenMax.to(this.refs.eye.childNodes, 0.5, { opacity: this.props.target == "eye" ? 0.4 : 0 });
+        // TweenMax.to(this.refs.mouth.childNodes, 0.5, { opacity: this.props.target == "mouth" ? 0.4 : 0 });
 
-        TweenMax.to(this.refs.hair.childNodes[this.state.currentHairID], 0.5, { opacity: 1 });
-        TweenMax.to(this.refs.eye.childNodes[this.state.currentEyeID], 0.5, { opacity: 1 });
-        TweenMax.to(this.refs.mouth.childNodes[this.state.currentMouthID], 0.5, { opacity: 1 });
+        // TweenMax.to(this.refs.hair.childNodes[this.state.currentHairID], 0.5, { opacity: 1 });
+        // TweenMax.to(this.refs.eye.childNodes[this.state.currentEyeID], 0.5, { opacity: 1 });
+        // TweenMax.to(this.refs.mouth.childNodes[this.state.currentMouthID], 0.5, { opacity: 1 });
 
-        this.updateTargetZone();
+        // this.updateTargetZone();
     }
     render() {
         // this.currentHairX = this.state.currentHairID * 330;
@@ -164,25 +197,29 @@ class Avatar extends Component {
             <div className="avatar">
                 <div ref="targetZone" className="avatar__targetZone" />
                 <div ref="hair" className="avatar__part avatar__part--hair">
-                    <img className="avatar__item" src={assets[this.props.gender].hair[0]} />
-                    <img className="avatar__item" src={assets[this.props.gender].hair[1]} />
-                    <img className="avatar__item" src={assets[this.props.gender].hair[2]} />
-                    <img className="avatar__item" src={assets[this.props.gender].hair[3]} />
-                    <img className="avatar__item" src={assets[this.props.gender].hair[4]} />
+                    {assets[this.props.gender].hair.map((el, id) => {
+                        return <img key={id} className="avatar__item" src={el} />;
+                    })}
                 </div>
                 <div ref="eye" className="avatar__part avatar__part--eye">
-                    <img className="avatar__item" src={assets[this.props.gender].eye[0]} />
+                    {assets[this.props.gender].eye.map((el, id) => {
+                        return <img key={id} className="avatar__item" src={el} />;
+                    })}
+                    {/* <img className="avatar__item" src={assets[this.props.gender].eye[0]} />
                     <img className="avatar__item" src={assets[this.props.gender].eye[1]} />
                     <img className="avatar__item" src={assets[this.props.gender].eye[2]} />
                     <img className="avatar__item" src={assets[this.props.gender].eye[3]} />
-                    <img className="avatar__item" src={assets[this.props.gender].eye[4]} />
+                    <img className="avatar__item" src={assets[this.props.gender].eye[4]} /> */}
                 </div>
                 <div ref="mouth" className="avatar__part avatar__part--mouth">
-                    <img className="avatar__item" src={assets[this.props.gender].mouth[0]} />
+                    {assets[this.props.gender].mouth.map((el, id) => {
+                        return <img key={id} className="avatar__item" src={el} />;
+                    })}
+                    {/* <img className="avatar__item" src={assets[this.props.gender].mouth[0]} />
                     <img className="avatar__item" src={assets[this.props.gender].mouth[1]} />
                     <img className="avatar__item" src={assets[this.props.gender].mouth[2]} />
                     <img className="avatar__item" src={assets[this.props.gender].mouth[3]} />
-                    <img className="avatar__item" src={assets[this.props.gender].mouth[4]} />
+                    <img className="avatar__item" src={assets[this.props.gender].mouth[4]} /> */}
                 </div>
                 <div className="avatar__arrowGroup">
                     <img ref="arrowLeft" className="avatar__arrow avatar__arrow--left" src={assets.arrow} onClick={this._prev} />

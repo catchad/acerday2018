@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Background from "../Background";
+
 class Rule extends Component {
     render() {
         return (
