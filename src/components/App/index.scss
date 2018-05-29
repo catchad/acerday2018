@@ -317,21 +317,31 @@ body {
         height: auto;
     }
     &__text {
-        font-size: 1.2em;
+        font-size: 1em;
         color: #000000;
         line-height: 1.5em;
         text-align: justify;
+        margin-bottom: 10px;
         &--s {
             font-size: 1em;
-            color: #000000;
         }
+        &--m {
+            font-size: 1.2em;
+        }
+        &--highlight {
+            font-weight: 500;
+        }
+    }
+    &__ol {
+        list-style: decimal;
+        margin-left: 1.5em;
     }
     &__ul {
         list-style: decimal;
         margin-left: 1.5em;
     }
     &__li {
-        font-size: 1.2em;
+        font-size: 1em;
         color: #000000;
         line-height: 1.5em;
         margin-bottom: 10px;

@@ -99,12 +99,7 @@ class Nitro5 extends Component {
                     </div>
                 </div>
                 <div className="page__row page__row--w800">
-                    <p className="page__text">
-                        <FormattedHTMLMessage id="intl.product.nitro5.content" />
-                    </p>
-                </div>
-                <div className="page__row page__row--w800">
-                    <p className="page__text">
+                    <p className="page__text page__text--m">
                         <FormattedHTMLMessage id="intl.product.nitro5.content" />
                     </p>
                 </div>
@@ -160,7 +155,7 @@ class Spin5 extends Component {
                     </div>
                 </div>
                 <div className="page__row page__row--w800">
-                    <p className="page__text">
+                    <p className="page__text page__text--m">
                         <FormattedHTMLMessage id="intl.product.spin5.content" />
                     </p>
                 </div>
@@ -216,7 +211,7 @@ class Helios300 extends Component {
                     </div>
                 </div>
                 <div className="page__row page__row--w800">
-                    <p className="page__text">
+                    <p className="page__text page__text--m">
                         <FormattedHTMLMessage id="intl.product.helios300.content" />
                     </p>
                 </div>
@@ -272,7 +267,7 @@ class Switch7 extends Component {
                     </div>
                 </div>
                 <div className="page__row page__row--w800">
-                    <p className="page__text">
+                    <p className="page__text page__text--m">
                         <FormattedHTMLMessage id="intl.product.swtich7.content" />
                     </p>
                 </div>
@@ -328,7 +323,7 @@ class Swift5 extends Component {
                     </div>
                 </div>
                 <div className="page__row page__row--w800">
-                    <p className="page__text">
+                    <p className="page__text page__text--m">
                         <FormattedHTMLMessage id="intl.product.swift5.content" />
                     </p>
                 </div>
