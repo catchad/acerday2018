@@ -113,7 +113,6 @@ class Avatar extends Component {
             ctx.drawImage(img2, 0, 0);
             ctx.drawImage(img3, 0, 0);
             callback(canvas.toDataURL());
-            console.log(canvas.toDataURL());
         });
 
         img1.src = assets[this.props.gender].hair[this.state.currentHairID];
