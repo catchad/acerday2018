@@ -4,6 +4,8 @@ const us = {
     "intl.homepage.text": "Have fun everyday! Let's play music together! Be creative!<br/>Collect points and win big prizes!",
     "intl.homepage.btn": "Log In/Sign Up",
 
+    "intl.select.cancel": "Cancel",
+
     "intl.nav.task": "Challenges",
     "intl.nav.game": "Rhythm Game",
     "intl.nav.rule": "About Acer Day",
@@ -13,8 +15,6 @@ const us = {
     "intl.nav.promote": "Promotional Activities ",
     "intl.nav.promote.link": "http://www.google.com.tw/",
 
-    "intl.select.default": "Please select",
-
     "intl.login.title": "Select login method",
     "intl.login.readme": "I have read and agreed to the terms and conditions of the privacy policy",
     "intl.login.facebook": "FACEBOOK",
@@ -23,6 +23,7 @@ const us = {
 
     "intl.register.step1.title": "Country Selection",
     "intl.register.step1.desc": "The country/region affects your future lottery and reward collection procedure. Please choose carefully.",
+    "intl.register.step1.pleaseSelect": "Please select",
     "intl.register.step1.confirm": "Confirm and send",
 
     "intl.register.step2.title": "Build your character",
@@ -50,6 +51,7 @@ const us = {
 
     "intl.game.step1.title": "Invite a friend to co-create",
     "intl.game.step1.desc": "Please select a friend",
+    "intl.game.step1.country": "Country",
     "intl.game.step1.btn.search": "Search",
 
     "intl.game.step2.title": "Say hello to your new friend",

@@ -9,6 +9,8 @@ import Background from "../Background";
 import CircleBtn from "../CircleBtn";
 import RoundBtn from "../RoundBtn";
 import user from "./user.png";
+import icon_male from "./icon-male.svg";
+import icon_female from "./icon-female.svg";
 import ReactTransitionGroup from "react-addons-transition-group";
 import { FormattedMessage } from "react-intl";
 import { AppContextConsumer } from "../../AppContext";
@@ -148,6 +150,7 @@ class Step1 extends Component {
                 </div>
                 <div className="page__row page__row--widthM">
                     <Select
+                        defaultName={this.props.intl.formatMessage({ id: "intl.register.step1.pleaseSelect" })}
                         onChange={value => {
                             this.props.userData.country = value;
                         }}
@@ -209,7 +212,7 @@ class Step2 extends Component {
                     </p>
                 </div>
                 <div className="page__row page__row--flex page__row--widthM">
-                    <SquareBtnGroup onChange={this.props.avatarGenderChange} data={[{ text: this.props.intl.formatMessage({ id: "intl.register.step2.male" }), icon: "https://fakeimg.pl/500x500", value: "male" }, { text: this.props.intl.formatMessage({ id: "intl.register.step2.female" }), icon: "https://fakeimg.pl/500x500", value: "female" }]} />;
+                    <SquareBtnGroup onChange={this.props.avatarGenderChange} data={[{ text: this.props.intl.formatMessage({ id: "intl.register.step2.male" }), icon: icon_male, value: "male" }, { text: this.props.intl.formatMessage({ id: "intl.register.step2.female" }), icon: icon_female, value: "female" }]} />;
                 </div>
                 <div className="page__row page__row--center">
                     <RoundBtn onClick={this.props.nextStep} size="L">

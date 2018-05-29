@@ -123,7 +123,7 @@ class Step1 extends Component {
     }
     render() {
         return (
-            <div className="page__section" ref="section">
+            <div className="page__section gameStep1" ref="section">
                 <div className="page__heading">
                     <p className="page__title">
                         <FormattedMessage id="intl.game.step1.title" />
@@ -132,9 +132,12 @@ class Step1 extends Component {
                         <FormattedMessage id="intl.game.step1.desc" />
                     </p>
                 </div>
-                <div className="page__row page__row--flex page__row--widthM">
-                    <input className="textInput" type="text" />
+                <div className="gameStep1__ui">
+                    <input className="page__inputtext gameStep1__input" type="text" placeholder="Acer ID" />
+                    <p className="gameStep1__or">or</p>
                     <Select
+                        className="gameStep1__select"
+                        defaultName={this.props.intl.formatMessage({ id: "intl.game.step1.country" })}
                         options={[
                             {
                                 name: "Taiwan",
@@ -145,85 +148,10 @@ class Step1 extends Component {
                                 name: "USA",
                                 icon: "https://restcountries.eu/data/usa.svg",
                                 value: "us"
-                            },
-                            {
-                                name: "USA",
-                                icon: "https://restcountries.eu/data/usa.svg",
-                                value: "us"
-                            },
-                            {
-                                name: "USA",
-                                icon: "https://restcountries.eu/data/usa.svg",
-                                value: "us"
-                            },
-                            {
-                                name: "USA",
-                                icon: "https://restcountries.eu/data/usa.svg",
-                                value: "us"
-                            },
-                            {
-                                name: "USA",
-                                icon: "https://restcountries.eu/data/usa.svg",
-                                value: "us"
-                            },
-                            {
-                                name: "USA",
-                                icon: "https://restcountries.eu/data/usa.svg",
-                                value: "us"
-                            },
-                            {
-                                name: "Japan",
-                                icon: "https://restcountries.eu/data/jpn.svg",
-                                value: "jp"
-                            },
-                            {
-                                name: "Japan",
-                                icon: "https://restcountries.eu/data/jpn.svg",
-                                value: "jp"
-                            },
-                            {
-                                name: "Japan",
-                                icon: "https://restcountries.eu/data/jpn.svg",
-                                value: "jp"
-                            },
-                            {
-                                name: "Japan",
-                                icon: "https://restcountries.eu/data/jpn.svg",
-                                value: "jp"
-                            },
-                            {
-                                name: "Japan",
-                                icon: "https://restcountries.eu/data/jpn.svg",
-                                value: "jp"
-                            },
-                            {
-                                name: "Japan",
-                                icon: "https://restcountries.eu/data/jpn.svg",
-                                value: "jp"
-                            },
-                            {
-                                name: "Japan",
-                                icon: "https://restcountries.eu/data/jpn.svg",
-                                value: "jp"
-                            },
-                            {
-                                name: "Japan",
-                                icon: "https://restcountries.eu/data/jpn.svg",
-                                value: "jp"
-                            },
-                            {
-                                name: "Japan",
-                                icon: "https://restcountries.eu/data/jpn.svg",
-                                value: "jp"
-                            },
-                            {
-                                name: "Japan",
-                                icon: "https://restcountries.eu/data/jpn.svg",
-                                value: "jp"
                             }
                         ]}
                     />
-                    <RoundBtn size="L">
+                    <RoundBtn className="gameStep1__btn" size="M">
                         <FormattedMessage id="intl.game.step1.btn.search" />
                     </RoundBtn>
                 </div>

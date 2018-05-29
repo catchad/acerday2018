@@ -32,3 +32,83 @@
         }
     }
 }
+
+.gameStep1 {
+    &__ui {
+        display: flex;
+        align-items: flex-end;
+        width: 100%;
+        max-width: 700px;
+        margin: 0 auto;
+    }
+    &__input.page__inputtext {
+        flex: 1;
+        font-size: 1.8em;
+        font-family: "Noto Sans TC";
+        font-weight: 300;
+        padding-bottom: 13px;
+        margin-bottom: 0;
+        &::-webkit-input-placeholder {
+            font-weight: 300;
+        }
+        &::-moz-placeholder {
+            font-weight: 300;
+        }
+        &:-ms-input-placeholder {
+            font-weight: 300;
+        }
+        &:-moz-placeholder {
+            font-weight: 300;
+        }
+        @media screen and (max-width: 600px) {
+            font-size: 1em;
+            padding-bottom: 6px;
+        }
+    }
+    &__or {
+        flex: 0 0 auto;
+        align-self: center;
+        margin: 0 30px;
+        font-size: 1.5em;
+        color: #ffffff;
+        @media screen and (max-width: 600px) {
+            margin: 0 6px;
+            font-size: 1em;
+        }
+    }
+    &__btn {
+        flex: 0 0 auto;
+        align-self: center;
+        margin-left: 20px;
+        @media screen and (max-width: 600px) {
+            font-size: 1em;
+            padding: 7px 13px;
+            margin-left: 10px;
+        }
+    }
+    &__select {
+        flex: 1;
+        .select__selector {
+            text-align: left;
+            @media screen and (max-width: 600px) {
+                padding-bottom: 10px;
+            }
+        }
+        .select__name {
+            color: #000000;
+            @media screen and (max-width: 600px) {
+                font-size: 1em;
+            }
+        }
+        .select__arrow {
+            @media screen and (max-width: 600px) {
+                width: 14px;
+            }
+        }
+        .select__icon {
+            @media screen and (max-width: 600px) {
+                display: none;
+            }
+        }
+    }
+}

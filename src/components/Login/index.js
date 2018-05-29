@@ -4,6 +4,8 @@ import Background from "../Background";
 import SquareBtnGroup from "../SquareBtnGroup";
 import RoundBtn from "../RoundBtn";
 import { FormattedMessage } from "react-intl";
+import icon_facebook from "./icon-facebook.svg";
+import icon_twitter from "./icon-twitter.svg";
 
 class Login extends Component {
     constructor(props) {
@@ -21,7 +23,7 @@ class Login extends Component {
                         </p>
                     </div>
                     <div className="page__row page__row--flex page__row--widthM">
-                        <SquareBtnGroup data={[{ text: this.props.intlContext.formatMessage({ id: "intl.login.facebook" }), icon: "https://fakeimg.pl/500x500", value: "facebook" }, { text: this.props.intlContext.formatMessage({ id: "intl.login.twitter" }), icon: "https://fakeimg.pl/500x500", value: "twitter" }]} />;
+                        <SquareBtnGroup data={[{ text: this.props.intlContext.formatMessage({ id: "intl.login.facebook" }), icon: icon_facebook, value: "facebook" }, { text: this.props.intlContext.formatMessage({ id: "intl.login.twitter" }), icon: icon_twitter, value: "twitter" }]} />;
                     </div>
                     <div className="page__row page__row--center">
                         <RoundBtn size="L" routerLink={`/${this.props.appContext.currentCountry}/register`}>

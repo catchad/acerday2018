@@ -47,12 +47,12 @@ class Select extends Component {
     }
     render() {
         return (
-            <div className="select">
+            <div className={`select ${this.props.className}`}>
                 <div className="select__selector" onClick={this._openLightbox}>
                     {this.state.selected.icon ? <img className="select__icon" src={this.state.selected.icon} /> : ""}
                     <IntlContextConsumer>
                         {context => {
-                            return <p className="select__name">{this.state.selected.name ? this.state.selected.name : context.intl.formatMessage({ id: "intl.select.default" })}</p>;
+                            return <p className="select__name">{this.state.selected.name ? this.state.selected.name : this.props.defaultName}</p>;
                         }}
                     </IntlContextConsumer>
 

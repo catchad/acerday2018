@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { createPortal } from "react-dom";
+import { FormattedMessage } from "react-intl";
 import "./index.scss";
 import { TweenMax } from "gsap";
 
@@ -32,6 +33,15 @@ class SelectingBox extends Component {
                             </div>
                         );
                     })}
+                    <div className="selectingBox__option">
+                        <a className="squareBtn" onClick={e => this.props._closeLightbox(e, { name: "", value: "" })}>
+                            <div className="squareBtn__wrapper">
+                                <p className="squareBtn__text">
+                                    <FormattedMessage id="intl.select.cancel" />
+                                </p>
+                            </div>
+                        </a>
+                    </div>
                 </div>
             </div>,
             window.document.getElementById("portal")
