@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from "react";
 import { FormattedMessage } from "react-intl";
+import axios from "axios";
 import { Link } from "react-router-dom";
 import VinylRecord from "../VinylRecord";
 import Background from "../Background";
@@ -14,6 +15,18 @@ class Creation extends Component {
         // console.log(this.props);
         console.log("作品ID:" + this.props.match.params.cid);
         console.log(this.props.match.params.complete == "complete" ? "雙人" : "單人");
+
+        axios({
+            method: "GET",
+            url: `/api/tasks/rythmgames/${this.props.match.params.cid}`,
+            responseType: "json"
+        }).then(response => {
+            console.log(response);
+            var resp = response.data;
+            if (resp.code == 200) {
+                console.log(resp);
+            }
+        });
     }
     componentDidUpdate(prevProps, prevState) {
         if (prevState.playing !== this.state.playing) this.props.appContext.toggleBgmForceMuted(this.state.playing);

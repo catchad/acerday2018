@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import axios from "axios";
 import Block from "../Block";
 import RoundBtn from "../RoundBtn";
 import VinylRecord from "../VinylRecord";
@@ -30,16 +31,105 @@ class Freestyle extends Component {
         });
         this.props.appContext.toggleBgmForceMuted(true);
     };
-    _freestyleComplete = melody => {
-        this.setState({
-            openConfrim: true
+    _share = () => {
+        console.log("share");
+        axios({
+            method: "POST",
+            url: `/api/tasks/rythmgames/${this.props.cid}/shares`,
+            responseType: "json",
+            data: data
+        }).then(response => {
+            console.log(response);
+            var resp = response.data;
         });
-        this.props.appContext.toggleBgmForceMuted(false);
-        console.log("freestyle complete");
-        console.log("freestyle data:");
-        console.log(melody);
-        console.log("合作模式: " + this.props.cid);
-        console.log("分數: " + this.props.score);
+    };
+    _freestyleComplete = melody => {
+        console.log(this.props.invite);
+        var data;
+        // 送出結果
+        if (this.props.cid) {
+            // 雙人創作
+            data = {
+                GameId: this.props.cid,
+                GameLevel: 1,
+                GameData: JSON.stringify(melody),
+                GameScore: this.props.score
+            };
+        } else {
+            // 單人創作
+            data = {
+                InvitationId: this.props.invite.userTaskId,
+                GameLevel: 1,
+                GameData: JSON.stringify(melody),
+                GameScore: this.props.score
+            };
+        }
+        axios({
+            method: "POST",
+            url: "/api/tasks/rythmgames",
+            responseType: "json",
+            data: data
+        }).then(response => {
+            console.log(response);
+            var resp = response.data;
+
+            if (resp.code == 201) {
+                this.setState({
+                    openConfrim: true
+                });
+                this.props.appContext.toggleBgmForceMuted(false);
+            } else {
+                alert(resp.code);
+            }
+        });
+
+        // console.log({
+        //     InvitationId: this.props.invite.userTaskId,
+        //     GameLevel: 1,
+        //     GameData: melody,
+        //     GameScore: this.props.score
+        // });
+
+        // setTimeout(() => {
+        //     var response = {
+        //         code: 201,
+        //         message: "Created",
+        //         data: {
+        //             Points: 2000,
+        //             Game: {
+        //                 Id: "1234567",
+        //                 Players: [
+        //                     {
+        //                         User: {
+        //                             Id: "1234567",
+        //                             UserCode: "ABCDE12345",
+        //                             Country: "tw",
+        //                             GreetingTextKey: "1",
+        //                             DisplayName: "張大山",
+        //                             ProfileImageUrl: "https://www.acer-day.com/_upload/profile/xxxxxxxxx.jpg"
+        //                         },
+        //                         InvitationId: "xxxx-xxxx-xxxx",
+        //                         GameLevel: 1,
+        //                         GameScore: 2000,
+        //                         GameData: "xxxxxx",
+        //                         CreateTime: "2018-06-01T12:34:56.789Z"
+        //                     }
+        //                 ]
+        //             }
+        //         }
+        //     };
+
+        //     this.setState({
+        //         openConfrim: true
+        //     });
+        //     this.props.appContext.toggleBgmForceMuted(false);
+        // }, 500);
+
+        // console.log("freestyle complete");
+        // console.log("freestyle data:");
+        // console.log(melody);
+        // console.log("合作模式: " + this.props.cid);
+        // console.log("分數: " + this.props.score);
     };
     render() {
         return (
@@ -121,7 +211,7 @@ class Freestyle extends Component {
                                 <FormattedMessage id="intl.freestyle.confrim.text" />
                             </p>
                             <div className="gameComplete__row">
-                                <RoundBtn fixedSize="M">
+                                <RoundBtn fixedSize="M" onClick={this._share}>
                                     <FormattedMessage id="intl.freestyle.confrim.share" />
                                 </RoundBtn>
                             </div>

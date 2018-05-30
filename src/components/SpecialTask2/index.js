@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import axios from "axios";
 import Background from "../Background";
 import Radio from "../Radio";
 import { toast } from "react-toastify";
@@ -10,8 +11,28 @@ class SpecialTask2 extends Component {
         super(props);
     }
     _send = () => {
-        toast(this.props.intlContext.formatMessage({ id: "intl.notification.sentence13" }));
-        this.props.appContext.history.push(`/${this.props.appContext.currentCountry}`);
+        if (this.ajaxing) return;
+        this.ajaxing = true;
+
+        // 限定任務 / 完成限定任務
+        axios({
+            method: "POST",
+            url: "/api/tasks/special",
+            responseType: "json",
+            data: {
+                TaskName: "VideoChallenge2"
+            }
+        }).then(response => {
+            console.log(response);
+            var resp = response.data;
+            if (resp.code == 201) {
+                toast(this.props.intlContext.formatMessage({ id: "intl.notification.sentence13" }));
+                this.props.appContext.history.push(`/${this.props.appContext.currentCountry}`);
+            } else {
+                alert(resp.code);
+                this.ajaxing = false;
+            }
+        });
     };
     render() {
         return (

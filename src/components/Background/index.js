@@ -12,7 +12,7 @@ class Background extends Component {
     }
 
     render() {
-        return createPortal(<div ref="bg" className="background" style={this.props.transparent ? { zIndex: this.props.zIndex } : { background: `linear-gradient(225deg, ${this.props.color1}, ${this.props.color2})`, zIndex: this.props.zIndex }} />, document.getElementById("portal"));
+        return createPortal(<div ref="bg" className="background" style={this.props.transparent ? { zIndex: this.props.zIndex } : { background: `linear-gradient(-40deg, ${this.props.color1}, ${this.props.color2})`, zIndex: this.props.zIndex }} />, document.getElementById("portal"));
     }
 }
 

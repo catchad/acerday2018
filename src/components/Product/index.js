@@ -39,24 +39,24 @@ class Product extends Component {
         var c2;
         switch (this.props.match.params.pname) {
             case "nitro5":
-                c1 = "#B8EF22";
-                c2 = "#7F9D2B";
+                c1 = "#8FBA28";
+                c2 = "#A4CA48";
                 break;
             case "spin5":
-                c1 = "#FF3AC5";
-                c2 = "#FD026B";
+                c1 = "#DC2080";
+                c2 = "#FD4FA8";
                 break;
             case "helios300":
-                c1 = "#00fbe8";
-                c2 = "#016ecd";
+                c1 = "#18A3CA";
+                c2 = "#1CCDFF";
                 break;
             case "switch7":
-                c1 = "#ff0f44";
-                c2 = "#fe0000";
+                c1 = "#F32132";
+                c2 = "#FF5360";
                 break;
             case "swift5":
-                c1 = "#FFC500";
-                c2 = "#FFA600";
+                c1 = "#FCCC31";
+                c2 = "#FADE37";
                 break;
         }
 

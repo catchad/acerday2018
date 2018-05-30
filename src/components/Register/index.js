@@ -1,4 +1,5 @@
 import React, { Component, Fragment } from "react";
+import axios from "axios";
 import Select from "../Select";
 import Avatar from "../Avatar";
 import Block from "../Block";
@@ -16,10 +17,14 @@ import { FormattedMessage } from "react-intl";
 import { AppContextConsumer } from "../../AppContext";
 import { IntlContextConsumer } from "../../IntlContext";
 import { toast } from "react-toastify";
+import keyBy from "lodash/keyBy";
+import flagUS from "./flag-us.svg";
+import flagTW from "./flag-tw.svg";
 import "./index.scss";
 class Register extends Component {
     constructor(props) {
         super(props);
+        console.log("register");
         this.state = {
             currentStep: 1,
             avatarTarget: "hair",
@@ -28,9 +33,9 @@ class Register extends Component {
             test: 1
         };
         this.userData = {
-            country: "tw",
-            avatar: "",
-            greet: ""
+            Country: "",
+            ProfileImageData: "",
+            GreetingTextKey: 0
         };
         // console.log(this.props);
         // console.log(this.props.intl.formatMessage({ id: "intl.name" }, { name: "Hank" }));
@@ -73,11 +78,11 @@ class Register extends Component {
                 </button> */}
 
                 <ReactTransitionGroup component="div">
-                    {this.state.currentStep == 1 ? <Step1 intl={this.props.intlContext} nextStep={this._nextStep} userData={this.userData} /> : null}
+                    {this.state.currentStep == 1 ? <Step1 intl={this.props.intlContext} appContext={this.props.appContext} nextStep={this._nextStep} userData={this.userData} /> : null}
                     {this.state.currentStep == 2 ? <Step2 intl={this.props.intlContext} nextStep={this._nextStep} avatarGenderChange={this._avatarGenderChange} /> : null}
                     {this.state.currentStep == 3 ? <Step3 intl={this.props.intlContext} nextStep={this._nextStep} avatarGenderChange={this._avatarGenderChange} userData={this.userData} avatarTargetChange={this._avatarTargetChange} avatarResultChange={this._avatarResultChange} avatarTarget={this.state.avatarTarget} avatarGender={this.state.avatarGender} /> : null}
-                    {this.state.currentStep == 4 ? <Step4 intl={this.props.intlContext} nextStep={this._nextStep} userData={this.userData} avatarResult={this.state.avatarResult} /> : null}
-                    {this.state.currentStep == 5 ? <Step5 intl={this.props.intlContext} nextStep={this._nextStep} avatarResult={this.state.avatarResult} /> : null}
+                    {this.state.currentStep == 4 ? <Step4 intl={this.props.intlContext} appContext={this.props.appContext} nextStep={this._nextStep} userData={this.userData} avatarResult={this.state.avatarResult} /> : null}
+                    {this.state.currentStep == 5 ? <Step5 intl={this.props.intlContext} appContext={this.props.appContext} nextStep={this._nextStep} avatarResult={this.state.avatarResult} /> : null}
                 </ReactTransitionGroup>
 
                 {/* <Alert>
@@ -131,11 +136,20 @@ class Step1 extends Component {
         TweenMax.to(this.refs.section, 0.25, {
             autoAlpha: 0,
             onComplete: () => {
-                window.scrollTo(0, 0);
+                // window.scrollTo(0, 0);
+                this.props.appContext.history.push(`/${this.props.userData.Country}/register`);
                 callback();
             }
         });
     }
+    _finish = () => {
+        if (this.props.userData.Country == "") {
+            alert(this.props.intl.formatMessage({ id: "intl.register.step1.alert.pleaseSelectCountry" }));
+            return;
+        }
+        // this.props.appContext.history.push(`/${this.props.userData.Country}/`);
+        this.props.nextStep();
+    };
     render() {
         return (
             <section className="page__section" ref="section">
@@ -152,13 +166,13 @@ class Step1 extends Component {
                     <Select
                         defaultName={this.props.intl.formatMessage({ id: "intl.register.step1.pleaseSelect" })}
                         onChange={value => {
-                            this.props.userData.country = value;
+                            this.props.userData.Country = value;
                         }}
-                        options={[{ name: "Taiwan", icon: "https://restcountries.eu/data/twn.svg", value: "tw" }, { name: "USA", icon: "https://restcountries.eu/data/usa.svg", value: "us" }, { name: "USA", icon: "https://restcountries.eu/data/usa.svg", value: "us" }, { name: "USA", icon: "https://restcountries.eu/data/usa.svg", value: "us" }, { name: "USA", icon: "https://restcountries.eu/data/usa.svg", value: "us" }, { name: "USA", icon: "https://restcountries.eu/data/usa.svg", value: "us" }, { name: "USA", icon: "https://restcountries.eu/data/usa.svg", value: "us" }, { name: "Japan", icon: "https://restcountries.eu/data/jpn.svg", value: "jp" }, { name: "Japan", icon: "https://restcountries.eu/data/jpn.svg", value: "jp" }, { name: "Japan", icon: "https://restcountries.eu/data/jpn.svg", value: "jp" }, { name: "Japan", icon: "https://restcountries.eu/data/jpn.svg", value: "jp" }, { name: "Japan", icon: "https://restcountries.eu/data/jpn.svg", value: "jp" }, { name: "Japan", icon: "https://restcountries.eu/data/jpn.svg", value: "jp" }, { name: "Japan", icon: "https://restcountries.eu/data/jpn.svg", value: "jp" }, { name: "Japan", icon: "https://restcountries.eu/data/jpn.svg", value: "jp" }, { name: "Japan", icon: "https://restcountries.eu/data/jpn.svg", value: "jp" }, { name: "Japan", icon: "https://restcountries.eu/data/jpn.svg", value: "jp" }]}
+                        options={[{ name: "Taiwan", icon: flagTW, value: "tw" }, { name: "USA", icon: flagUS, value: "us" }]}
                     />
                 </div>
                 <div className="page__row page__row--center">
-                    <RoundBtn onClick={this.props.nextStep} size="L">
+                    <RoundBtn onClick={this._finish} size="L">
                         <FormattedMessage id="intl.register.step1.confirm" />
                     </RoundBtn>
                 </div>
@@ -301,7 +315,7 @@ class Step3 extends Component {
                             className="avatarUI__nextStep"
                             onClick={() => {
                                 this.refs.avatar._getResult(result => {
-                                    this.props.userData.avatar = result;
+                                    this.props.userData.ProfileImageData = result.split(",")[1];
                                     this.props.avatarResultChange(result);
                                     this.props.nextStep();
                                 });
@@ -318,6 +332,12 @@ class Step3 extends Component {
 }
 
 class Step4 extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {};
+        this.ajaxing = false;
+    }
+
     componentWillEnter(callback) {
         TweenMax.fromTo(
             this.refs.section,
@@ -349,6 +369,85 @@ class Step4 extends Component {
             }
         });
     }
+    _regist(data) {
+        if (this.ajaxing) return;
+        this.ajaxing = true;
+
+        console.log("_regist");
+        console.log(data);
+        axios({
+            method: "POST",
+            url: "/api/users",
+            responseType: "json",
+            data: data
+        }).then(response => {
+            console.log("finish");
+            console.log(response);
+            var resp = response.data;
+
+            this.ajaxing = false;
+            resp.data.Tasks = keyBy(resp.data.Tasks, "TaskName");
+            console.log(resp.data.User);
+            this.props.appContext.setUserData(resp.data.User);
+            toast(this.props.intl.formatMessage({ id: "intl.notification.sentence1" }));
+            toast(this.props.intl.formatMessage({ id: "intl.notification.sentence2" }));
+            this.props.nextStep();
+        });
+
+        // setTimeout(() => {
+        //     var response = {
+        //         code: 200,
+        //         message: "OK",
+        //         data: {
+        //             Id: "1234567",
+        //             InvitationCode: "ABCDE12345",
+        //             Country: "tw",
+        //             GreetingTextKey: "1",
+        //             DisplayName: "張大山",
+        //             ProfileImageUrl: "https://www.acer-day.com/_upload/profile/xxxxxxxxx.jpg",
+        //             Points: 8000,
+        //             Sns: "Facebook",
+        //             SnsId: "10083922392228383",
+        //             MaxGameLevel: 1,
+        //             Tasks: [
+        //                 {
+        //                     TaskName: "RythmGame",
+        //                     Points: 1000,
+        //                     Finished: 7,
+        //                     Limit: 8
+        //                 },
+        //                 {
+        //                     // 接受邀請
+        //                     TaskName: "AcceptInvitation",
+        //                     Points: 600,
+        //                     Finished: 6,
+        //                     Limit: 8
+        //                 },
+        //                 {
+        //                     // 完成共同創作
+        //                     TaskName: "RythmGameComplete",
+        //                     Points: 1500,
+        //                     Finished: 4,
+        //                     Limit: 8
+        //                 },
+        //                 {
+        //                     // 分享共同創作
+        //                     TaskName: "RythmGameShare",
+        //                     Points: 500,
+        //                     Finished: 2,
+        //                     Limit: 16
+        //                 }
+        //             ]
+        //         }
+        //     };
+        //     this.ajaxing = false;
+        //     response.data.Tasks = keyBy(response.data.Tasks, "TaskName");
+        //     this.props.appContext.setUserData(response);
+        //     toast(this.props.intl.formatMessage({ id: "intl.notification.sentence1" }));
+        //     toast(this.props.intl.formatMessage({ id: "intl.notification.sentence2" }));
+        //     this.props.nextStep();
+        // }, 1000);
+    }
     render() {
         return (
             <section className="page__section" ref="section" ref="section">
@@ -366,7 +465,9 @@ class Step4 extends Component {
                 <div className="page__row page__row--widthM">
                     <Radio
                         onChange={value => {
-                            this.props.userData.greet = value;
+                            console.log(value);
+                            this.props.userData.GreetingTextKey = value;
+                            // this.props.userData.GreetingTextKey = "greeting_1";
                         }}
                         options={[{ text: this.props.intl.formatMessage({ id: "intl.register.step4.greet1" }), value: 0 }, { text: this.props.intl.formatMessage({ id: "intl.register.step4.greet2" }), value: 1 }]}
                     />
@@ -374,10 +475,7 @@ class Step4 extends Component {
                 <div className="page__row page__row--center">
                     <RoundBtn
                         onClick={() => {
-                            console.log(this.props.userData);
-                            toast(this.props.intl.formatMessage({ id: "intl.notification.sentence1" }));
-                            toast(this.props.intl.formatMessage({ id: "intl.notification.sentence2" }));
-                            this.props.nextStep();
+                            this._regist(this.props.userData);
                         }}
                         size="L"
                     >
@@ -429,6 +527,15 @@ class Step5 extends Component {
         //         <p className="Toastify__text">恭喜你完成註冊，獲得4000點</p>
         //     </Fragment>
         // );
+
+        console.log({
+            id: this.props.appContext.id,
+            name: this.props.appContext.name,
+            country: this.props.appContext.country,
+            countryFullName: this.props.appContext.countryFullName,
+            character: this.props.appContext.character,
+            greet: this.props.appContext.greet
+        });
     }
     render() {
         return (
@@ -445,11 +552,11 @@ class Step5 extends Component {
                     <Block
                         data={{
                             id: "9999999",
-                            name: "Melody",
-                            country: "tw",
-                            countryFullName: "Taiwan",
-                            character: this.props.avatarResult,
-                            greet: 0
+                            name: this.props.appContext.name,
+                            country: this.props.appContext.country,
+                            countryFullName: this.props.appContext.countryFullName,
+                            character: this.props.appContext.character,
+                            greet: this.props.appContext.greet
                         }}
                     />
                 </div>

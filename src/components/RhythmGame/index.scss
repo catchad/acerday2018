@@ -47,8 +47,21 @@
         color: #ffffff;
         font-size: 1.2em;
     }
-    &__gif {
+    &__tip {
+        position: relative;
         margin-bottom: 20px;
+        &::before {
+            content: "";
+            display: block;
+            padding-top: 50%;
+        }
+    }
+    &__tipVideo {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
     }
     &__score {
         position: absolute;

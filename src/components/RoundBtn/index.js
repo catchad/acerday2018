@@ -24,11 +24,11 @@ class RoundBtn extends Component {
     };
     render() {
         return this.props.routerLink ? (
-            <Link ref="btn" id={this.props.id} to={this.props.routerLink} className={this.classnames} onClick={this.props.disabled ? null : this.props.onClick} style={this.props.disabled || this.props.secondary ? null : { background: `linear-gradient(45deg, ${this.props.color2}, ${this.props.color1})` }}>
+            <Link ref="btn" id={this.props.id} to={this.props.routerLink} className={this.classnames} onClick={this.props.disabled ? null : this.props.onClick} style={this.props.disabled || this.props.secondary ? null : { background: `linear-gradient(90deg, ${this.props.color1}, ${this.props.color2})` }}>
                 {this.props.children}
             </Link>
         ) : (
-            <a ref="btn" id={this.props.id} className={this.classnames} href={this.props.disabled ? null : this.props.href} target={this.props.target} onClick={this.props.disabled ? null : this.props.onClick} style={this.props.disabled || this.props.secondary ? null : { background: `linear-gradient(45deg, ${this.props.color2}, ${this.props.color1})` }}>
+            <a ref="btn" id={this.props.id} className={this.classnames} href={this.props.disabled ? null : this.props.href} target={this.props.target} onClick={this.props.disabled ? null : this.props.onClick} style={this.props.disabled || this.props.secondary ? null : { background: `linear-gradient(90deg, ${this.props.color1}, ${this.props.color2})` }}>
                 {this.props.children}
             </a>
         );
@@ -38,13 +38,11 @@ class RoundBtn extends Component {
 RoundBtn.propTypes = {
     color1: PropTypes.string,
     color2: PropTypes.string
-    // target: PropTypes.string
 };
 
 RoundBtn.defaultProps = {
-    color1: "#fe6231",
-    color2: "#ff0e41"
-    // target: "_self"
+    color1: "#ff0e41",
+    color2: "#fe6231"
 };
 
 export default RoundBtn;

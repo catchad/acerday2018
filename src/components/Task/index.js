@@ -21,81 +21,9 @@ class Task extends Component {
         const doc = window.document;
         this.node = doc.getElementById("portal");
 
-        this.state = {};
+        console.log(this.props.appContext);
         // this.taskNames = ["rhythmGame", "acceptInvite", "completeCreation", "shareCreation", "login", "greet", "loginEveryday3", "loginEveryday8", "greetEveryday"];
         // this.specialTaskNames = [{ name: "specialTask1", open: true }, { name: "specialTask2", open: true }, { name: "specialTask3", open: false }];
-        setTimeout(() => {
-            this.setState({
-                data: {
-                    specialTask: [true, true, false],
-                    normalTask: [
-                        {
-                            // 玩節奏遊戲
-                            name: "rhythmGame",
-                            point: 1000,
-                            finish: 2,
-                            limit: 8
-                        },
-                        {
-                            // 接受邀請
-                            name: "acceptInvite",
-                            point: 600,
-                            finish: 1,
-                            limit: 8
-                        },
-                        {
-                            // 完成共同創作
-                            name: "completeCreation",
-                            point: 1500,
-                            finish: 3,
-                            limit: 8
-                        },
-                        {
-                            // 分享共同創作
-                            name: "shareCreation",
-                            point: 500,
-                            finish: 2,
-                            limit: 16
-                        },
-                        {
-                            // 每天登入網站
-                            name: "login",
-                            point: 800,
-                            finish: 1,
-                            limit: 14
-                        },
-                        {
-                            // 打招呼
-                            name: "greet",
-                            point: 1000,
-                            finish: 1,
-                            limit: 8
-                        },
-                        {
-                            // 連續登入網站3天
-                            name: "loginEveryday3",
-                            point: 2000,
-                            finish: 0,
-                            limit: 1
-                        },
-                        {
-                            // 連續登入網站8天
-                            name: "loginEveryday8",
-                            point: 4000,
-                            finish: 0,
-                            limit: 1
-                        },
-                        {
-                            // 限時8天內交友
-                            name: "greetEveryday",
-                            point: 5000,
-                            finish: 0,
-                            limit: 1
-                        }
-                    ]
-                }
-            });
-        }, 1000);
     }
     componentWillEnter(callback) {
         TweenMax.fromTo(this.refs.task, 0.25, { autoAlpha: 0 }, { autoAlpha: 1 });
@@ -122,15 +50,15 @@ class Task extends Component {
                             <p className="task__title">
                                 <FormattedMessage id="intl.task.title" />
                             </p>
-                            {this.state.data ? (
+                            {this.props.appContext.task.data ? (
                                 <div className="task__list">
                                     <TaskItemGroup name={this.props.intlContext.formatMessage({ id: "intl.task.specialTask.title" })} desc={this.props.intlContext.formatMessage({ id: "intl.task.specialTask.desc" })}>
-                                        {this.state.data.specialTask.map((el, id) => {
+                                        {this.props.appContext.task.data.special.map((el, id) => {
                                             return <SpecialTask key={id} icon={el ? "https://fakeimg.pl/70x70/" : "https://fakeimg.pl/70x70/282828/eae0d0/"} name={this.props.intlContext.formatMessage({ id: `intl.task.specialTask${id + 1}.name` })} activeText={this.props.intlContext.formatMessage({ id: `intl.task.specialTask${id + 1}.active` })} unactiveText={this.props.intlContext.formatMessage({ id: `intl.task.specialTask${id + 1}.unactive` })} link={`st${id + 1}`} active={el} />;
                                         })}
                                     </TaskItemGroup>
 
-                                    {this.state.data.normalTask.map((el, id) => {
+                                    {this.props.appContext.task.data.normal.map((el, id) => {
                                         return (
                                             <div className="task__item" key={id}>
                                                 <p className="task__name">

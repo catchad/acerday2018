@@ -6,6 +6,8 @@ import normal from "./normal.json";
 import hard from "./hard.json";
 import music from "./acer-demo3.m4a";
 import RoundBtn from "../RoundBtn";
+import tip from "./tip.mp4";
+import tipM from "./tip-m.mp4";
 // import { THREE } from "three";
 // import { THREE } from "three/build/three.modules";
 import { Scene, PerspectiveCamera, WebGLRenderer, HemisphereLight, PlaneGeometry, MeshBasicMaterial, MeshLambertMaterial, SphereGeometry, Mesh, RingGeometry, Texture, CylinderGeometry, CircleGeometry, Group, Raycaster, Vector2, Vector3, Geometry, PointsMaterial, Points } from "three";
@@ -867,7 +869,11 @@ class RhythmGame extends Component {
                                     <p className="rhythmGame__text">
                                         <FormattedHTMLMessage id="intl.rhythmgame.confrim.text" />
                                     </p>
-                                    <img className="rhythmGame__gif" src="http://via.placeholder.com/400x200" />
+                                    {/* <img className="rhythmGame__gif" src="http://via.placeholder.com/400x200" /> */}
+                                    <div className="rhythmGame__tip">
+                                        <video className="rhythmGame__tipVideo" width="400" height="200" loop autoPlay="1" playsInline="playsinline" muted src={tip} />
+                                    </div>
+
                                     <div>
                                         <RoundBtn onClick={this._start}>
                                             <FormattedMessage id="intl.rhythmgame.confrim.btn" />

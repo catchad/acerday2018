@@ -142,6 +142,22 @@ class Homepage extends Component {
     }
 
     render() {
+        // #00D8EF
+        // #0097FF
+        switch (this.state.currentID) {
+            case 0:
+            case 3:
+                this.color1 = "#ff0e41";
+                this.color2 = "#fe6231";
+                break;
+            case 1:
+            case 2:
+            case 4:
+                this.color1 = "#155DE5";
+                this.color2 = "#37B0FF";
+                break;
+        }
+
         return (
             <div>
                 <div className="homepage">
@@ -232,7 +248,8 @@ class Homepage extends Component {
                         <p className="homepage__text">
                             <FormattedHTMLMessage id="intl.homepage.text" />
                         </p>
-                        <RoundBtn color1="#00D8EF" color2="#0097FF" routerLink={`/${this.props.appContext.currentCountry}/login`}>
+
+                        <RoundBtn color1={this.color1} color2={this.color2} routerLink={`/${this.props.appContext.currentCountry}/login`}>
                             <p>
                                 <FormattedMessage id="intl.homepage.btn" />
                             </p>

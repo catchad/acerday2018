@@ -82,134 +82,131 @@ class Block extends Component {
                 break;
         }
 
-        if (Array.isArray(this.props.data)) {
-            return (
-                <div className="block">
-                    <div className="block__group" style={{ marginTop: `${m}%` }}>
-                        {(() => {
-                            var result = [];
-                            for (var i = 0; i < number + 1; i++) {
-                                result.push(
-                                    <div className="block__item" key={i}>
-                                        <div className="block__wrapper">
-                                            <div className="block__surface block__surface--a" />
-                                            <div className="block__surface block__surface--b" />
-                                            <div className="block__surface block__surface--c" />
+        if (this.props.data) {
+            if (Array.isArray(this.props.data)) {
+                return (
+                    <div className="block">
+                        <div className="block__group" style={{ marginTop: `${m}%` }}>
+                            {(() => {
+                                var result = [];
+                                for (var i = 0; i < number + 1; i++) {
+                                    result.push(
+                                        <div className="block__item" key={i}>
+                                            <div className="block__wrapper">
+                                                <div className="block__surface block__surface--a" />
+                                                <div className="block__surface block__surface--b" />
+                                                <div className="block__surface block__surface--c" />
+                                            </div>
+                                        </div>
+                                    );
+                                }
+                                return result;
+                            })()}
+                        </div>
+                        {data.map((el, id) => {
+                            return (
+                                <Fragment key={id}>
+                                    <div className="block__group" style={{ width: `${Math.floor((number + 2) / (number + 1) * 1000000) / 10000}%`, marginLeft: `-${this.state.ww / (number + 1) / 2}px` }}>
+                                        <div className="block__item">
+                                            <div className="block__wrapper">
+                                                <div className="block__surface block__surface--a" />
+                                                <div className="block__surface block__surface--b" />
+                                                <div className="block__surface block__surface--c" />
+                                            </div>
+                                        </div>
+                                        {el.map((el, id) => {
+                                            if (el == null) {
+                                                return (
+                                                    <div className="block__item" key={id}>
+                                                        <div className="block__wrapper">
+                                                            <div className="block__surface block__surface--a" />
+                                                            <div className="block__surface block__surface--b" />
+                                                            <div className="block__surface block__surface--c" />
+                                                        </div>
+                                                    </div>
+                                                );
+                                            } else {
+                                                return (
+                                                    <div
+                                                        className="block__item block__item--user"
+                                                        key={id}
+                                                        onClick={e => {
+                                                            this._blockClick(el);
+                                                        }}
+                                                    >
+                                                        <div className="block__wrapper">
+                                                            <div className="block__surface block__surface--a" />
+                                                            <div className="block__surface block__surface--b">
+                                                                <p className="block__name">{el.name}</p>
+                                                                <p className="block__country">{el.countryFullName}</p>
+                                                            </div>
+                                                            <div className="block__surface block__surface--c">
+                                                                <p className="block__greet">{greets[el.country][el.greet]}</p>
+                                                            </div>
+                                                            <img className="block__userPhoto" src={el.character} />
+                                                        </div>
+                                                    </div>
+                                                );
+                                            }
+                                        })}
+
+                                        <div className="block__item">
+                                            <div className="block__wrapper">
+                                                <div className="block__surface block__surface--a" />
+                                                <div className="block__surface block__surface--b" />
+                                                <div className="block__surface block__surface--c" />
+                                            </div>
                                         </div>
                                     </div>
-                                );
-                            }
-                            return result;
-                        })()}
+
+                                    <div className="block__group">
+                                        {(() => {
+                                            var result = [];
+                                            for (var i = 0; i < number + 1; i++) {
+                                                result.push(
+                                                    <div className="block__item" key={i}>
+                                                        <div className="block__wrapper">
+                                                            <div className="block__surface block__surface--a" />
+                                                            <div className="block__surface block__surface--b" />
+                                                            <div className="block__surface block__surface--c" />
+                                                            <img className="block__laptop" src={laptop} />
+                                                        </div>
+                                                    </div>
+                                                );
+                                            }
+                                            return result;
+                                        })()}
+                                    </div>
+                                </Fragment>
+                            );
+                        })}
                     </div>
-                    {data.map((el, id) => {
-                        return (
-                            <Fragment key={id}>
-                                <div className="block__group" style={{ width: `${Math.floor((number + 2) / (number + 1) * 1000000) / 10000}%`, marginLeft: `-${this.state.ww / (number + 1) / 2}px` }}>
-                                    <div className="block__item">
-                                        <div className="block__wrapper">
-                                            <div className="block__surface block__surface--a" />
-                                            <div className="block__surface block__surface--b" />
-                                            <div className="block__surface block__surface--c" />
-                                        </div>
+                );
+            }
+
+            if (!Array.isArray(this.props.data)) {
+                return (
+                    <div className="block">
+                        <div className="block__group" style={{ marginTop: "72%" }}>
+                            <div className="block__item block__item--noHover">
+                                <div className="block__wrapper">
+                                    <div className="block__surface block__surface--a" />
+                                    <div className="block__surface block__surface--b">
+                                        <p className="block__name">{this.props.data.name}</p>
+                                        <p className="block__country">{this.props.data.countryFullName}</p>
                                     </div>
-                                    {el.map((el, id) => {
-                                        if (el == null) {
-                                            return (
-                                                <div className="block__item" key={id}>
-                                                    <div className="block__wrapper">
-                                                        <div className="block__surface block__surface--a" />
-                                                        <div className="block__surface block__surface--b" />
-                                                        <div className="block__surface block__surface--c" />
-                                                    </div>
-                                                </div>
-                                            );
-                                        } else {
-                                            return (
-                                                <div
-                                                    className="block__item block__item--user"
-                                                    key={id}
-                                                    onClick={e => {
-                                                        this._blockClick({
-                                                            id: el.id,
-                                                            name: el.name,
-                                                            country: el.country,
-                                                            countryFullName: el.countryFullName,
-                                                            greet: el.greet,
-                                                            character: el.character
-                                                        });
-                                                    }}
-                                                >
-                                                    <div className="block__wrapper">
-                                                        <div className="block__surface block__surface--a" />
-                                                        <div className="block__surface block__surface--b">
-                                                            <p className="block__name">{el.name}</p>
-                                                            <p className="block__country">{el.countryFullName}</p>
-                                                        </div>
-                                                        <div className="block__surface block__surface--c">
-                                                            <p className="block__greet">{greets[el.country][el.greet]}</p>
-                                                        </div>
-                                                        <img className="block__userPhoto" src={el.character} />
-                                                    </div>
-                                                </div>
-                                            );
-                                        }
-                                    })}
-
-                                    <div className="block__item">
-                                        <div className="block__wrapper">
-                                            <div className="block__surface block__surface--a" />
-                                            <div className="block__surface block__surface--b" />
-                                            <div className="block__surface block__surface--c" />
-                                        </div>
+                                    <div className="block__surface block__surface--c">
+                                        <p className="block__greet">{this.props.data.country ? greets[this.props.data.country][this.props.data.greet] : ""}</p>
                                     </div>
+                                    <img className="block__userPhoto" src={this.props.data.character} />
                                 </div>
-
-                                <div className="block__group">
-                                    {(() => {
-                                        var result = [];
-                                        for (var i = 0; i < number + 1; i++) {
-                                            result.push(
-                                                <div className="block__item" key={i}>
-                                                    <div className="block__wrapper">
-                                                        <div className="block__surface block__surface--a" />
-                                                        <div className="block__surface block__surface--b" />
-                                                        <div className="block__surface block__surface--c" />
-                                                        <img className="block__laptop" src={laptop} />
-                                                    </div>
-                                                </div>
-                                            );
-                                        }
-                                        return result;
-                                    })()}
-                                </div>
-                            </Fragment>
-                        );
-                    })}
-                </div>
-            );
-        }
-
-        if (!Array.isArray(this.props.data)) {
-            return (
-                <div className="block">
-                    <div className="block__group" style={{ marginTop: "72%" }}>
-                        <div className="block__item block__item--noHover">
-                            <div className="block__wrapper">
-                                <div className="block__surface block__surface--a" />
-                                <div className="block__surface block__surface--b">
-                                    <p className="block__name">{this.props.data.name}</p>
-                                    <p className="block__country">{this.props.data.countryFullName}</p>
-                                </div>
-                                <div className="block__surface block__surface--c">
-                                    <p className="block__greet">{greets[this.props.data.country][this.props.data.greet]}</p>
-                                </div>
-                                <img className="block__userPhoto" src={this.props.data.character} />
                             </div>
                         </div>
                     </div>
-                </div>
-            );
+                );
+            }
+        } else {
+            return null;
         }
     }
 }

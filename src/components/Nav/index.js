@@ -60,7 +60,7 @@ class Nav extends Component {
                                                     {appContext.id ? (
                                                         <div className="userInfo">
                                                             <p className="userInfo__name">{appContext.name}</p>
-                                                            <p className="userInfo__acerID">Acer ID: {appContext.id}</p>
+                                                            <p className="userInfo__acerID">Acer ID: {appContext.userCode}</p>
                                                             <p className="userInfo__point">{appContext.point} 點</p>
                                                         </div>
                                                     ) : (

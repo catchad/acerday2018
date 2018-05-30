@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import axios from "axios";
 import Block from "../Block";
 import Select from "../Select";
 import Background from "../Background";
@@ -11,7 +12,10 @@ import { toast } from "react-toastify";
 import { FormattedMessage } from "react-intl";
 import { TweenMax } from "gsap";
 import ReactTransitionGroup from "react-addons-transition-group";
+import getCountryFullName from "../../helper/getCountryFullName.js";
 import greets from "../../locale/greets";
+import flagUS from "./flag-us.svg";
+import flagTW from "./flag-tw.svg";
 
 class Game extends Component {
     constructor(props) {
@@ -45,14 +49,9 @@ class Game extends Component {
 
     _setInvite = values => {
         this.setState({
-            step: this.state.step + 1,
             invite: {
-                id: values.id,
-                name: values.name,
-                country: values.country,
-                countryFullName: values.countryFullName,
-                greet: values.greet,
-                character: values.character
+                ...this.state.invite,
+                ...values
             }
         });
     };
@@ -75,7 +74,7 @@ class Game extends Component {
             <div className="page">
                 <ReactTransitionGroup component="div">
                     {this.state.step == 1 ? <Step1 intl={this.props.intlContext} appContext={this.props.appContext} nextStep={this._nextStep} setInvite={this._setInvite} /> : ""}
-                    {this.state.step == 2 ? <Step2 intl={this.props.intlContext} invite={this.state.invite} appContext={this.props.appContext} nextStep={this._nextStep} /> : ""}
+                    {this.state.step == 2 ? <Step2 intl={this.props.intlContext} invite={this.state.invite} appContext={this.props.appContext} setInvite={this._setInvite} nextStep={this._nextStep} /> : ""}
                     {this.state.step == 3 ? <Step3 intl={this.props.intlContext} invite={this.state.invite} appContext={this.props.appContext} nextStep={this._nextStep} /> : ""}
                     {this.state.step == 4 ? <Step4 intl={this.props.intlContext} invite={this.state.invite} appContext={this.props.appContext} nextStep={this._nextStep} updateScore={this._updateScore} /> : ""}
                     {this.state.step == 5 ? <Step5 intl={this.props.intlContext} invite={this.state.invite} appContext={this.props.appContext} nextStep={this._nextStep} restart={this._restart} cid={this.props.match.params.cid} score={this.state.score} /> : ""}
@@ -89,6 +88,14 @@ class Game extends Component {
 class Step1 extends Component {
     constructor(props) {
         super(props);
+        this.state = {
+            searchId: "",
+            searchCountry: ""
+        };
+
+        this._updateList();
+        // this.searchId = "";
+        // this.searchCountry = "";
     }
 
     componentWillEnter(callback) {
@@ -121,6 +128,54 @@ class Step1 extends Component {
             }
         });
     }
+    _updateList = () => {
+        // console.log(this.state);
+        if (this.state.searchId == "" && this.state.searchCountry == "") {
+            axios({
+                method: "GET",
+                url: "/api/users?page=1&pagesize=24&random=1",
+                responseType: "json"
+            }).then(this._updateData);
+            return;
+        }
+        if (this.state.searchId == "" && this.state.searchCountry !== "") {
+            // alert(this.state.searchCountry);
+            axios({
+                method: "GET",
+                url: `/api/users?page=1&pagesize=24&random=1&country=${this.state.searchCountry}`,
+                responseType: "json"
+            }).then(this._updateData);
+            return;
+        }
+        if (this.state.searchId !== "") {
+            // alert(this.state.searchId);
+            axios({
+                method: "GET",
+                url: `/api/users?page=1&pagesize=24&random=1&id=${this.state.searchId}`,
+                responseType: "json"
+            }).then(this._updateData);
+            return;
+        }
+    };
+    _updateData = response => {
+        var resp = response.data;
+        var data = [];
+        resp.data.List.forEach((el, id) => {
+            data.push({
+                id: el.Id,
+                userCode: el.UserCode,
+                name: el.DisplayName,
+                country: el.Country,
+                countryFullName: getCountryFullName(el.Country),
+                character: el.ProfileImageUrl,
+                greet: el.GreetingTextKey
+            });
+        });
+        this.setState({
+            data: data
+        });
+    };
+
     render() {
         return (
             <div className="page__section gameStep1" ref="section">
@@ -133,133 +188,56 @@ class Step1 extends Component {
                     </p>
                 </div>
                 <div className="gameStep1__ui">
-                    <input className="page__inputtext gameStep1__input" type="text" placeholder="Acer ID" />
+                    <input
+                        className="page__inputtext gameStep1__input"
+                        type="text"
+                        placeholder="Acer ID"
+                        value={this.state.searchId}
+                        onChange={e => {
+                            this.setState({ searchId: e.target.value });
+                        }}
+                    />
                     <p className="gameStep1__or">or</p>
                     <Select
                         className="gameStep1__select"
                         defaultName={this.props.intl.formatMessage({ id: "intl.game.step1.country" })}
+                        onChange={value => {
+                            this.setState({
+                                searchCountry: value
+                            });
+                        }}
                         options={[
                             {
                                 name: "Taiwan",
-                                icon: "https://restcountries.eu/data/twn.svg",
+                                icon: flagTW,
                                 value: "tw"
                             },
                             {
                                 name: "USA",
-                                icon: "https://restcountries.eu/data/usa.svg",
+                                icon: flagUS,
                                 value: "us"
                             }
                         ]}
                     />
-                    <RoundBtn className="gameStep1__btn" size="M">
+                    <RoundBtn className="gameStep1__btn" size="M" onClick={this._updateList}>
                         <FormattedMessage id="intl.game.step1.btn.search" />
                     </RoundBtn>
                 </div>
 
                 <div className="page__row page__row--fullWidth">
-                    <Block
-                        type="list"
-                        onClick={this.props.setInvite}
-                        randomColor
-                        data={[
-                            {
-                                id: "",
-                                name: "Ray Su",
-                                country: "tw",
-                                countryFullName: "Taiwan",
-                                character: user,
-                                greet: 0
-                            },
-                            {
-                                id: "",
-                                name: "Kanokporn Sopontaweesab",
-                                character: user,
-                                country: "tw",
-                                countryFullName: "Taiwan",
-                                greet: 0
-                            },
-                            {
-                                id: "",
-                                name: "Anis Aiz Sllu Tersenyum",
-                                character: user,
-                                country: "us",
-                                countryFullName: "United States",
-                                greet: 1
-                            },
-                            {
-                                id: "",
-                                name: "Isaac chuang",
-                                country: "tw",
-                                countryFullName: "Taiwan",
-                                character: user,
-                                greet: 0
-                            },
-                            {
-                                id: "",
-                                name: "Rachel Wang",
-                                country: "tw",
-                                countryFullName: "Taiwan",
-                                character: user,
-                                greet: 1
-                            },
-                            {
-                                id: "",
-                                name: "莊育銘",
-                                country: "tw",
-                                countryFullName: "Taiwan",
-                                character: user,
-                                greet: 1
-                            },
-                            {
-                                id: "",
-                                name: "Ray Su",
-                                country: "tw",
-                                countryFullName: "Taiwan",
-                                character: user,
-                                greet: 0
-                            },
-                            {
-                                id: "",
-                                name: "Kanokporn Sopontaweesab",
-                                character: user,
-                                country: "tw",
-                                countryFullName: "Taiwan",
-                                greet: 1
-                            },
-                            {
-                                id: "",
-                                name: "Anis Aiz Sllu Tersenyum",
-                                character: user,
-                                country: "tw",
-                                countryFullName: "Taiwan",
-                                greet: 0
-                            },
-                            {
-                                id: "",
-                                name: "Isaac chuang",
-                                country: "tw",
-                                countryFullName: "Taiwan",
-                                character: user,
-                                greet: 1
-                            },
-                            {
-                                id: "",
-                                name: "Rachel Wang",
-                                country: "tw",
-                                countryFullName: "Taiwan",
-                                character: user,
-                                greet: 0
-                            },
-                            {
-                                id: "",
-                                name: "莊育銘",
-                                country: "tw",
-                                countryFullName: "Taiwan",
-                                character: user,
-                                greet: 1
-                            }
-                        ]}
-                    />
+                    {this.state.data && this.state.data.length > 0 ? (
+                        <Block
+                            type="list"
+                            onClick={values => {
+                                this.props.setInvite(values);
+                                this.props.nextStep();
+                            }}
+                            randomColor
+                            data={this.state.data}
+                        />
+                    ) : (
+                        <p>沒有資料</p>
+                    )}
                 </div>
             </div>
         );
@@ -273,6 +251,7 @@ class Step2 extends Component {
         // this.state = {
         //     bubbleActive: false
         // };
+        this.ajaxing = false;
     }
     componentDidMount() {
         this._hideBubble();
@@ -314,32 +293,85 @@ class Step2 extends Component {
         // this.setState()
     };
     _showBubble = () => {
-        // if (!this.bubbleActive) {
-        // this.bubbleActive = true;
-        // this.setState({
-        //     bubbleActive: true
-        // });
-        TweenMax.to("#step2Btn", 0.25, { opacity: 0 });
-        TweenMax.set([this.refs.bubble1, this.refs.bubble2], { opacity: 1 });
-        TweenMax.fromTo(this.refs.bubble1, 0.5, { y: 150, scale: 0 }, { y: 0, scale: 1, ease: Back.easeOut });
-        TweenMax.fromTo(
-            this.refs.bubble2,
-            0.5,
-            { y: 150, scale: 0 },
-            {
-                y: 0,
-                scale: 1,
-                ease: Back.easeOut,
-                delay: 1,
-                onComplete: () => {
-                    toast(this.props.intl.formatMessage({ id: "intl.notification.sentence6" }, { name: "Rachel Wang" }));
-                    toast(this.props.intl.formatMessage({ id: "intl.notification.sentence7" }));
-                    setTimeout(() => {
-                        this.props.nextStep();
-                    }, 1000);
-                }
+        // 送出邀請
+        // console.log(this.props.invite)
+        if (this.ajaxing) return;
+        this.ajaxing = true;
+
+        axios({
+            method: "POST",
+            url: "/api/tasks/invitations",
+            responseType: "json",
+            data: {
+                ToUserID: this.props.invite.userCode
             }
-        );
+        }).then(response => {
+            console.log(response);
+            var resp = response.data;
+            this.props.setInvite({ userTaskId: resp.data.UserTaskId });
+
+            TweenMax.to("#step2Btn", 0.25, { opacity: 0 });
+            TweenMax.set([this.refs.bubble1, this.refs.bubble2], { opacity: 1 });
+            TweenMax.fromTo(this.refs.bubble1, 0.5, { y: 150, scale: 0 }, { y: 0, scale: 1, ease: Back.easeOut });
+            TweenMax.fromTo(
+                this.refs.bubble2,
+                0.5,
+                { y: 150, scale: 0 },
+                {
+                    y: 0,
+                    scale: 1,
+                    ease: Back.easeOut,
+                    delay: 1,
+                    onComplete: () => {
+                        toast(this.props.intl.formatMessage({ id: "intl.notification.sentence6" }, { name: "Rachel Wang" }));
+                        toast(this.props.intl.formatMessage({ id: "intl.notification.sentence7" }));
+                        setTimeout(() => {
+                            this.props.nextStep();
+                        }, 1000);
+                    }
+                }
+            );
+        });
+
+        // console.log({
+        //     ToUserID: this.props.invite.userCode
+        // });
+
+        // setTimeout(() => {
+        //     var response = {
+        //         code: 201,
+        //         message: "Created",
+        //         data: {
+        //             UserTaskId: "1234567",
+        //             Points: 2000
+        //         }
+        //     };
+
+        //     this.props.setInvite({ userTaskId: response.data.UserTaskId });
+
+        //     TweenMax.to("#step2Btn", 0.25, { opacity: 0 });
+        //     TweenMax.set([this.refs.bubble1, this.refs.bubble2], { opacity: 1 });
+        //     TweenMax.fromTo(this.refs.bubble1, 0.5, { y: 150, scale: 0 }, { y: 0, scale: 1, ease: Back.easeOut });
+        //     TweenMax.fromTo(
+        //         this.refs.bubble2,
+        //         0.5,
+        //         { y: 150, scale: 0 },
+        //         {
+        //             y: 0,
+        //             scale: 1,
+        //             ease: Back.easeOut,
+        //             delay: 1,
+        //             onComplete: () => {
+        //                 toast(this.props.intl.formatMessage({ id: "intl.notification.sentence6" }, { name: "Rachel Wang" }));
+        //                 toast(this.props.intl.formatMessage({ id: "intl.notification.sentence7" }));
+        //                 setTimeout(() => {
+        //                     this.props.nextStep();
+        //                 }, 1000);
+        //             }
+        //         }
+        //     );
+        // }, 500);
+
         // }
     };
 
@@ -397,6 +429,8 @@ class Step2 extends Component {
 class Step3 extends Component {
     constructor(props) {
         super(props);
+        console.log("s3");
+        console.log(this.props.invite);
     }
 
     componentWillEnter(callback) {
