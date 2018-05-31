@@ -20,7 +20,7 @@ ReactDOM.render(
     <Router>
         <Switch>
             {/* <Route path="/:country(tw|us)" render={props => <IntlProviderContainer {...props} />} /> */}
-            <Route path="/:country(tw|us)" component={App} />
+            <Route path="/:country(tw|sg)" component={App} />
             <Route path="/" component={Global} />
         </Switch>
     </Router>,

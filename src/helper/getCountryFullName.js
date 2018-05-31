@@ -3,8 +3,8 @@ var getCountryFullName = function(country) {
         case "tw":
             return "Taiwan";
             break;
-        case "us":
-            return "USA";
+        case "sg":
+            return "Singapore";
             break;
     }
 };

@@ -14,6 +14,7 @@ class AppContext extends Component {
         super(props);
         this.debug = false;
         this.state = {
+            isLogin: null,
             id: 0,
             userCode: "",
             name: "",
@@ -154,14 +155,12 @@ class AppContext extends Component {
                 });
             },
             setUserData: data => {
-                console.log("setUserData");
-                console.log(data);
-
                 data.Tasks = keyBy(data.Tasks, "TaskName");
                 if (data.Tasks == null) data.Tasks = {};
 
                 this.setState({
                     ...this.state,
+                    isLogin: true,
                     id: data.Id,
                     userCode: data.UserCode,
                     name: data.DisplayName,
@@ -322,6 +321,10 @@ class AppContext extends Component {
                 var resp = response.data;
                 if (resp.code == 200) {
                     this.state.setUserData(resp.data);
+                } else {
+                    this.setState({
+                        isLogin: false
+                    });
                 }
             });
 

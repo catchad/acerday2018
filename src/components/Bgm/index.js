@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import music from "./bgm.mp3";
+import music from "./bgm.m4a";
 
 class Bgm extends Component {
     constructor(props) {

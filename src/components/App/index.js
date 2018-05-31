@@ -47,7 +47,7 @@ import zh from "react-intl/locale-data/zh";
 import en from "react-intl/locale-data/en";
 
 import tw from "../../locale/messages/tw.js";
-import us from "../../locale/messages/us.js";
+import sg from "../../locale/messages/sg.js";
 
 addLocaleData([...en, ...zh]);
 
@@ -81,9 +81,9 @@ class App extends React.Component {
                 this.locale = "zh";
                 this.messages = tw;
                 break;
-            case "us":
+            case "sg":
                 this.locale = "en";
-                this.messages = us;
+                this.messages = sg;
                 break;
             default:
                 this.locale = "zh";

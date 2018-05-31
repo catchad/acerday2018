@@ -14,7 +14,7 @@ import { TweenMax } from "gsap";
 import ReactTransitionGroup from "react-addons-transition-group";
 import getCountryFullName from "../../helper/getCountryFullName.js";
 import greets from "../../locale/greets";
-import flagUS from "./flag-us.svg";
+import flagSG from "./flag-sg.svg";
 import flagTW from "./flag-tw.svg";
 
 class Game extends Component {
@@ -39,12 +39,58 @@ class Game extends Component {
                       greet: 0,
                       character: ""
                   },
-            score: 0
+            score: 0,
+            gameLevel: 1
         };
 
-        console.log(props);
-        console.log(props.match.params.cid ? 4 : 1);
-        // console.log(this.props.appContext);
+        if (props.match.params.cid) {
+            axios({
+                method: "GET",
+                url: `/api/tasks/rythmgames/${props.match.params.cid}`,
+                responseType: "json"
+            }).then(response => {
+                var resp = response.data;
+                this.setState({
+                    ...this.state,
+                    invite: {
+                        id: resp.data.Players[0].User.Id,
+                        name: resp.data.Players[0].User.DisplayName,
+                        country: resp.data.Players[0].User.Country,
+                        countryFullName: getCountryFullName(resp.data.Players[0].User.Country),
+                        greet: resp.data.Players[0].User.GreetingTextKey,
+                        character: resp.data.Players[0].User.ProfileImageUrl
+                    }
+                });
+            });
+        }
+    }
+    componentWillUpdate(nextProps, nextState) {
+        console.log("componentWillUpdate");
+
+        if (this.props.match.params.cid !== nextProps.match.params.cid && nextProps.match.params.cid) {
+            this.setState({
+                ...this.state,
+                step: 4
+            });
+            axios({
+                method: "GET",
+                url: `/api/tasks/rythmgames/${nextProps.match.params.cid}`,
+                responseType: "json"
+            }).then(response => {
+                var resp = response.data;
+                this.setState({
+                    ...this.state,
+                    invite: {
+                        id: resp.data.Players[0].User.Id,
+                        name: resp.data.Players[0].User.DisplayName,
+                        country: resp.data.Players[0].User.Country,
+                        countryFullName: getCountryFullName(resp.data.Players[0].User.Country),
+                        greet: resp.data.Players[0].User.GreetingTextKey,
+                        character: resp.data.Players[0].User.ProfileImageUrl
+                    }
+                });
+            });
+        }
     }
 
     _setInvite = values => {
@@ -63,6 +109,13 @@ class Game extends Component {
     _updateScore = value => {
         this.setState({ step: this.state.step + 1, score: value });
     };
+    _selectLevel = level => {
+        this.setState({
+            ...this.state,
+            gameLevel: level,
+            step: this.state.step + 1
+        });
+    };
     _restart = () => {
         this.setState({
             step: 1
@@ -75,8 +128,8 @@ class Game extends Component {
                 <ReactTransitionGroup component="div">
                     {this.state.step == 1 ? <Step1 intl={this.props.intlContext} appContext={this.props.appContext} nextStep={this._nextStep} setInvite={this._setInvite} /> : ""}
                     {this.state.step == 2 ? <Step2 intl={this.props.intlContext} invite={this.state.invite} appContext={this.props.appContext} setInvite={this._setInvite} nextStep={this._nextStep} /> : ""}
-                    {this.state.step == 3 ? <Step3 intl={this.props.intlContext} invite={this.state.invite} appContext={this.props.appContext} nextStep={this._nextStep} /> : ""}
-                    {this.state.step == 4 ? <Step4 intl={this.props.intlContext} invite={this.state.invite} appContext={this.props.appContext} nextStep={this._nextStep} updateScore={this._updateScore} /> : ""}
+                    {this.state.step == 3 ? <Step3 intl={this.props.intlContext} invite={this.state.invite} appContext={this.props.appContext} selectLevel={this._selectLevel} nextStep={this._nextStep} /> : ""}
+                    {this.state.step == 4 ? <Step4 intl={this.props.intlContext} invite={this.state.invite} appContext={this.props.appContext} level={this.state.gameLevel} nextStep={this._nextStep} updateScore={this._updateScore} /> : ""}
                     {this.state.step == 5 ? <Step5 intl={this.props.intlContext} invite={this.state.invite} appContext={this.props.appContext} nextStep={this._nextStep} restart={this._restart} cid={this.props.match.params.cid} score={this.state.score} /> : ""}
                 </ReactTransitionGroup>
                 <Background color1={this.state.step == 4 || this.state.step == 5 ? "#505CFF" : "#9AEF00"} color2={this.state.step == 4 || this.state.step == 5 ? "#62008B" : "#6F9F0F"} />
@@ -213,9 +266,9 @@ class Step1 extends Component {
                                 value: "tw"
                             },
                             {
-                                name: "USA",
-                                icon: flagUS,
-                                value: "us"
+                                name: "Singapore",
+                                icon: flagSG,
+                                value: "sg"
                             }
                         ]}
                     />
@@ -429,8 +482,6 @@ class Step2 extends Component {
 class Step3 extends Component {
     constructor(props) {
         super(props);
-        console.log("s3");
-        console.log(this.props.invite);
     }
 
     componentWillEnter(callback) {
@@ -476,13 +527,28 @@ class Step3 extends Component {
                     </p>
                 </div>
                 <div className="page__row page__row--center">
-                    <RoundBtn onClick={this.props.nextStep} fixedSize="S">
+                    <RoundBtn
+                        onClick={() => {
+                            this.props.selectLevel(1);
+                        }}
+                        fixedSize="S"
+                    >
                         ★
                     </RoundBtn>
-                    <RoundBtn onClick={this.props.nextStep} fixedSize="S">
+                    <RoundBtn
+                        onClick={() => {
+                            this.props.selectLevel(2);
+                        }}
+                        fixedSize="S"
+                    >
                         ★★
                     </RoundBtn>
-                    <RoundBtn onClick={this.props.nextStep} fixedSize="S">
+                    <RoundBtn
+                        onClick={() => {
+                            this.props.selectLevel(3);
+                        }}
+                        fixedSize="S"
+                    >
                         ★★★
                     </RoundBtn>
                 </div>
@@ -524,7 +590,7 @@ class Step4 extends Component {
     }
 
     render() {
-        return <RhythmGame level="1" appContext={this.props.appContext} onGameOver={this.props.updateScore} />;
+        return <RhythmGame level={this.props.level} appContext={this.props.appContext} onGameOver={this.props.updateScore} />;
     }
 }
 

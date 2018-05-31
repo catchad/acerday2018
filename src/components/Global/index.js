@@ -12,7 +12,7 @@ class Global extends Component {
                 <p>Global</p>
                 <Link to="/tw">tw</Link>
                 <br />
-                <Link to="/us">us</Link>
+                <Link to="/sg">sg</Link>
             </div>
         );
     }

@@ -4,13 +4,18 @@ import { Scrollbars } from "react-custom-scrollbars";
 import easy from "./easy.json";
 import normal from "./normal.json";
 import hard from "./hard.json";
-import music from "./acer-demo3.m4a";
+import music from "./acer-final.m4a";
 import RoundBtn from "../RoundBtn";
 import tip from "./tip.mp4";
 import tipM from "./tip-m.mp4";
+import p1 from "./p1.png";
+import p2 from "./p2.png";
+import p3 from "./p3.png";
+import p4 from "./p4.png";
+import p5 from "./p5.png";
 // import { THREE } from "three";
 // import { THREE } from "three/build/three.modules";
-import { Scene, PerspectiveCamera, WebGLRenderer, HemisphereLight, PlaneGeometry, MeshBasicMaterial, MeshLambertMaterial, SphereGeometry, Mesh, RingGeometry, Texture, CylinderGeometry, CircleGeometry, Group, Raycaster, Vector2, Vector3, Geometry, PointsMaterial, Points } from "three";
+import { Scene, PerspectiveCamera, WebGLRenderer, HemisphereLight, PlaneGeometry, MeshBasicMaterial, MeshLambertMaterial, SphereGeometry, Mesh, RingGeometry, Texture, CylinderGeometry, CircleGeometry, Group, Raycaster, Vector2, Vector3, Geometry, PointsMaterial, Points, ImageUtils, RepeatWrapping } from "three";
 import "./index.scss";
 
 class RhythmGame extends Component {
@@ -23,16 +28,17 @@ class RhythmGame extends Component {
             start: false
         };
         this.musicGame = null;
-        this.bpm = 113;
+        this.bpm = 116;
         this.ticker = null;
+        this.prodImgs = [p1, p2, p3, p4, p5];
         switch (this.props.level) {
-            case "1":
+            case 1:
                 this.score = easy;
                 break;
-            case "2":
+            case 2:
                 this.score = normal;
                 break;
-            case "3":
+            case 3:
                 this.score = hard;
                 break;
         }
@@ -57,7 +63,7 @@ class RhythmGame extends Component {
         this.showExplode = true; //是否啟用粒子
         this.showCamera = false; //是否啟用鏡頭移動
         this.screenHeight = 1200; //遊戲螢幕高度
-        this.scoreSpeed = 1; //遊戲速度：預設1
+        this.scoreSpeed = 1.5; //遊戲速度：預設1
         this.scoreBottom = 300; //按鈕中心點離bottom距離
         this.trackBetween = 80; //每軌間距
 
@@ -244,11 +250,65 @@ class RhythmGame extends Component {
                 return "#" + hex;
             }
         }
+        var prodNote = (color, prodIndex) => {
+            // function prodNote(color, prodIndex) {
+            var size = 512;
+            var canvas = document.createElement("canvas");
+            canvas.width = size;
+            canvas.height = size;
+            var context = canvas.getContext("2d");
+            // draw gradient
+            context.rect(0, 0, size, size);
+            var gradient = context.createRadialGradient(size / 2, size / 2, 1, size / 2, size / 2, 200);
+            gradient.addColorStop(0, "transparent");
+            // gradient.addColorStop(0, "#000000");
+            gradient.addColorStop(1, toHEX(color));
+            context.fillStyle = gradient;
+            context.fill();
 
-        var makeNote = (index, position, color) => {
-            var geometry = new SphereGeometry(20, 16, 16);
-            var material = new MeshLambertMaterial({ color: color });
-            var note = new Mesh(geometry, material);
+            // $(".songs").append(canvas);
+
+            function toHEX(color) {
+                var hex = color.toString(16);
+                while (hex.length < 6) {
+                    hex = "0" + hex;
+                }
+                return "#" + hex;
+            }
+            var texture = new Texture(canvas);
+            texture.needsUpdate = true;
+
+            var note = new Group();
+            var geometry = new SphereGeometry(30, 16, 16);
+            var material = new MeshLambertMaterial({ map: texture, transparent: true });
+            material.opacity = 0.3;
+            var mesh = new Mesh(geometry, material);
+            // console.log(geometry.parameters);
+            note.add(mesh);
+            mesh.rotation.y = Math.PI + Math.PI / 8;
+            mesh.rotation.x = -Math.PI / 8;
+
+            var texture = ImageUtils.loadTexture(this.prodImgs[prodIndex]);
+            texture.wrapS = RepeatWrapping;
+            texture.wrapT = RepeatWrapping;
+            var material = new MeshBasicMaterial({ map: texture });
+
+            var geometry = new CircleGeometry(30, 16);
+            var prod = new Mesh(geometry, material);
+            note.add(prod);
+
+            return note;
+        };
+
+        var makeNote = (index, position, color, prodIndex) => {
+            if (prodIndex !== false) {
+                var note = prodNote(color, prodIndex);
+            } else {
+                var geometry = new SphereGeometry(20, 16, 16);
+                var material = new MeshLambertMaterial({ color: color });
+                var note = new Mesh(geometry, material);
+                // var note = prodNote(color);
+            }
             this.noteContainer.add(note);
             var posX = (position[0] - 1) * this.trackBetween;
             var posZ = position[1];
@@ -274,6 +334,26 @@ class RhythmGame extends Component {
             var line = [[], [], []];
             var noteIndexCount = 0;
 
+            //找出有幾個type1的note
+            var type1count = 0;
+            for (var i = 0; i < score.length; i++) {
+                for (var j = 0; j < score[i].length; j++) {
+                    for (var k = 0; k < score[i][j].length - 1; k++) {
+                        if (score[i][j][k] == 1) {
+                            type1count++;
+                        }
+                    }
+                }
+            }
+            // console.log(type1count);
+            var prodNotePos = [];
+            for (var i = 0; i < 5; i++) {
+                prodNotePos.push(parseInt(Math.random() * type1count));
+                // prodNotePos.push(i+1);
+            }
+            // console.log(prodNotePos);
+            type1count = 0;
+
             var bar = 0;
             for (var i = 0; i < score.length; i++) {
                 //每小節
@@ -288,17 +368,29 @@ class RhythmGame extends Component {
                                 var note = new Note();
                                 note.index = noteIndexCount;
                                 note.position = [i, beat, k];
-                                note.realTime = (bar * 4 + beat) * 60 / _this.bpm;
+                                note.realTime = (bar * 4 + beat) * 60 / this.bpm;
                                 note.type = score[i][j][k];
+                                if (note.type == 1) {
+                                    type1count++;
+                                    if (prodNotePos.indexOf(type1count) != -1) {
+                                        //隨機抽中了成為商品note
+                                        note.type = 4;
+                                    }
+                                }
                                 // var color = _this.noteColors[Math.floor(Math.random()*_this.noteColors.length)];
-                                var color = _this.noteColors[noteIndexCount % _this.noteColors.length];
+                                var color = this.noteColors[noteIndexCount % this.noteColors.length];
                                 note.color = color;
                                 notes.push(note);
                                 noteIndexCount++;
                             }
 
                             if (score[i][j][k] == 1) {
-                                makeNote(note.index, [k, posZ], color);
+                                if (note.type == 4) {
+                                    makeNote(note.index, [k, posZ], color, prodNotePos.indexOf(type1count));
+                                } else {
+                                    makeNote(note.index, [k, posZ], color, false);
+                                }
+
                                 line[k] = [];
                             } else {
                                 if (score[i][j][k] == 2) {
@@ -307,7 +399,7 @@ class RhythmGame extends Component {
                                         line[k][1] = 1 / (1 / line[k][1] + 1 / score[i][j][3]); //line的beat長度
                                     } else {
                                         //line開始點
-                                        makeNote(note.index, [k, posZ], color);
+                                        makeNote(note.index, [k, posZ], color, false);
                                         // isLineing = true;
                                         line[k][0] = color;
                                         line[k][1] = score[i][j][3];
@@ -317,7 +409,7 @@ class RhythmGame extends Component {
                                     //line結束點
                                     var lineLength = 1 / line[k][1] * this.screenHeight * this.scoreSpeed;
                                     makeLine(line[k][2], [k, posZ], lineLength, line[k][0]);
-                                    makeNote(note.index, [k, posZ], line[k][0]);
+                                    makeNote(note.index, [k, posZ], line[k][0], false);
                                     notes[line[k][2]].duration = bar * 4 + beat - (notes[line[k][2]].position[0] * 4 + notes[line[k][2]].position[1]);
                                     note.color = line[k][0];
                                     line[k] = [];
@@ -419,6 +511,9 @@ class RhythmGame extends Component {
         } else {
             this.notes[note.index].point = 0;
             this.notes[note.index].stat = 2;
+        }
+        if (this.notes[note.index].type == 4) {
+            this.notes[note.index].point *= 2;
         }
         this.noteChangeUI(note.index);
         this.checkCombo();

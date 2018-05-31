@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from "react";
 import { createPortal } from "react-dom";
 import { Scrollbars } from "react-custom-scrollbars";
+import axios from "axios";
 import CircleBtn from "../CircleBtn/";
 import RoundBtn from "../RoundBtn";
 import TaskItemGroup from "../TaskItemGroup";
@@ -18,28 +19,70 @@ class Notification extends Component {
             data: {}
         };
 
+        axios({
+            method: "GET",
+            url: "/api/tasks/rythmgames",
+            responseType: "json"
+        }).then(response => {
+            console.log(response);
+            var resp = response.data;
+
+            if (resp.code == 200) {
+                var inviteData = [];
+
+                resp.data.List.forEach((el, id) => {
+                    if (el.Players.length > 0) {
+                        // data.push({
+                        //     from: el.Players[0].User.DisplayName,
+                        //     to: el.Players[1].User.DisplayName,
+                        //     id: el.Id,
+                        //     complete: el.Players[1].GameData !== null
+                        // });
+
+                        if (el.Players[1].User.Id == this.props.appContext.id && el.Players[1].GameData == null) {
+                            inviteData.push({
+                                id: el.Id,
+                                name: el.Players[0].User.DisplayName
+                            });
+                        }
+                    }
+                });
+                console.log(inviteData);
+
+                this.setState({
+                    data: {
+                        ...this.state.data,
+                        invite: inviteData
+                    }
+                });
+            } else {
+                alert(resp.code);
+            }
+        });
+
         setTimeout(() => {
             this.setState({
                 data: {
                     // 邀請
-                    invite: [
-                        {
-                            id: "wehewhaweh",
-                            name: "Rachel Wang"
-                        },
-                        {
-                            id: "wehewhaweh",
-                            name: "Rachel Wang"
-                        },
-                        {
-                            id: "wehewhaweh",
-                            name: "Rachel Wang"
-                        },
-                        {
-                            id: "wehewhaweh",
-                            name: "Rachel Wang"
-                        }
-                    ],
+                    // invite: [
+                    //     {
+                    //         id: "wehewhaweh",
+                    //         name: "Rachel Wang"
+                    //     },
+                    //     {
+                    //         id: "wehewhaweh",
+                    //         name: "Rachel Wang"
+                    //     },
+                    //     {
+                    //         id: "wehewhaweh",
+                    //         name: "Rachel Wang"
+                    //     },
+                    //     {
+                    //         id: "wehewhaweh",
+                    //         name: "Rachel Wang"
+                    //     }
+                    // ],
+                    ...this.state.data,
                     // 通知
                     notification: [
                         {
@@ -115,55 +158,57 @@ class Notification extends Component {
                                 <FormattedMessage id="intl.notification.title" />
                             </p>
 
-                            {this.state.data.invite ? (
-                                <Fragment>
-                                    <TaskItemGroup name={this.props.intlContext.formatMessage({ id: "intl.notification.invite.title" })} desc={this.props.intlContext.formatMessage({ id: "intl.notification.invite.desc" })}>
-                                        {this.state.data.invite.map((el, id) => {
-                                            return (
-                                                <div className="notification__invite" key={id}>
-                                                    <div className="notification__inviteLeft">
-                                                        <img className="notification__icon" src="https://fakeimg.pl/50x50/" />
-                                                        <p className="notification__name">
-                                                            <FormattedMessage id="intl.notification.invite.action" values={{ name: el.name }} />{" "}
-                                                        </p>
-                                                    </div>
-                                                    <div className="notification__inviteRight">
-                                                        <RoundBtn
-                                                            size="S"
-                                                            routerLink={`/${this.props.appContext.currentCountry}/game/${el.id}`}
-                                                            onClick={() => {
-                                                                this.props.appContext.notification.toggle();
-                                                            }}
-                                                        >
-                                                            GO
-                                                        </RoundBtn>
-                                                    </div>
+                            {this.state.data.invite && this.state.data.invite.length > 0 ? (
+                                <TaskItemGroup name={this.props.intlContext.formatMessage({ id: "intl.notification.invite.title" })} desc={this.props.intlContext.formatMessage({ id: "intl.notification.invite.desc" })}>
+                                    {this.state.data.invite.map((el, id) => {
+                                        return (
+                                            <div className="notification__invite" key={id}>
+                                                <div className="notification__inviteLeft">
+                                                    <img className="notification__icon" src="https://fakeimg.pl/50x50/" />
+                                                    <p className="notification__name">
+                                                        <FormattedMessage id="intl.notification.invite.action" values={{ name: el.name }} />{" "}
+                                                    </p>
                                                 </div>
-                                            );
-                                        })}
-                                    </TaskItemGroup>
-
-                                    <div className="notification__list">
-                                        {this.state.data.notification.map((el, id) => {
-                                            return (
-                                                <div className="notification__item" key={id}>
-                                                    <p className="notification__date">{el.date}</p>
-                                                    <ul className="notification__msgList">
-                                                        {el.sentence.map((el2, id2) => {
-                                                            return (
-                                                                <li className="notification__msg" key={id2}>
-                                                                    <FormattedMessage id={`intl.notification.sentence${el2.id}`} values={el2.values} />
-                                                                </li>
-                                                            );
-                                                        })}
-                                                    </ul>
+                                                <div className="notification__inviteRight">
+                                                    <RoundBtn
+                                                        size="S"
+                                                        routerLink={`/${this.props.appContext.currentCountry}/game/${el.id}`}
+                                                        onClick={() => {
+                                                            this.props.appContext.notification.toggle();
+                                                        }}
+                                                    >
+                                                        GO
+                                                    </RoundBtn>
                                                 </div>
-                                            );
-                                        })}
-                                    </div>
-                                </Fragment>
+                                            </div>
+                                        );
+                                    })}
+                                </TaskItemGroup>
                             ) : (
-                                <p>Loading...</p>
+                                ""
+                            )}
+
+                            {this.state.data.notification && this.state.data.notification.length > 0 ? (
+                                <div className="notification__list">
+                                    {this.state.data.notification.map((el, id) => {
+                                        return (
+                                            <div className="notification__item" key={id}>
+                                                <p className="notification__date">{el.date}</p>
+                                                <ul className="notification__msgList">
+                                                    {el.sentence.map((el2, id2) => {
+                                                        return (
+                                                            <li className="notification__msg" key={id2}>
+                                                                <FormattedMessage id={`intl.notification.sentence${el2.id}`} values={el2.values} />
+                                                            </li>
+                                                        );
+                                                    })}
+                                                </ul>
+                                            </div>
+                                        );
+                                    })}
+                                </div>
+                            ) : (
+                                ""
                             )}
                         </div>
                     </Scrollbars>

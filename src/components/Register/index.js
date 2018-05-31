@@ -18,8 +18,17 @@ import { AppContextConsumer } from "../../AppContext";
 import { IntlContextConsumer } from "../../IntlContext";
 import { toast } from "react-toastify";
 import keyBy from "lodash/keyBy";
-import flagUS from "./flag-us.svg";
+import flagSG from "./flag-sg.svg";
 import flagTW from "./flag-tw.svg";
+
+import iconFemaleEye from "./icon_female_eye.svg";
+import iconFemaleHair from "./icon_female_hair.svg";
+import iconFemaleMouth from "./icon_female_mouth.svg";
+import iconMaleEye from "./icon_male_eye.svg";
+import iconMaleHair from "./icon_male_hair.svg";
+import iconMaleMouth from "./icon_male_mouth.svg";
+import iconRandom from "./icon_random.svg";
+
 import "./index.scss";
 class Register extends Component {
     constructor(props) {
@@ -168,7 +177,7 @@ class Step1 extends Component {
                         onChange={value => {
                             this.props.userData.Country = value;
                         }}
-                        options={[{ name: "Taiwan", icon: flagTW, value: "tw" }, { name: "USA", icon: flagUS, value: "us" }]}
+                        options={[{ name: "Taiwan", icon: flagTW, value: "tw" }, { name: "Singapore", icon: flagSG, value: "sg" }]}
                     />
                 </div>
                 <div className="page__row page__row--center">
@@ -287,12 +296,12 @@ class Step3 extends Component {
 
                 <div className="page__row page__row--flex avatarUI">
                     <div className="avatarUI__left">
-                        <SquareBtnGroup defaultValue="hair" size="s" onChange={this.props.avatarTargetChange} data={[{ text: this.props.intl.formatMessage({ id: "intl.register.step3.hair" }), value: "hair", icon: "https://fakeimg.pl/64x64/" }, { text: this.props.intl.formatMessage({ id: "intl.register.step3.eye" }), value: "eye", icon: "https://fakeimg.pl/64x64/" }, { text: this.props.intl.formatMessage({ id: "intl.register.step3.mouth" }), value: "mouth", icon: "https://fakeimg.pl/64x64/" }]} />;
+                        <SquareBtnGroup defaultValue="hair" size="s" onChange={this.props.avatarTargetChange} data={[{ text: this.props.intl.formatMessage({ id: "intl.register.step3.hair" }), value: "hair", icon: this.props.avatarGender == "male" ? iconMaleHair : iconFemaleHair }, { text: this.props.intl.formatMessage({ id: "intl.register.step3.eye" }), value: "eye", icon: this.props.avatarGender == "male" ? iconMaleEye : iconFemaleEye }, { text: this.props.intl.formatMessage({ id: "intl.register.step3.mouth" }), value: "mouth", icon: this.props.avatarGender == "male" ? iconMaleMouth : iconFemaleMouth }]} />;
                     </div>
                     <div className="avatarUI__right">
                         <CircleBtn
                             secondary
-                            icon="https://fakeimg.pl/64x64/"
+                            icon={this.props.avatarGender == "male" ? icon_female : icon_male}
                             onClick={() => {
                                 switch (this.props.avatarGender) {
                                     case "male":
@@ -306,7 +315,7 @@ class Step3 extends Component {
                         />
                         <CircleBtn
                             secondary
-                            icon="https://fakeimg.pl/64x64/"
+                            icon={iconRandom}
                             onClick={() => {
                                 this.refs.avatar._random();
                             }}

@@ -38,6 +38,7 @@ import img5_2 from "./5-2.png";
 import img5_3 from "./5-3.png";
 import img5_4 from "./5-4.png";
 
+import copyright from "./copyright.jpg";
 class Homepage extends Component {
     constructor(props) {
         super(props);
@@ -248,12 +249,15 @@ class Homepage extends Component {
                         <p className="homepage__text">
                             <FormattedHTMLMessage id="intl.homepage.text" />
                         </p>
-
-                        <RoundBtn color1={this.color1} color2={this.color2} routerLink={`/${this.props.appContext.currentCountry}/login`}>
-                            <p>
-                                <FormattedMessage id="intl.homepage.btn" />
-                            </p>
-                        </RoundBtn>
+                        {this.props.appContext.isLogin ? (
+                            ""
+                        ) : (
+                            <RoundBtn color1={this.color1} color2={this.color2} routerLink={`/${this.props.appContext.currentCountry}/login`}>
+                                <p>
+                                    <FormattedMessage id="intl.homepage.btn" />
+                                </p>
+                            </RoundBtn>
+                        )}
                     </div>
                     {/* <div className="homepage__bg homepage__bg--1" style={this.state.currentID == 0 ? { opacity: 1, zIndex: 10 } : { opacity: 0, zIndex: 5 }} /> */}
                     {/* <div className="homepage__bg homepage__bg--2" style={this.state.currentID == 1 ? { opacity: 1, zIndex: 10 } : { opacity: 0, zIndex: 5 }} /> */}
@@ -266,13 +270,14 @@ class Homepage extends Component {
                     {/* <Background color1="#FF0081" color2="#FF0082" /> */}
                 </div>
                 <footer className="footer">
-                    <div className="footer__left">
+                    {/* <div className="footer__left">
                         <p className="footer__text">Intel Inside®. Extraordinary Performance Outside.</p>
                         <p className="footer__text">Intel® Core™ i7 Processor1</p>
                         <p className="footer__text">Intel, the Intel Logo, Intel Inside, and Core Inside are trademarks</p>
-                    </div>
+                    </div> */}
                     <div className="footer__right">
-                        <img className="footer__logo" src="http://via.placeholder.com/50x50" />
+                        {/* <img className="footer__logo" src="http://via.placeholder.com/50x50" /> */}
+                        <img className="footer__copyright" src={copyright} />
                     </div>
                 </footer>
             </div>

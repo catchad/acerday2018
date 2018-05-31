@@ -13,7 +13,8 @@ class Freestyle extends Component {
         super(props);
         this.state = {
             start: false,
-            openConfrim: false
+            openConfrim: false,
+            loading: true
         };
         this.props.appContext.toggleBgmForceMuted(false);
     }
@@ -22,6 +23,7 @@ class Freestyle extends Component {
             start: true
         });
         this.props.appContext.toggleBgmForceMuted(true);
+        this.refs.vinylRecord.startGame();
     };
     _preview = () => {
         this.refs.vinylRecord.setMode("cdplayer");
@@ -32,19 +34,26 @@ class Freestyle extends Component {
         this.props.appContext.toggleBgmForceMuted(true);
     };
     _share = () => {
-        console.log("share");
         axios({
             method: "POST",
-            url: `/api/tasks/rythmgames/${this.props.cid}/shares`,
+            url: `/api/tasks/rythmgames/${this.props.cid ? this.props.cid : this.cid}/shares`,
             responseType: "json",
-            data: data
+            data: {
+                SharePostId: this.props.cid ? this.props.cid : this.cid
+            }
         }).then(response => {
-            console.log(response);
             var resp = response.data;
         });
     };
-    _freestyleComplete = melody => {
-        console.log(this.props.invite);
+    _loadComplete = () => {
+        this.setState({
+            loading: false
+        });
+    };
+    _freestyleComplete = result => {
+        console.log("result");
+        console.log(result);
+        console.log(JSON.stringify(result));
         var data;
         // 送出結果
         if (this.props.cid) {
@@ -52,18 +61,27 @@ class Freestyle extends Component {
             data = {
                 GameId: this.props.cid,
                 GameLevel: 1,
-                GameData: JSON.stringify(melody),
+                GameData: JSON.stringify(result),
                 GameScore: this.props.score
             };
+            this.cdPlayerData2 = result;
         } else {
             // 單人創作
             data = {
                 InvitationId: this.props.invite.userTaskId,
                 GameLevel: 1,
-                GameData: JSON.stringify(melody),
+                GameData: JSON.stringify(result),
                 GameScore: this.props.score
             };
+            this.cdPlayerData1 = result;
         }
+
+        // this.setState({
+        //     openConfrim: true
+        // });
+        // this.props.appContext.toggleBgmForceMuted(false);
+        // this.cid = "99999";
+
         axios({
             method: "POST",
             url: "/api/tasks/rythmgames",
@@ -78,58 +96,11 @@ class Freestyle extends Component {
                     openConfrim: true
                 });
                 this.props.appContext.toggleBgmForceMuted(false);
+                this.cid = resp.data.Game.Id;
             } else {
                 alert(resp.code);
             }
         });
-
-        // console.log({
-        //     InvitationId: this.props.invite.userTaskId,
-        //     GameLevel: 1,
-        //     GameData: melody,
-        //     GameScore: this.props.score
-        // });
-
-        // setTimeout(() => {
-        //     var response = {
-        //         code: 201,
-        //         message: "Created",
-        //         data: {
-        //             Points: 2000,
-        //             Game: {
-        //                 Id: "1234567",
-        //                 Players: [
-        //                     {
-        //                         User: {
-        //                             Id: "1234567",
-        //                             UserCode: "ABCDE12345",
-        //                             Country: "tw",
-        //                             GreetingTextKey: "1",
-        //                             DisplayName: "張大山",
-        //                             ProfileImageUrl: "https://www.acer-day.com/_upload/profile/xxxxxxxxx.jpg"
-        //                         },
-        //                         InvitationId: "xxxx-xxxx-xxxx",
-        //                         GameLevel: 1,
-        //                         GameScore: 2000,
-        //                         GameData: "xxxxxx",
-        //                         CreateTime: "2018-06-01T12:34:56.789Z"
-        //                     }
-        //                 ]
-        //             }
-        //         }
-        //     };
-
-        //     this.setState({
-        //         openConfrim: true
-        //     });
-        //     this.props.appContext.toggleBgmForceMuted(false);
-        // }, 500);
-
-        // console.log("freestyle complete");
-        // console.log("freestyle data:");
-        // console.log(melody);
-        // console.log("合作模式: " + this.props.cid);
-        // console.log("分數: " + this.props.score);
     };
     render() {
         return (
@@ -138,7 +109,10 @@ class Freestyle extends Component {
                     <VinylRecord
                         ref="vinylRecord"
                         defaultMode="freestyle"
-                        cdplayerData={[]}
+                        player={this.props.cid ? 2 : 1}
+                        loadComplete={this._loadComplete}
+                        cdPlayerData1={this.cdPlayerData1}
+                        cdPlayerData2={this.cdPlayerData2}
                         onPlayerEnd={() => {
                             this.setState({
                                 openConfrim: true
@@ -189,8 +163,8 @@ class Freestyle extends Component {
                                     </p>
                                     <img className="freestyleReady__gif" src="http://via.placeholder.com/400x400" />
                                     <div>
-                                        <RoundBtn onClick={this._start}>
-                                            <FormattedMessage id="intl.rhythmgame.confrim.btn" />
+                                        <RoundBtn onClick={this._start} disabled={this.state.loading}>
+                                            {this.state.loading ? <p>Loading</p> : <FormattedMessage id="intl.rhythmgame.confrim.btn" />}
                                         </RoundBtn>
                                     </div>
                                 </div>

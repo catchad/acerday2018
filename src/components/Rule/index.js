@@ -115,7 +115,7 @@ class Rule extends Component {
                     ""
                 )}
 
-                {this.props.appContext.currentCountry == "us" ? (
+                {this.props.appContext.currentCountry == "sg" ? (
                     <div className="page__section">
                         <div className="page__heading">
                             <p className="page__title">Acer Day - Play Music Together</p>

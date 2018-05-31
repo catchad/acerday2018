@@ -1,4 +1,4 @@
-const us = {
+const sg = {
     "intl.nomatch.text": "Page not found",
 
     "intl.homepage.text": "Have fun everyday! Let's play music together! Be creative!<br/>Collect points and win big prizes!",
@@ -229,4 +229,4 @@ const us = {
         comingsoon: true
     }
 };
-export default us;
+export default sg;
