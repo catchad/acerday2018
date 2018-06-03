@@ -3,6 +3,7 @@ import React, { Component } from "react";
 import axios from "axios";
 import { IntlProvider } from "react-intl";
 import getCountryFullName from "./helper/getCountryFullName.js";
+import notificationTextKeyToID from "./helper/notificationTextKeyToID.js";
 import { withRouter } from "react-router";
 import keyBy from "lodash/keyBy";
 // export const UserContext = React.createContext({});
@@ -140,6 +141,43 @@ class AppContext extends Component {
                             status: !this.state.notification.status
                         }
                     });
+                },
+                data: [],
+                updateData: () => {
+                    axios({
+                        method: "GET",
+                        url: "/api/users/me/notifications",
+                        responseType: "json"
+                    }).then(response => {
+                        console.log("notifications");
+                        console.log(response);
+                        var resp = response.data;
+                        if (resp.code == 200) {
+                            var data = [];
+                            Object.keys(resp.data.DateGroups).map(el => {
+                                var nDate = new Date(el);
+                                var n = { date: `${nDate.getFullYear()}/${nDate.getMonth() + 1}/${nDate.getDate()}`, sentence: [] };
+                                resp.data.DateGroups[el].map(el => {
+                                    n.sentence.push({ id: notificationTextKeyToID(el.TextKey), values: el.Values });
+                                });
+                                data.push(n);
+                            });
+                            this.setState(
+                                {
+                                    ...this.state,
+                                    notification: {
+                                        ...this.state.notification,
+                                        data: data
+                                    }
+                                },
+                                () => {
+                                    console.log("update notification");
+                                    console.log(this.state);
+                                }
+                            );
+                        } else {
+                        }
+                    });
                 }
             },
             setSpecialTaskStatus: data => {
@@ -155,6 +193,9 @@ class AppContext extends Component {
                 });
             },
             setUserData: data => {
+                if (data.Country !== this.props.currentCountry) {
+                    this.props.history.replace(`/${data.Country}`);
+                }
                 data.Tasks = keyBy(data.Tasks, "TaskName");
                 if (data.Tasks == null) data.Tasks = {};
 
@@ -246,6 +287,8 @@ class AppContext extends Component {
                 });
             }
         };
+
+        this.state.notification.updateData();
 
         if (this.debug) {
             setTimeout(() => {

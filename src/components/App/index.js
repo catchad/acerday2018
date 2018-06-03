@@ -112,7 +112,7 @@ class App extends React.Component {
                                         {intlContext => {
                                             return (
                                                 <main className="main">
-                                                    <Scrollbars>
+                                                    <Scrollbars style={{ width: "100%" }}>
                                                         <Switch>
                                                             <Route
                                                                 path="/:country/"

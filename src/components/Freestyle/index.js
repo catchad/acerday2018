@@ -5,6 +5,7 @@ import RoundBtn from "../RoundBtn";
 import VinylRecord from "../VinylRecord";
 import { Scrollbars } from "react-custom-scrollbars";
 import { FormattedMessage } from "react-intl";
+import checkToast from "../../helper/checkToast.js";
 import greets from "../../locale/greets";
 
 import "./index.scss";
@@ -97,6 +98,7 @@ class Freestyle extends Component {
                 });
                 this.props.appContext.toggleBgmForceMuted(false);
                 this.cid = resp.data.Game.Id;
+                checkToast();
             } else {
                 alert(resp.code);
             }

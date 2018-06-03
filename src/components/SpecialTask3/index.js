@@ -5,6 +5,7 @@ import Radio from "../Radio";
 import { toast } from "react-toastify";
 import { FormattedMessage } from "react-intl";
 import RoundBtn from "../RoundBtn";
+import checkToast from "../../helper/checkToast.js";
 import "./index.scss";
 class SpecialTask3 extends Component {
     constructor(props) {
@@ -23,11 +24,11 @@ class SpecialTask3 extends Component {
                 TaskName: "VideoChallenge3"
             }
         }).then(response => {
-            console.log(response);
             var resp = response.data;
             if (resp.code == 201) {
                 toast(this.props.intlContext.formatMessage({ id: "intl.notification.sentence14" }));
                 this.props.appContext.history.push(`/${this.props.appContext.currentCountry}`);
+                checkToast();
             } else {
                 alert(resp.code);
                 this.ajaxing = false;

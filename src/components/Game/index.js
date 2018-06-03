@@ -13,6 +13,7 @@ import { FormattedMessage } from "react-intl";
 import { TweenMax } from "gsap";
 import ReactTransitionGroup from "react-addons-transition-group";
 import getCountryFullName from "../../helper/getCountryFullName.js";
+import checkToast from "../../helper/checkToast.js";
 import greets from "../../locale/greets";
 import flagSG from "./flag-sg.svg";
 import flagTW from "./flag-tw.svg";
@@ -359,7 +360,6 @@ class Step2 extends Component {
                 ToUserID: this.props.invite.userCode
             }
         }).then(response => {
-            console.log(response);
             var resp = response.data;
             this.props.setInvite({ userTaskId: resp.data.UserTaskId });
 
@@ -380,6 +380,7 @@ class Step2 extends Component {
                         toast(this.props.intl.formatMessage({ id: "intl.notification.sentence7" }));
                         setTimeout(() => {
                             this.props.nextStep();
+                            checkToast();
                         }, 1000);
                     }
                 }

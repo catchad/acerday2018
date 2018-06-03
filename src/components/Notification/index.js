@@ -31,14 +31,7 @@ class Notification extends Component {
                 var inviteData = [];
 
                 resp.data.List.forEach((el, id) => {
-                    if (el.Players.length > 0) {
-                        // data.push({
-                        //     from: el.Players[0].User.DisplayName,
-                        //     to: el.Players[1].User.DisplayName,
-                        //     id: el.Id,
-                        //     complete: el.Players[1].GameData !== null
-                        // });
-
+                    if (el.Players.length == 2) {
                         if (el.Players[1].User.Id == this.props.appContext.id && el.Players[1].GameData == null) {
                             inviteData.push({
                                 id: el.Id,
@@ -60,77 +53,77 @@ class Notification extends Component {
             }
         });
 
-        setTimeout(() => {
-            this.setState({
-                data: {
-                    // 邀請
-                    // invite: [
-                    //     {
-                    //         id: "wehewhaweh",
-                    //         name: "Rachel Wang"
-                    //     },
-                    //     {
-                    //         id: "wehewhaweh",
-                    //         name: "Rachel Wang"
-                    //     },
-                    //     {
-                    //         id: "wehewhaweh",
-                    //         name: "Rachel Wang"
-                    //     },
-                    //     {
-                    //         id: "wehewhaweh",
-                    //         name: "Rachel Wang"
-                    //     }
-                    // ],
-                    ...this.state.data,
-                    // 通知
-                    notification: [
-                        {
-                            date: "2018/7/25",
-                            sentence: [
-                                {
-                                    id: 10,
-                                    values: {
-                                        name: "Melody"
-                                    }
-                                },
-                                {
-                                    id: 11,
-                                    values: {
-                                        name: "Melody"
-                                    }
-                                }
-                            ]
-                        },
-                        {
-                            date: "2018/7/24",
-                            sentence: [
-                                {
-                                    id: 6,
-                                    values: {
-                                        name: "Melody"
-                                    }
-                                },
-                                {
-                                    id: 7
-                                }
-                            ]
-                        },
-                        {
-                            date: "2018/7/23",
-                            sentence: [
-                                {
-                                    id: 1
-                                },
-                                {
-                                    id: 2
-                                }
-                            ]
-                        }
-                    ]
-                }
-            });
-        }, 1000);
+        // setTimeout(() => {
+        //     this.setState({
+        //         data: {
+        //             // 邀請
+        //             // invite: [
+        //             //     {
+        //             //         id: "wehewhaweh",
+        //             //         name: "Rachel Wang"
+        //             //     },
+        //             //     {
+        //             //         id: "wehewhaweh",
+        //             //         name: "Rachel Wang"
+        //             //     },
+        //             //     {
+        //             //         id: "wehewhaweh",
+        //             //         name: "Rachel Wang"
+        //             //     },
+        //             //     {
+        //             //         id: "wehewhaweh",
+        //             //         name: "Rachel Wang"
+        //             //     }
+        //             // ],
+        //             ...this.state.data,
+        //             // 通知
+        //             notification: [
+        //                 {
+        //                     date: "2018/7/25",
+        //                     sentence: [
+        //                         {
+        //                             id: 10,
+        //                             values: {
+        //                                 name: "Melody"
+        //                             }
+        //                         },
+        //                         {
+        //                             id: 11,
+        //                             values: {
+        //                                 name: "Melody"
+        //                             }
+        //                         }
+        //                     ]
+        //                 },
+        //                 {
+        //                     date: "2018/7/24",
+        //                     sentence: [
+        //                         {
+        //                             id: 6,
+        //                             values: {
+        //                                 name: "Melody"
+        //                             }
+        //                         },
+        //                         {
+        //                             id: 7
+        //                         }
+        //                     ]
+        //                 },
+        //                 {
+        //                     date: "2018/7/23",
+        //                     sentence: [
+        //                         {
+        //                             id: 1
+        //                         },
+        //                         {
+        //                             id: 2
+        //                         }
+        //                     ]
+        //                 }
+        //             ]
+        //         }
+        //     });
+        // }, 1000);
     }
     componentWillEnter(callback) {
         TweenMax.fromTo(this.refs.task, 0.25, { autoAlpha: 0 }, { autoAlpha: 1 });
@@ -188,9 +181,9 @@ class Notification extends Component {
                                 ""
                             )}
 
-                            {this.state.data.notification && this.state.data.notification.length > 0 ? (
+                            {this.props.appContext.notification.data && this.props.appContext.notification.data.length > 0 ? (
                                 <div className="notification__list">
-                                    {this.state.data.notification.map((el, id) => {
+                                    {this.props.appContext.notification.data.map((el, id) => {
                                         return (
                                             <div className="notification__item" key={id}>
                                                 <p className="notification__date">{el.date}</p>

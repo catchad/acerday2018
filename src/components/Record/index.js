@@ -24,7 +24,7 @@ class Record extends Component {
                 var data = [];
 
                 resp.data.List.forEach((el, id) => {
-                    if (el.Players.length > 0) {
+                    if (el.Players.length == 2) {
                         data.push({
                             from: el.Players[0].User.DisplayName,
                             to: el.Players[1].User.DisplayName,
@@ -41,102 +41,6 @@ class Record extends Component {
                 alert(resp.code);
             }
         });
-
-        // setTimeout(() => {
-        //     var response = {
-        //         code: 200,
-        //         message: "OK",
-        //         data: {
-        //             PageSize: 0,
-        //             Page: 1,
-        //             TotalPages: 1,
-        //             TotalRecords: 1,
-        //             List: [
-        //                 {
-        //                     Id: "1234567",
-        //                     Players: [
-        //                         {
-        //                             User: {
-        //                                 Id: "1234567",
-        //                                 UserCode: "ABCDE12345",
-        //                                 Country: "tw",
-        //                                 GreetingTextKey: "1",
-        //                                 DisplayName: "玩家A",
-        //                                 ProfileImageUrl: "https://www.acer-day.com/_upload/profile/xxxxxxxxx.jpg"
-        //                             },
-        //                             InvitationId: "xxxx-xxxx-xxxx",
-        //                             GameLevel: 1,
-        //                             GameScore: 2000,
-        //                             GameData: "xxxxxx",
-        //                             CreateTime: "2018-06-01T12:34:56.789Z"
-        //                         },
-        //                         {
-        //                             User: {
-        //                                 Id: "1234567",
-        //                                 UserCode: "ABCDE12345",
-        //                                 Country: "tw",
-        //                                 GreetingTextKey: "1",
-        //                                 DisplayName: "玩家B",
-        //                                 ProfileImageUrl: "https://www.acer-day.com/_upload/profile/xxxxxxxxx.jpg"
-        //                             },
-        //                             CreateTime: "2018-06-01T12:34:56.789Z"
-        //                         }
-        //                     ]
-        //                 },
-        //                 {
-        //                     Id: "1234567",
-        //                     Players: [
-        //                         {
-        //                             User: {
-        //                                 Id: "1234567",
-        //                                 UserCode: "ABCDE12345",
-        //                                 Country: "tw",
-        //                                 GreetingTextKey: "1",
-        //                                 DisplayName: "玩家B",
-        //                                 ProfileImageUrl: "https://www.acer-day.com/_upload/profile/xxxxxxxxx.jpg"
-        //                             },
-        //                             InvitationId: "xxxx-xxxx-xxxx",
-        //                             GameLevel: 1,
-        //                             GameScore: 2000,
-        //                             GameData: "xxxxxx",
-        //                             CreateTime: "2018-06-01T12:34:56.789Z"
-        //                         },
-        //                         {
-        //                             User: {
-        //                                 Id: "1234567",
-        //                                 UserCode: "ABCDE12345",
-        //                                 Country: "tw",
-        //                                 GreetingTextKey: "1",
-        //                                 DisplayName: "玩家A",
-        //                                 ProfileImageUrl: "https://www.acer-day.com/_upload/profile/xxxxxxxxx.jpg"
-        //                             },
-        //                             InvitationId: "xxxx-xxxx-xxxx",
-        //                             GameLevel: 1,
-        //                             GameScore: 2000,
-        //                             GameData: "xxxxxx",
-        //                             CreateTime: "2018-06-01T12:34:56.789Z"
-        //                         }
-        //                     ]
-        //                 }
-        //             ]
-        //         }
-        //     };
-
-        //     var data = [];
-
-        //     response.data.List.forEach((el, id) => {
-        //         data.push({
-        //             from: el.Players[0].User.DisplayName,
-        //             to: el.Players[1].User.DisplayName,
-        //             id: el.Id,
-        //             complete: el.Players[1].GameScore ? true : false
-        //         });
-        //     });
-
-        //     this.setState({
-        //         data: data
-        //     });
-        // }, 100);
     }
 
     render() {

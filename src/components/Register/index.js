@@ -29,6 +29,8 @@ import iconMaleHair from "./icon_male_hair.svg";
 import iconMaleMouth from "./icon_male_mouth.svg";
 import iconRandom from "./icon_random.svg";
 
+import checkToast from "../../helper/checkToast.js";
+
 import "./index.scss";
 class Register extends Component {
     constructor(props) {
@@ -398,9 +400,11 @@ class Step4 extends Component {
             resp.data.Tasks = keyBy(resp.data.Tasks, "TaskName");
             console.log(resp.data.User);
             this.props.appContext.setUserData(resp.data.User);
-            toast(this.props.intl.formatMessage({ id: "intl.notification.sentence1" }));
-            toast(this.props.intl.formatMessage({ id: "intl.notification.sentence2" }));
+            // toast(this.props.intl.formatMessage({ id: "intl.notification.sentence1" }));
+            // toast(this.props.intl.formatMessage({ id: "intl.notification.sentence2" }));
             this.props.nextStep();
+
+            checkToast();
         });
 
         // setTimeout(() => {

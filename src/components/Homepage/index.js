@@ -38,6 +38,8 @@ import img5_2 from "./5-2.png";
 import img5_3 from "./5-3.png";
 import img5_4 from "./5-4.png";
 
+import checkToast from "../../helper/checkToast.js";
+
 import copyright from "./copyright.jpg";
 class Homepage extends Component {
     constructor(props) {
@@ -94,18 +96,21 @@ class Homepage extends Component {
         this.sliderAnimate[this.state.currentID].play();
         this.myReq = requestAnimationFrame(this._loop);
 
-        toast(
-            <Fragment>
-                <p className="Toastify__title">
-                    <FormattedHTMLMessage id="intl.toast.specialTaskOpen.title" />
-                </p>
-                <p className="Toastify__text">
-                    <FormattedHTMLMessage id="intl.toast.specialTaskOpen.desc" />
-                </p>
-            </Fragment>
-        );
-        toast(<FormattedHTMLMessage id="intl.notification.sentence3" />);
-        toast(<FormattedHTMLMessage id="intl.notification.sentence4" />);
+        checkToast();
+
+        // toast(
+        //     <Fragment>
+        //         <p className="Toastify__title">
+        //             <FormattedHTMLMessage id="intl.toast.specialTaskOpen.title" />
+        //         </p>
+        //         <p className="Toastify__text">
+        //             <FormattedHTMLMessage id="intl.toast.specialTaskOpen.desc" />
+        //         </p>
+        //     </Fragment>
+        // );
+
+        // toast(<FormattedHTMLMessage id="intl.notification.sentence3" />);
+        // toast(<FormattedHTMLMessage id="intl.notification.sentence4" />);
         // toast("你連續登錄網站8天，獲得4000點");
     }
 
