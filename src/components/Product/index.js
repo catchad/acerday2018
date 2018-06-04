@@ -62,15 +62,15 @@ class Product extends Component {
 
         return (
             <div className="page page--marginLeft50">
-                {this.props.match.params.pname == "nitro5" ? <Nitro5 /> : ""}
+                {this.props.match.params.pname == "nitro5" ? <Nitro5 intl={this.props.intlContext} /> : ""}
 
-                {this.props.match.params.pname == "spin5" ? <Spin5 /> : ""}
+                {this.props.match.params.pname == "spin5" ? <Spin5 intl={this.props.intlContext} /> : ""}
 
-                {this.props.match.params.pname == "helios300" ? <Helios300 /> : ""}
+                {this.props.match.params.pname == "helios300" ? <Helios300 intl={this.props.intlContext} /> : ""}
 
-                {this.props.match.params.pname == "switch7" ? <Switch7 /> : ""}
+                {this.props.match.params.pname == "switch7" ? <Switch7 intl={this.props.intlContext} /> : ""}
 
-                {this.props.match.params.pname == "swift5" ? <Swift5 /> : ""}
+                {this.props.match.params.pname == "swift5" ? <Swift5 intl={this.props.intlContext} /> : ""}
 
                 <Background color1={c1} color2={c2} />
             </div>
@@ -134,7 +134,7 @@ class Nitro5 extends Component {
                     </p>
                 </div>
                 <div className="page__row page__row--w800 page__row--center">
-                    <RoundBtn size="L">
+                    <RoundBtn size="L" href={this.props.intl.formatMessage({ id: "intl.product.nitro5.link" })} target="_blank">
                         <FormattedMessage id="intl.product.more" />
                     </RoundBtn>
                 </div>
@@ -196,7 +196,7 @@ class Spin5 extends Component {
                     </p>
                 </div>
                 <div className="page__row page__row--w800 page__row--center">
-                    <RoundBtn size="L">
+                    <RoundBtn size="L" href={this.props.intl.formatMessage({ id: "intl.product.spin5.link" })} target="_blank">
                         <FormattedMessage id="intl.product.more" />
                     </RoundBtn>
                 </div>
@@ -258,7 +258,7 @@ class Helios300 extends Component {
                     </p>
                 </div>
                 <div className="page__row page__row--w800 page__row--center">
-                    <RoundBtn size="L">
+                    <RoundBtn size="L" href={this.props.intl.formatMessage({ id: "intl.product.helios300.link" })} target="_blank">
                         <FormattedMessage id="intl.product.more" />
                     </RoundBtn>
                 </div>
@@ -316,7 +316,7 @@ class Switch7 extends Component {
                     </p>
                 </div>
                 <div className="page__row page__row--w800 page__row--center">
-                    <RoundBtn size="L">
+                    <RoundBtn size="L" href={this.props.intl.formatMessage({ id: "intl.product.swtich7.link" })} target="_blank">
                         <FormattedMessage id="intl.product.more" />
                     </RoundBtn>
                 </div>
@@ -378,7 +378,7 @@ class Swift5 extends Component {
                     </p>
                 </div>
                 <div className="page__row page__row--w800 page__row--center">
-                    <RoundBtn size="L">
+                    <RoundBtn size="L" href={this.props.intl.formatMessage({ id: "intl.product.swift5.link" })} target="_blank">
                         <FormattedMessage id="intl.product.more" />
                     </RoundBtn>
                 </div>

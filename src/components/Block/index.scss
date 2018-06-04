@@ -57,6 +57,83 @@
     &__item--user {
         cursor: pointer;
     }
+    &__item--colorset1 {
+        .block__surface--a {
+            background-color: #9ce95d;
+        }
+        .block__surface--b {
+            background-color: #73d126;
+        }
+        .block__surface--c {
+            background-color: #5abc0a;
+        }
+    }
+    &__item--colorset2 {
+        .block__surface--a {
+            background-color: #83d9ff;
+        }
+        .block__surface--b {
+            background-color: #3ec0f9;
+        }
+        .block__surface--c {
+            background-color: #01a0e8;
+        }
+    }
+    &__item--colorset3 {
+        .block__surface--a {
+            background-color: #ff9292;
+        }
+        .block__surface--b {
+            background-color: #fd4646;
+        }
+        .block__surface--c {
+            background-color: #e20c0c;
+        }
+    }
+    &__item--colorset4 {
+        .block__surface--a {
+            background-color: #ffac8b;
+        }
+        .block__surface--b {
+            background-color: #ff743e;
+        }
+        .block__surface--c {
+            background-color: #ff4a05;
+        }
+    }
+    &__item--colorset5 {
+        .block__surface--a {
+            background-color: #c77eee;
+        }
+        .block__surface--b {
+            background-color: #9f41d1;
+        }
+        .block__surface--c {
+            background-color: #8020b2;
+        }
+    }
+    &__item--colorset6 {
+        .block__surface--a {
+            background-color: #ff92b7;
+        }
+        .block__surface--b {
+            background-color: #fd4687;
+        }
+        .block__surface--c {
+            background-color: #e32367;
+        }
+    }
+    &__item--colorset7 {
+        .block__surface--a {
+            background-color: #ffe292;
+        }
+        .block__surface--b {
+            background-color: #ffcc43;
+        }
+        .block__surface--c {
+            background-color: #feb900;
+        }
+    }
 
     &__name {
         font-size: 1.5em;
@@ -116,6 +193,18 @@
         // transform: translate3d(-50%, -145%, 300px); // for ios bug
         z-index: 100;
     }
+    &__userPhotoImg {
+        position: relative;
+        width: 100%;
+        height: auto;
+    }
+    &__userPhotoShadow {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 160%;
+    }
     &__laptop {
         position: absolute;
         top: 50%;
@@ -124,6 +213,26 @@
         transform: translate(-50%, -180%);
         pointer-events: none;
         // transform: translate3d(-50%, -180%, 300px); // for ios bug
+    }
+    &__laptop--1 {
+        transform: translate(-50%, -178%);
+        width: 60%;
+    }
+    &__laptop--2 {
+        transform: translate(-50%, -175%);
+        width: 60%;
+    }
+    &__laptop--3 {
+        transform: translate(-50%, -189%);
+        width: 50%;
+    }
+    &__laptop--4 {
+        transform: translate(-50%, -150%);
+        width: 60%;
+    }
+    &__laptop--5 {
+        transform: translate(-50%, -151%);
+        width: 50%;
     }
     &__wrapper {
         position: absolute;
@@ -142,13 +251,11 @@
         padding: 7%;
         color: #ffffff;
     }
+
     &__surface--a {
         width: 71.2%;
-        // height: 71%;
         background-color: #cdcdcd;
         transform: translate(-50%, -51%) rotateX(65deg) rotateY(0deg) rotateZ(45deg);
-        // transform: translate(-50%, -20%) rotateX(-65deg) rotateY(0deg) rotateZ(45deg);
-        // transform: translate(-50%, -51%) rotateX(-65deg) rotateY(0deg) rotateZ(45deg);
         &:before {
             content: "";
             display: block;
@@ -156,29 +263,15 @@
         }
     }
     &__surface--b {
-        // display: none;
-        // position: absolute;
-        // top: 0;
-        // left: 50%;
         width: 71.2%;
         height: 78.5%;
         background-color: #9a9a9a;
-        // transform: translate(-85%, 57%) rotateX(-25deg) rotateY(-45deg) rotateZ(0deg);
         transform: translate(-85%, 13%) rotateX(-25deg) rotateY(-45deg) rotateZ(0deg);
-        // box-sizing: border-box;
-        // border: 3px solid #000000;
     }
     &__surface--c {
-        // display: none;
-        // position: absolute;
-        // top: 0;
-        // left: 50%;
         width: 71.2%;
         height: 78.5%;
         background-color: #686868;
-        // transform: translate(-14%, 57%) rotateX(-25deg) rotateY(45deg) rotateZ(0deg);
         transform: translate(-14.6%, 13%) rotateX(-25deg) rotateY(45deg) rotateZ(0deg);
-        // box-sizing: border-box;
-        // border: 3px solid #000000;
     }
 }

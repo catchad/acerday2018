@@ -96,7 +96,7 @@ class Homepage extends Component {
         this.sliderAnimate[this.state.currentID].play();
         this.myReq = requestAnimationFrame(this._loop);
 
-        checkToast();
+        checkToast(this.props.appContext);
 
         // toast(
         //     <Fragment>
@@ -255,7 +255,11 @@ class Homepage extends Component {
                             <FormattedHTMLMessage id="intl.homepage.text" />
                         </p>
                         {this.props.appContext.isLogin ? (
-                            ""
+                            <RoundBtn color1={this.color1} color2={this.color2} routerLink={`/${this.props.appContext.currentCountry}/game`}>
+                                <p>
+                                    <FormattedMessage id="intl.register.step5.startgame" />
+                                </p>
+                            </RoundBtn>
                         ) : (
                             <RoundBtn color1={this.color1} color2={this.color2} routerLink={`/${this.props.appContext.currentCountry}/login`}>
                                 <p>

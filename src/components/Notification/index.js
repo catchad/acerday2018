@@ -7,6 +7,8 @@ import RoundBtn from "../RoundBtn";
 import TaskItemGroup from "../TaskItemGroup";
 import { FormattedMessage } from "react-intl";
 import { AppContextConsumer } from "../../AppContext";
+import iconInvited from "./icon_invited.svg";
+import iconClose from "./icon_close.svg";
 import "./index.scss";
 
 class Notification extends Component {
@@ -24,7 +26,6 @@ class Notification extends Component {
             url: "/api/tasks/rythmgames",
             responseType: "json"
         }).then(response => {
-            console.log(response);
             var resp = response.data;
 
             if (resp.code == 200) {
@@ -40,7 +41,6 @@ class Notification extends Component {
                         }
                     }
                 });
-                console.log(inviteData);
 
                 this.setState({
                     data: {
@@ -52,78 +52,6 @@ class Notification extends Component {
                 alert(resp.code);
             }
         });
-
-        // setTimeout(() => {
-        //     this.setState({
-        //         data: {
-        //             // 邀請
-        //             // invite: [
-        //             //     {
-        //             //         id: "wehewhaweh",
-        //             //         name: "Rachel Wang"
-        //             //     },
-        //             //     {
-        //             //         id: "wehewhaweh",
-        //             //         name: "Rachel Wang"
-        //             //     },
-        //             //     {
-        //             //         id: "wehewhaweh",
-        //             //         name: "Rachel Wang"
-        //             //     },
-        //             //     {
-        //             //         id: "wehewhaweh",
-        //             //         name: "Rachel Wang"
-        //             //     }
-        //             // ],
-        //             ...this.state.data,
-        //             // 通知
-        //             notification: [
-        //                 {
-        //                     date: "2018/7/25",
-        //                     sentence: [
-        //                         {
-        //                             id: 10,
-        //                             values: {
-        //                                 name: "Melody"
-        //                             }
-        //                         },
-        //                         {
-        //                             id: 11,
-        //                             values: {
-        //                                 name: "Melody"
-        //                             }
-        //                         }
-        //                     ]
-        //                 },
-        //                 {
-        //                     date: "2018/7/24",
-        //                     sentence: [
-        //                         {
-        //                             id: 6,
-        //                             values: {
-        //                                 name: "Melody"
-        //                             }
-        //                         },
-        //                         {
-        //                             id: 7
-        //                         }
-        //                     ]
-        //                 },
-        //                 {
-        //                     date: "2018/7/23",
-        //                     sentence: [
-        //                         {
-        //                             id: 1
-        //                         },
-        //                         {
-        //                             id: 2
-        //                         }
-        //                     ]
-        //                 }
-        //             ]
-        //         }
-        //     });
-        // }, 1000);
     }
     componentWillEnter(callback) {
         TweenMax.fromTo(this.refs.task, 0.25, { autoAlpha: 0 }, { autoAlpha: 1 });
@@ -157,7 +85,7 @@ class Notification extends Component {
                                         return (
                                             <div className="notification__invite" key={id}>
                                                 <div className="notification__inviteLeft">
-                                                    <img className="notification__icon" src="https://fakeimg.pl/50x50/" />
+                                                    <img className="notification__icon" src={iconInvited} />
                                                     <p className="notification__name">
                                                         <FormattedMessage id="intl.notification.invite.action" values={{ name: el.name }} />{" "}
                                                     </p>
@@ -208,6 +136,7 @@ class Notification extends Component {
 
                     <CircleBtn
                         className="notification__close"
+                        icon={iconClose}
                         onClick={() => {
                             this.props.appContext.notification.toggle();
                         }}

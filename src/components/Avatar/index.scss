@@ -28,6 +28,17 @@
             margin-right: 10px;
         }
     }
+    &__shadow {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 400px;
+        height: auto;
+        @media screen and (max-width: 1024px) {
+            width: 300px;
+        }
+    }
     &__arrowGroup {
         position: absolute;
         top: 50%;

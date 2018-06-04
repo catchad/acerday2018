@@ -11,6 +11,7 @@ import user from "./testuser.png";
 import { toast } from "react-toastify";
 import { FormattedMessage } from "react-intl";
 import { TweenMax } from "gsap";
+import shuffle from "lodash/shuffle";
 import ReactTransitionGroup from "react-addons-transition-group";
 import getCountryFullName from "../../helper/getCountryFullName.js";
 import checkToast from "../../helper/checkToast.js";
@@ -215,16 +216,19 @@ class Step1 extends Component {
         var resp = response.data;
         var data = [];
         resp.data.List.forEach((el, id) => {
-            data.push({
-                id: el.Id,
-                userCode: el.UserCode,
-                name: el.DisplayName,
-                country: el.Country,
-                countryFullName: getCountryFullName(el.Country),
-                character: el.ProfileImageUrl,
-                greet: el.GreetingTextKey
-            });
+            if (el.Id !== this.props.appContext.id) {
+                data.push({
+                    id: el.Id,
+                    userCode: el.UserCode,
+                    name: el.DisplayName,
+                    country: el.Country,
+                    countryFullName: getCountryFullName(el.Country),
+                    character: el.ProfileImageUrl,
+                    greet: el.GreetingTextKey
+                });
+            }
         });
+        data = shuffle(data);
         this.setState({
             data: data
         });
@@ -348,7 +352,6 @@ class Step2 extends Component {
     };
     _showBubble = () => {
         // 送出邀請
-        // console.log(this.props.invite)
         if (this.ajaxing) return;
         this.ajaxing = true;
 
@@ -376,57 +379,14 @@ class Step2 extends Component {
                     ease: Back.easeOut,
                     delay: 1,
                     onComplete: () => {
-                        toast(this.props.intl.formatMessage({ id: "intl.notification.sentence6" }, { name: "Rachel Wang" }));
-                        toast(this.props.intl.formatMessage({ id: "intl.notification.sentence7" }));
+                        checkToast(this.props.appContext);
                         setTimeout(() => {
                             this.props.nextStep();
-                            checkToast();
                         }, 1000);
                     }
                 }
             );
         });
-
-        // console.log({
-        //     ToUserID: this.props.invite.userCode
-        // });
-
-        // setTimeout(() => {
-        //     var response = {
-        //         code: 201,
-        //         message: "Created",
-        //         data: {
-        //             UserTaskId: "1234567",
-        //             Points: 2000
-        //         }
-        //     };
-
-        //     this.props.setInvite({ userTaskId: response.data.UserTaskId });
-
-        //     TweenMax.to("#step2Btn", 0.25, { opacity: 0 });
-        //     TweenMax.set([this.refs.bubble1, this.refs.bubble2], { opacity: 1 });
-        //     TweenMax.fromTo(this.refs.bubble1, 0.5, { y: 150, scale: 0 }, { y: 0, scale: 1, ease: Back.easeOut });
-        //     TweenMax.fromTo(
-        //         this.refs.bubble2,
-        //         0.5,
-        //         { y: 150, scale: 0 },
-        //         {
-        //             y: 0,
-        //             scale: 1,
-        //             ease: Back.easeOut,
-        //             delay: 1,
-        //             onComplete: () => {
-        //                 toast(this.props.intl.formatMessage({ id: "intl.notification.sentence6" }, { name: "Rachel Wang" }));
-        //                 toast(this.props.intl.formatMessage({ id: "intl.notification.sentence7" }));
-        //                 setTimeout(() => {
-        //                     this.props.nextStep();
-        //                 }, 1000);
-        //             }
-        //         }
-        //     );
-        // }, 500);
-
-        // }
     };
 
     render() {

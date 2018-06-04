@@ -1,8 +1,15 @@
 import React, { Component, Fragment } from "react";
 import "./index.scss";
 import laptop from "./laptop.png";
+import shadow from "./shadow.png";
 import chunk from "lodash/chunk";
 import greets from "../../locale/greets";
+
+import nitro5Photo from "./nitro5_photo.png";
+import spin5Photo from "./spin5_photo.png";
+import helios300Photo from "./helios300_photo.png";
+import swift5Photo from "./swift5_photo.png";
+import switch7Photo from "./switch7_photo.png";
 
 class Block extends Component {
     constructor(props) {
@@ -10,6 +17,7 @@ class Block extends Component {
         this.state = {
             ww: window.innerWidth
         };
+        this.laptops = [nitro5Photo, spin5Photo, helios300Photo, swift5Photo, switch7Photo];
     }
 
     componentDidMount() {
@@ -17,6 +25,17 @@ class Block extends Component {
     }
     componentWillUnmount() {
         window.removeEventListener("resize", this._onResize);
+    }
+
+    shouldComponentUpdate(nextProps, nextState) {
+        // 怪招
+        if (Array.isArray(this.props.data)) {
+            if (nextProps.data[0].id == this.props.data[0].id) {
+                return false;
+            } else {
+                return true;
+            }
+        }
     }
 
     _onResize = () => {
@@ -91,7 +110,7 @@ class Block extends Component {
                                 var result = [];
                                 for (var i = 0; i < number + 1; i++) {
                                     result.push(
-                                        <div className="block__item" key={i}>
+                                        <div className={`block__item block__item--colorset${Math.floor(Math.random() * 7) + 1}`} key={i}>
                                             <div className="block__wrapper">
                                                 <div className="block__surface block__surface--a" />
                                                 <div className="block__surface block__surface--b" />
@@ -107,7 +126,7 @@ class Block extends Component {
                             return (
                                 <Fragment key={id}>
                                     <div className="block__group" style={{ width: `${Math.floor((number + 2) / (number + 1) * 1000000) / 10000}%`, marginLeft: `-${this.state.ww / (number + 1) / 2}px` }}>
-                                        <div className="block__item">
+                                        <div className={`block__item block__item--colorset${Math.floor(Math.random() * 7) + 1}`}>
                                             <div className="block__wrapper">
                                                 <div className="block__surface block__surface--a" />
                                                 <div className="block__surface block__surface--b" />
@@ -117,7 +136,7 @@ class Block extends Component {
                                         {el.map((el, id) => {
                                             if (el == null) {
                                                 return (
-                                                    <div className="block__item" key={id}>
+                                                    <div className={`block__item block__item--colorset${Math.floor(Math.random() * 7) + 1}`} key={id}>
                                                         <div className="block__wrapper">
                                                             <div className="block__surface block__surface--a" />
                                                             <div className="block__surface block__surface--b" />
@@ -128,7 +147,7 @@ class Block extends Component {
                                             } else {
                                                 return (
                                                     <div
-                                                        className="block__item block__item--user"
+                                                        className={`block__item block__item--user block__item--colorset${Math.floor(Math.random() * 7) + 1}`}
                                                         key={id}
                                                         onClick={e => {
                                                             this._blockClick(el);
@@ -143,14 +162,17 @@ class Block extends Component {
                                                             <div className="block__surface block__surface--c">
                                                                 <p className="block__greet">{greets[el.country][el.greet]}</p>
                                                             </div>
-                                                            <img className="block__userPhoto" src={el.character} />
+                                                            <div className="block__userPhoto">
+                                                                <img className="block__userPhotoShadow" src={shadow} />
+                                                                <img className="block__userPhotoImg" src={el.character} />
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 );
                                             }
                                         })}
 
-                                        <div className="block__item">
+                                        <div className={`block__item block__item--colorset${Math.floor(Math.random() * 7) + 1}`}>
                                             <div className="block__wrapper">
                                                 <div className="block__surface block__surface--a" />
                                                 <div className="block__surface block__surface--b" />
@@ -163,13 +185,15 @@ class Block extends Component {
                                         {(() => {
                                             var result = [];
                                             for (var i = 0; i < number + 1; i++) {
+                                                var laptopID = Math.floor(Math.random() * this.laptops.length);
+
                                                 result.push(
-                                                    <div className="block__item" key={i}>
+                                                    <div className={`block__item block__item--colorset${Math.floor(Math.random() * 7) + 1}`} key={i}>
                                                         <div className="block__wrapper">
                                                             <div className="block__surface block__surface--a" />
                                                             <div className="block__surface block__surface--b" />
                                                             <div className="block__surface block__surface--c" />
-                                                            <img className="block__laptop" src={laptop} />
+                                                            <img className={`block__laptop block__laptop--${laptopID + 1}`} src={this.laptops[laptopID]} />
                                                         </div>
                                                     </div>
                                                 );
@@ -188,7 +212,7 @@ class Block extends Component {
                 return (
                     <div className="block">
                         <div className="block__group" style={{ marginTop: "72%" }}>
-                            <div className="block__item block__item--noHover">
+                            <div className={`block__item block__item--noHover block__item--colorset${Math.floor(Math.random() * 7) + 1}`}>
                                 <div className="block__wrapper">
                                     <div className="block__surface block__surface--a" />
                                     <div className="block__surface block__surface--b">
@@ -198,7 +222,10 @@ class Block extends Component {
                                     <div className="block__surface block__surface--c">
                                         <p className="block__greet">{this.props.data.country ? greets[this.props.data.country][this.props.data.greet] : ""}</p>
                                     </div>
-                                    <img className="block__userPhoto" src={this.props.data.character} />
+                                    <div className="block__userPhoto">
+                                        <img className="block__userPhotoShadow" src={shadow} />
+                                        <img className="block__userPhotoImg" src={this.props.data.character} />
+                                    </div>
                                 </div>
                             </div>
                         </div>

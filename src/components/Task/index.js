@@ -12,6 +12,13 @@ import TaskProgress from "../TaskProgress";
 import TaskItemGroup from "../TaskItemGroup";
 import { AppContextConsumer } from "../../AppContext";
 
+import st1IconLock from "./icon_specialTask1_lock.svg";
+import st1IconOpen from "./icon_specialTask1_open.svg";
+import st2IconLock from "./icon_specialTask2_lock.svg";
+import st2IconOpen from "./icon_specialTask2_open.svg";
+import st3IconLock from "./icon_specialTask3_lock.svg";
+import st3IconOpen from "./icon_specialTask3_open.svg";
+import iconClose from "./icon_close.svg";
 import "./index.scss";
 
 class Task extends Component {
@@ -21,7 +28,9 @@ class Task extends Component {
         const doc = window.document;
         this.node = doc.getElementById("portal");
 
-        console.log(this.props.appContext);
+        this.stOpenIcons = [st1IconOpen, st2IconOpen, st3IconOpen];
+        this.stLockIcons = [st1IconLock, st2IconLock, st3IconLock];
+        // console.log(this.props.appContext);
         // this.taskNames = ["rhythmGame", "acceptInvite", "completeCreation", "shareCreation", "login", "greet", "loginEveryday3", "loginEveryday8", "greetEveryday"];
         // this.specialTaskNames = [{ name: "specialTask1", open: true }, { name: "specialTask2", open: true }, { name: "specialTask3", open: false }];
     }
@@ -54,7 +63,7 @@ class Task extends Component {
                                 <div className="task__list">
                                     <TaskItemGroup name={this.props.intlContext.formatMessage({ id: "intl.task.specialTask.title" })} desc={this.props.intlContext.formatMessage({ id: "intl.task.specialTask.desc" })}>
                                         {this.props.appContext.task.data.special.map((el, id) => {
-                                            return <SpecialTask key={id} icon={el ? "https://fakeimg.pl/70x70/" : "https://fakeimg.pl/70x70/282828/eae0d0/"} name={this.props.intlContext.formatMessage({ id: `intl.task.specialTask${id + 1}.name` })} activeText={this.props.intlContext.formatMessage({ id: `intl.task.specialTask${id + 1}.active` })} unactiveText={this.props.intlContext.formatMessage({ id: `intl.task.specialTask${id + 1}.unactive` })} link={`st${id + 1}`} active={el} />;
+                                            return <SpecialTask key={id} icon={el ? this.stOpenIcons[id] : this.stLockIcons[id]} name={this.props.intlContext.formatMessage({ id: `intl.task.specialTask${id + 1}.name` })} activeText={this.props.intlContext.formatMessage({ id: `intl.task.specialTask${id + 1}.active` })} unactiveText={this.props.intlContext.formatMessage({ id: `intl.task.specialTask${id + 1}.unactive` })} link={`st${id + 1}`} active={el} />;
                                         })}
                                     </TaskItemGroup>
 
@@ -79,6 +88,7 @@ class Task extends Component {
                     </Scrollbars>
                     <CircleBtn
                         className="task__close"
+                        icon={iconClose}
                         onClick={() => {
                             this.props.appContext.task.toggle();
                         }}

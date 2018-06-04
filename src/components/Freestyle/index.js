@@ -7,7 +7,7 @@ import { Scrollbars } from "react-custom-scrollbars";
 import { FormattedMessage } from "react-intl";
 import checkToast from "../../helper/checkToast.js";
 import greets from "../../locale/greets";
-
+import tip from "./tip.mp4";
 import "./index.scss";
 class Freestyle extends Component {
     constructor(props) {
@@ -35,16 +35,24 @@ class Freestyle extends Component {
         this.props.appContext.toggleBgmForceMuted(true);
     };
     _share = () => {
-        axios({
-            method: "POST",
-            url: `/api/tasks/rythmgames/${this.props.cid ? this.props.cid : this.cid}/shares`,
-            responseType: "json",
-            data: {
-                SharePostId: this.props.cid ? this.props.cid : this.cid
-            }
-        }).then(response => {
-            var resp = response.data;
-        });
+        if (this.props.appContext.sns == "Facebook" || this.props.appContext.sns == "") {
+            FB.ui(
+                {
+                    method: "share",
+                    href: this.shareUrl
+                },
+                response => {
+                    axios({
+                        method: "POST",
+                        url: `/api/tasks/rythmgames/${this.props.cid ? this.props.cid : this.cid}/shares`,
+                        responseType: "json"
+                    }).then(response => {
+                        checkToast(this.props.appContext);
+                        this.props.restart();
+                    });
+                }
+            );
+        }
     };
     _loadComplete = () => {
         this.setState({
@@ -52,9 +60,6 @@ class Freestyle extends Component {
         });
     };
     _freestyleComplete = result => {
-        console.log("result");
-        console.log(result);
-        console.log(JSON.stringify(result));
         var data;
         // 送出結果
         if (this.props.cid) {
@@ -98,7 +103,7 @@ class Freestyle extends Component {
                 });
                 this.props.appContext.toggleBgmForceMuted(false);
                 this.cid = resp.data.Game.Id;
-                checkToast();
+                checkToast(this.props.appContext);
             } else {
                 alert(resp.code);
             }
@@ -163,7 +168,11 @@ class Freestyle extends Component {
                                     <p className="freestyleReady__text">
                                         <FormattedMessage id="intl.freestyle.ready.desc" />
                                     </p>
-                                    <img className="freestyleReady__gif" src="http://via.placeholder.com/400x400" />
+                                    {/* <img className="freestyleReady__gif" src="http://via.placeholder.com/400x400" /> */}
+                                    <div className="freestyleReady__tip">
+                                        <video className="freestyleReady__tipVideo" width="400" height="400" loop autoPlay="1" playsInline="playsinline" muted src={tip} />
+                                    </div>
+
                                     <div>
                                         <RoundBtn onClick={this._start} disabled={this.state.loading}>
                                             {this.state.loading ? <p>Loading</p> : <FormattedMessage id="intl.rhythmgame.confrim.btn" />}

@@ -4,6 +4,7 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import VinylRecord from "../VinylRecord";
 import Background from "../Background";
+import checkToast from "../../helper/checkToast.js";
 import "./index.scss";
 import iconPlay from "./icon_play_play.svg";
 import iconStop from "./icon_play_stop.svg";
@@ -17,7 +18,6 @@ class Creation extends Component {
             playing: false,
             loading: true
         };
-
         // console.log(this.props);
         console.log("作品ID:" + this.props.match.params.cid);
         console.log(this.props.match.params.complete == "complete" ? "雙人" : "單人");
@@ -30,15 +30,16 @@ class Creation extends Component {
             console.log(response);
             var resp = response.data;
             if (resp.code == 200) {
-                console.log(resp);
                 if (this.props.match.params.complete == "complete") {
                     console.log("雙人");
+                    this.shareUrl = resp.data.ShareUrlComplete;
                     this.setState({
                         cdPlayerData1: JSON.parse(resp.data.Players[0].GameData),
                         cdPlayerData2: JSON.parse(resp.data.Players[1].GameData)
                     });
                 } else {
                     console.log("單人");
+                    this.shareUrl = resp.data.ShareUrl;
                     this.setState({
                         cdPlayerData1: JSON.parse(resp.data.Players[0].GameData)
                     });
@@ -64,7 +65,25 @@ class Creation extends Component {
             }
         );
     };
-
+    shareClick = () => {
+        if (this.props.appContext.sns == "Facebook" || this.props.appContext.sns == "") {
+            FB.ui(
+                {
+                    method: "share",
+                    href: this.shareUrl
+                },
+                response => {
+                    axios({
+                        method: "POST",
+                        url: `/api/tasks/rythmgames/${this.props.match.params.cid}/shares`,
+                        responseType: "json"
+                    }).then(response => {
+                        checkToast(this.props.appContext);
+                    });
+                }
+            );
+        }
+    };
     render() {
         return (
             <div className="creation">
@@ -112,7 +131,7 @@ class Creation extends Component {
                         )}
                     </a>
                     <a className="creation__btn">
-                        <img className="creation__icon" src={iconShare} />
+                        <img className="creation__icon" src={iconShare} onClick={this.shareClick} />
                         <p>
                             <FormattedMessage id="intl.creation.share" />
                         </p>

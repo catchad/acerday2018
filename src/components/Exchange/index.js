@@ -7,6 +7,12 @@ import RoundBtn from "../RoundBtn";
 import { FormattedMessage, FormattedHTMLMessage } from "react-intl";
 import "./index.scss";
 
+import iconClose from "./icon_close.svg";
+import prize1Img from "./prize1.png";
+import prize2Img from "./prize2.png";
+import prize3Img from "./prize3.png";
+import prize4Img from "./prize4.png";
+
 class Exchange extends Component {
     constructor(props) {
         super(props);
@@ -42,9 +48,33 @@ class Exchange extends Component {
     };
 
     _send = () => {
+        if (this.state.name == "") {
+            alert(this.props.intlContext.formatMessage({ id: "intl.exchange.form.error.name" }));
+            return;
+        }
+        if (this.state.phone == "") {
+            alert(this.props.intlContext.formatMessage({ id: "intl.exchange.form.error.phone" }));
+            return;
+        }
+        if (!this._isEmail(this.state.email)) {
+            alert(this.props.intlContext.formatMessage({ id: "intl.exchange.form.error.email" }));
+            return;
+        }
+        if (this.state.address == "") {
+            alert(this.props.intlContext.formatMessage({ id: "intl.exchange.form.error.address" }));
+            return;
+        }
         console.log(this.state.name, this.state.phone, this.state.email, this.state.address);
+        alert(this.props.intlContext.formatMessage({ id: "intl.exchange.form.success" }));
+        this.setState({
+            step: 1
+        });
     };
 
+    _isEmail = str => {
+        var reg = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        return reg.test(str);
+    };
     _inputChange = (field, value) => {
         this.setState({ [field]: value });
     };
@@ -65,7 +95,7 @@ class Exchange extends Component {
                         <div className="prizeContainer">
                             <div className="prize">
                                 <div className="prize__left">
-                                    <img className="prize__photo" src="https://fakeimg.pl/300x200/" />
+                                    <img className="prize__photo" src={prize1Img} />
                                 </div>
                                 <div className="prize__right">
                                     <p className="prize__name">
@@ -80,7 +110,11 @@ class Exchange extends Component {
                                     <RoundBtn
                                         size="S"
                                         onClick={() => {
-                                            this._showConfirm(this.props.intlContext.formatMessage({ id: "intl.exchange.prize1.name" }), "10000");
+                                            if (this.props.appContext.point >= 35000) {
+                                                this._showConfirm(this.props.intlContext.formatMessage({ id: "intl.exchange.prize1.name" }), "35000");
+                                            } else {
+                                                alert(this.props.intlContext.formatMessage({ id: "intl.exchange.alert.point" }));
+                                            }
                                         }}
                                         noMargin
                                     >
@@ -90,7 +124,7 @@ class Exchange extends Component {
                             </div>
                             <div className="prize">
                                 <div className="prize__left">
-                                    <img className="prize__photo" src="https://fakeimg.pl/300x500/" />
+                                    <img className="prize__photo" src={prize2Img} />
                                 </div>
                                 <div className="prize__right">
                                     <p className="prize__name">
@@ -105,7 +139,11 @@ class Exchange extends Component {
                                     <RoundBtn
                                         size="S"
                                         onClick={() => {
-                                            this._showConfirm(this.props.intlContext.formatMessage({ id: "intl.exchange.prize2.name" }), "10000");
+                                            if (this.props.appContext.point >= 10000) {
+                                                this._showConfirm(this.props.intlContext.formatMessage({ id: "intl.exchange.prize2.name" }), "10000");
+                                            } else {
+                                                alert(this.props.intlContext.formatMessage({ id: "intl.exchange.alert.point" }));
+                                            }
                                         }}
                                         noMargin
                                     >
@@ -115,7 +153,7 @@ class Exchange extends Component {
                             </div>
                             <div className="prize">
                                 <div className="prize__left">
-                                    <img className="prize__photo" src="https://fakeimg.pl/500x300/" />
+                                    <img className="prize__photo" src={prize3Img} />
                                 </div>
                                 <div className="prize__right">
                                     <p className="prize__name">
@@ -130,7 +168,11 @@ class Exchange extends Component {
                                     <RoundBtn
                                         size="S"
                                         onClick={() => {
-                                            this._showConfirm(this.props.intlContext.formatMessage({ id: "intl.exchange.prize3.name" }), "10000");
+                                            if (this.props.appContext.point >= 23000) {
+                                                this._showConfirm(this.props.intlContext.formatMessage({ id: "intl.exchange.prize3.name" }), "23000");
+                                            } else {
+                                                alert(this.props.intlContext.formatMessage({ id: "intl.exchange.alert.point" }));
+                                            }
                                         }}
                                         noMargin
                                     >
@@ -140,7 +182,7 @@ class Exchange extends Component {
                             </div>
                             <div className="prize">
                                 <div className="prize__left">
-                                    <img className="prize__photo" src="https://fakeimg.pl/300x200/" />
+                                    <img className="prize__photo" src={prize4Img} />
                                 </div>
                                 <div className="prize__right">
                                     <p className="prize__name">
@@ -155,7 +197,11 @@ class Exchange extends Component {
                                     <RoundBtn
                                         size="S"
                                         onClick={() => {
-                                            this._showConfirm(this.props.intlContext.formatMessage({ id: "intl.exchange.prize4.name" }), "10000");
+                                            if (this.props.appContext.point >= 15000) {
+                                                this._showConfirm(this.props.intlContext.formatMessage({ id: "intl.exchange.prize4.name" }), "15000");
+                                            } else {
+                                                alert(this.props.intlContext.formatMessage({ id: "intl.exchange.alert.point" }));
+                                            }
                                         }}
                                         noMargin
                                     >
@@ -272,7 +318,7 @@ class Confirm extends Component {
                             <FormattedMessage id="intl.exchange.confirm.btn.send" />
                         </RoundBtn>
                     </div>
-                    <CircleBtn className="confirm__close" onClick={this.props.hideConfirm} />
+                    <CircleBtn className="confirm__close" icon={iconClose} onClick={this.props.hideConfirm} />
                 </div>
             </div>,
             document.getElementById("portal")

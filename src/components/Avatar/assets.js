@@ -11,7 +11,6 @@ import hair10 from "./assets/M_hair10.png";
 import hair11 from "./assets/M_hair11.png";
 import hair12 from "./assets/M_hair12.png";
 import hair13 from "./assets/M_hair13.png";
-import hair14 from "./assets/M_hair14.png";
 
 import eye1 from "./assets/M_eye1.png";
 import eye2 from "./assets/M_eye2.png";
@@ -22,7 +21,6 @@ import eye6 from "./assets/M_eye6.png";
 import eye7 from "./assets/M_eye7.png";
 import eye8 from "./assets/M_eye8.png";
 import eye9 from "./assets/M_eye9.png";
-import eye10 from "./assets/M_eye10.png";
 
 import mouth1 from "./assets/M_mouth1.png";
 import mouth2 from "./assets/M_mouth2.png";
@@ -88,8 +86,8 @@ import arrow from "./arrow.png";
 
 export default {
     male: {
-        hair: [hair1, hair2, hair3, hair4, hair5, hair6, hair7, hair8, hair9, hair10, hair11, hair12, hair13, hair14],
-        eye: [eye1, eye2, eye3, eye4, eye5, eye6, eye7, eye8, eye9, eye10],
+        hair: [hair1, hair2, hair3, hair4, hair5, hair6, hair7, hair8, hair9, hair10, hair11, hair12, hair13],
+        eye: [eye1, eye2, eye3, eye4, eye5, eye6, eye7, eye8, eye9],
         mouth: [mouth1, mouth2, mouth3, mouth4, mouth5, mouth6, mouth7, mouth8, mouth9]
     },
     female: {

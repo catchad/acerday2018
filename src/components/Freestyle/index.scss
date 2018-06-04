@@ -187,6 +187,22 @@
         height: auto;
         margin-bottom: 20px;
     }
+    &__tip {
+        position: relative;
+        margin-bottom: 20px;
+        &::before {
+            content: "";
+            display: block;
+            padding-top: 100%;
+        }
+    }
+    &__tipVideo {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
 }
 .gameComplete {
     position: fixed;

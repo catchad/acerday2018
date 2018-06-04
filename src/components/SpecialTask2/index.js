@@ -28,7 +28,7 @@ class SpecialTask2 extends Component {
             if (resp.code == 201) {
                 toast(this.props.intlContext.formatMessage({ id: "intl.notification.sentence13" }));
                 this.props.appContext.history.push(`/${this.props.appContext.currentCountry}`);
-                checkToast();
+                checkToast(this.props.appContext);
             } else {
                 alert(resp.code);
                 this.ajaxing = false;

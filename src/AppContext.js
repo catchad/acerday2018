@@ -27,7 +27,7 @@ class AppContext extends Component {
             sns: "",
             maxGameLevel: 0,
 
-            bgm: false,
+            bgm: true,
             bgmForceMuted: false,
             toggleBgm: status => {
                 if (status) {
@@ -149,8 +149,6 @@ class AppContext extends Component {
                         url: "/api/users/me/notifications",
                         responseType: "json"
                     }).then(response => {
-                        console.log("notifications");
-                        console.log(response);
                         var resp = response.data;
                         if (resp.code == 200) {
                             var data = [];

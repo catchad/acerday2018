@@ -5,7 +5,33 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>AcerDay</title>
+    <meta name="description" content="每天都好玩！一起玩音樂！玩創作！集點數">
+    <meta property="og:title" content="AcerDay Play Music Together">
+    <meta property="og:description" content="每天都好玩！一起玩音樂！玩創作！集點數">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="AcerDay Play Music Together">
+    <meta property="og:url" content="https://acerday-stage.azurewebsites.net/tw/">
+    <meta property="og:image" content="https://acerday-stage.azurewebsites.net/assets/ogimage.jpg">
+    <meta property="og:locale" content="zh_TW">
+    <title>AcerDay Play Music Together</title>
+    <script>
+        window.fbAsyncInit = function () {
+            FB.init({
+                appId: '2069756323295848',
+                autoLogAppEvents: true,
+                xfbml: true,
+                version: 'v3.0'
+            });
+        };
+
+        (function (d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) { return; }
+            js = d.createElement(s); js.id = id;
+            js.src = "https://connect.facebook.net/zh_TW/sdk.js";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+    </script>
 </head>
 
 <body>

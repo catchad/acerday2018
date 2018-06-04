@@ -404,7 +404,7 @@ class Step4 extends Component {
             // toast(this.props.intl.formatMessage({ id: "intl.notification.sentence2" }));
             this.props.nextStep();
 
-            checkToast();
+            checkToast(this.props.appContext);
         });
 
         // setTimeout(() => {

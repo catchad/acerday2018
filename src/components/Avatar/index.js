@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from "react";
 import "./index.scss";
 import assets from "./assets";
+import shadow from "./shadow.png";
 // import arrow from "./arrow.svg";
 import { TweenMax } from "gsap";
 import ColorPropsPlugin from "gsap/ColorPropsPlugin";
@@ -129,11 +130,11 @@ class Avatar extends Component {
     updateTargetZone() {
         switch (this.props.target) {
             case "hair":
-                TweenMax.to(this.refs.targetZone, 0.5, { top: "0%", height: "34%" });
+                TweenMax.to(this.refs.targetZone, 0.5, { top: "0%", height: "69%" });
                 TweenMax.to([this.refs.arrowLeft, this.refs.arrowRight], 0.5, { top: `${34 / 2}%` });
                 break;
             case "eye":
-                TweenMax.to(this.refs.targetZone, 0.5, { top: "32%", height: "22%" });
+                TweenMax.to(this.refs.targetZone, 0.5, { top: "38%", height: "38%" });
                 TweenMax.to([this.refs.arrowLeft, this.refs.arrowRight], 0.5, { top: `${32 + 22 / 2}%` });
                 break;
             case "mouth":
@@ -196,6 +197,7 @@ class Avatar extends Component {
         return (
             <div className="avatar">
                 <div ref="targetZone" className="avatar__targetZone" />
+                <img className="avatar__shadow" src={shadow} />
                 <div ref="hair" className="avatar__part avatar__part--hair">
                     {assets[this.props.gender].hair.map((el, id) => {
                         return <img key={id} className="avatar__item" src={el} />;

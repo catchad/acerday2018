@@ -948,7 +948,7 @@ class RhythmGame extends Component {
                         <span className="combo">{this.state.combo}</span>
                         <span>combo</span>
                     </div>
-                    <div className={`miss-container ${this.state.combo == 0 ? "active" : ""}`}>
+                    <div className={`miss-container ${this.state.combo == 0 && this.state.totalPoint !== 0 ? "active" : ""}`}>
                         <span>MISS!</span>
                     </div>
                 </div>
