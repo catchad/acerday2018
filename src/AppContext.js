@@ -27,7 +27,7 @@ class AppContext extends Component {
             sns: "",
             maxGameLevel: 0,
 
-            bgm: true,
+            bgm: false,
             bgmForceMuted: false,
             toggleBgm: status => {
                 if (status) {
@@ -127,6 +127,34 @@ class AppContext extends Component {
                         task: {
                             ...this.state.task,
                             status: !this.state.task.status
+                        }
+                    });
+                },
+                updateData: () => {
+                    axios({
+                        method: "GET",
+                        url: "/api/users/me/notifications",
+                        responseType: "json"
+                    }).then(response => {
+                        var resp = response.data;
+                        if (resp.code == 200) {
+                            var data = [];
+                            Object.keys(resp.data.DateGroups).map(el => {
+                                var nDate = new Date(el);
+                                var n = { date: `${nDate.getFullYear()}/${nDate.getMonth() + 1}/${nDate.getDate()}`, sentence: [] };
+                                resp.data.DateGroups[el].map(el => {
+                                    n.sentence.push({ id: notificationTextKeyToID(el.TextKey), values: el.Values });
+                                });
+                                data.push(n);
+                            });
+                            this.setState({
+                                ...this.state,
+                                notification: {
+                                    ...this.state.notification,
+                                    data: data
+                                }
+                            });
+                        } else {
                         }
                     });
                 }
@@ -401,7 +429,7 @@ class AppContext extends Component {
     //     }
     // };
     render() {
-        return <Provider value={{ ...this.state, currentCountry: this.props.currentCountry, history: this.props.history }}>{this.props.children}</Provider>;
+        return <Provider value={{ ...this.state, currentCountry: this.props.currentCountry, history: this.props.history, scrollToTop: this.props.scrollToTop }}>{this.props.children}</Provider>;
     }
 }
 

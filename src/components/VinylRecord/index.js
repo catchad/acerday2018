@@ -39,13 +39,13 @@ class VinylRecord extends Component {
         Tone.Transport.loop = true;
         Tone.Transport.loopStart = "0";
         Tone.Transport.loopEnd = "16m";
+        Tone.Master.volume.value = 0;
         this.tracks = [];
-
+        // Tone.Master
         assets.forEach((assetsTrack, assetsTrackID) => {
             var track = [];
             assetsTrack.forEach((assetsSound, assetsSoundID) => {
                 var player = new Tone.Player({
-                    // url: assetsSound,
                     loop: true
                 });
                 player.toMaster();
@@ -54,7 +54,7 @@ class VinylRecord extends Component {
                 player.mute = true;
                 player.load(assetsSound, () => {
                     this.loadingCount++;
-                    console.log(this.loadingCount);
+                    // console.log(this.loadingCount);
                     if (this.loadingCount >= 30) {
                         this.props.loadComplete();
                     }
@@ -74,7 +74,7 @@ class VinylRecord extends Component {
         bgmPlayer.load(bgm, () => {
             bgmPlayer.volume.value = -1;
             this.loadingCount++;
-            console.log(this.loadingCount);
+            // console.log(this.loadingCount);
             if (this.loadingCount >= 30) {
                 this.props.loadComplete();
             }
@@ -132,6 +132,7 @@ class VinylRecord extends Component {
     }
     play = () => {
         if (this.mode !== 2) return;
+        Tone.Master.volume.value = 0;
         this.currentSchedule = 0;
         this.playing = true;
         Tone.context.resume();
@@ -189,6 +190,9 @@ class VinylRecord extends Component {
                     }
                 });
             });
+            if (this.result.length == 7) {
+                TweenMax.to(Tone.Master.volume, Tone.Time("1m").toSeconds(), { ease: Expo.easeIn, value: -60 });
+            }
             if (this.result.length < 8) this.result.push(this.melody);
         }
 
@@ -209,8 +213,6 @@ class VinylRecord extends Component {
 
             if (this.props.cdPlayerData1) {
                 [0, 2, 3].forEach((el, id) => {
-                    console.log(this.props.cdPlayerData1[this.currentSchedule][id]);
-                    console.log(this.tracks[el][this.props.cdPlayerData1[this.currentSchedule][id]]);
                     this.tracks[el][this.props.cdPlayerData1[this.currentSchedule][id]].mute = false;
                 });
             }
@@ -220,6 +222,9 @@ class VinylRecord extends Component {
                 });
             }
 
+            if (this.currentSchedule == 7) {
+                TweenMax.to(Tone.Master.volume, Tone.Time("1m").toSeconds(), { ease: Expo.easeIn, value: -60 });
+            }
             this.currentSchedule++;
         }
 

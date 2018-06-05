@@ -5,7 +5,7 @@ import "./index.scss";
 class CircleBtn extends Component {
     constructor(props) {
         super(props);
-        this.classnames = classNames("circleBtn", this.props.className, { "circleBtn--secondary": this.props.secondary });
+        this.classnames = classNames("circleBtn", this.props.className, { "circleBtn--secondary": this.props.secondary }, { "circleBtn--s": this.props.size == "s" });
     }
 
     render() {

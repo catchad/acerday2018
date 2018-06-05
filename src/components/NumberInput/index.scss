@@ -1,0 +1,10 @@
+.NumberInput {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    &__number {
+        color: #ffffff;
+        font-size: 2em;
+        margin: 0 10px;
+    }
+}

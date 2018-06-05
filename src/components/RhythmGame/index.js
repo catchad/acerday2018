@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from "react";
 import { FormattedMessage, FormattedHTMLMessage } from "react-intl";
+import device from "current-device";
 import { Scrollbars } from "react-custom-scrollbars";
 import easy from "./easy.json";
 import normal from "./normal.json";
@@ -46,6 +47,8 @@ class RhythmGame extends Component {
     }
     componentDidMount() {
         this.MusicGame();
+        console.log("device");
+        console.log(device);
     }
     componentWillUnmount() {
         this.audio.pause();
@@ -966,7 +969,7 @@ class RhythmGame extends Component {
                                     </p>
                                     {/* <img className="rhythmGame__gif" src="http://via.placeholder.com/400x200" /> */}
                                     <div className="rhythmGame__tip">
-                                        <video className="rhythmGame__tipVideo" width="400" height="200" loop autoPlay="1" playsInline="playsinline" muted src={tip} />
+                                        <video disableRemotePlayback className="rhythmGame__tipVideo" width="400" height="200" loop autoPlay="1" playsInline="playsinline" muted src={device.desktop() ? tip : tipM} />
                                     </div>
 
                                     <div>

@@ -83,6 +83,16 @@ class Creation extends Component {
                 }
             );
         }
+        if (this.props.appContext.sns == "Twitter") {
+            window.open(`http://twitter.com/share?url=${this.shareUrl}`, "_blank");
+            axios({
+                method: "POST",
+                url: `/api/tasks/rythmgames/${this.props.match.params.cid}/shares`,
+                responseType: "json"
+            }).then(response => {
+                checkToast(this.props.appContext);
+            });
+        }
     };
     render() {
         return (

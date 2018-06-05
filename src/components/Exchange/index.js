@@ -4,6 +4,7 @@ import { createPortal } from "react-dom";
 import Background from "../Background";
 import CircleBtn from "../CircleBtn";
 import RoundBtn from "../RoundBtn";
+import NumberInput from "../NumberInput";
 import { FormattedMessage, FormattedHTMLMessage } from "react-intl";
 import "./index.scss";
 
@@ -197,11 +198,11 @@ class Exchange extends Component {
                                     <RoundBtn
                                         size="S"
                                         onClick={() => {
-                                            if (this.props.appContext.point >= 15000) {
-                                                this._showConfirm(this.props.intlContext.formatMessage({ id: "intl.exchange.prize4.name" }), "15000");
-                                            } else {
-                                                alert(this.props.intlContext.formatMessage({ id: "intl.exchange.alert.point" }));
-                                            }
+                                            // if (this.props.appContext.point >= 15000) {
+                                            this._showConfirm(this.props.intlContext.formatMessage({ id: "intl.exchange.prize4.name" }), "15000");
+                                            // } else {
+                                            // alert(this.props.intlContext.formatMessage({ id: "intl.exchange.alert.point" }));
+                                            // }
                                         }}
                                         noMargin
                                     >
@@ -279,6 +280,9 @@ class Exchange extends Component {
 class Confirm extends Component {
     constructor(props) {
         super(props);
+        this.state = {
+            exchangeNumber: 1
+        };
     }
     componentWillEnter(callback) {
         TweenMax.fromTo(this.refs.lightbox, 0.25, { autoAlpha: 0 }, { autoAlpha: 1 });
@@ -295,6 +299,11 @@ class Confirm extends Component {
     componentWillUnmount() {
         document.body.classList.remove("body--hideScrollbar");
     }
+    numberChange = value => {
+        this.setState({
+            exchangeNumber: value
+        });
+    };
     render() {
         return createPortal(
             <div className="confirm" ref="lightbox">
@@ -307,9 +316,9 @@ class Confirm extends Component {
                             <FormattedMessage id="intl.exchange.confirm.title" values={{ prize: this.props.prize }} />
                         </p>
                         <p className="confirm__desc">
-                            <FormattedHTMLMessage id="intl.exchange.confirm.text" values={{ prize: this.props.prize, point: this.props.point }} />
+                            <FormattedHTMLMessage id="intl.exchange.confirm.text" values={{ prize: this.props.prize, point: this.props.point * this.state.exchangeNumber }} />
                         </p>
-
+                        <NumberInput className="confirm__numberInput" min="1" max={Math.floor(this.props.appContext.point / this.props.point)} onChange={this.numberChange} />
                         <RoundBtn onClick={this.props.hideConfirm} size="L" secondary>
                             <FormattedMessage id="intl.exchange.confirm.btn.cancel" />
                         </RoundBtn>

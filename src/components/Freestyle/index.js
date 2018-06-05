@@ -7,7 +7,9 @@ import { Scrollbars } from "react-custom-scrollbars";
 import { FormattedMessage } from "react-intl";
 import checkToast from "../../helper/checkToast.js";
 import greets from "../../locale/greets";
+import device from "current-device";
 import tip from "./tip.mp4";
+import tipM from "./tip_m.mp4";
 import "./index.scss";
 class Freestyle extends Component {
     constructor(props) {
@@ -53,6 +55,16 @@ class Freestyle extends Component {
                 }
             );
         }
+        if (this.props.appContext.sns == "Twitter") {
+            window.open(`http://twitter.com/share?url=${this.shareUrl}`, "_blank");
+            axios({
+                method: "POST",
+                url: `/api/tasks/rythmgames/${this.props.cid ? this.props.cid : this.cid}/shares`,
+                responseType: "json"
+            }).then(response => {
+                checkToast(this.props.appContext);
+            });
+        }
     };
     _loadComplete = () => {
         this.setState({
@@ -82,12 +94,6 @@ class Freestyle extends Component {
             this.cdPlayerData1 = result;
         }
 
-        // this.setState({
-        //     openConfrim: true
-        // });
-        // this.props.appContext.toggleBgmForceMuted(false);
-        // this.cid = "99999";
-
         axios({
             method: "POST",
             url: "/api/tasks/rythmgames",
@@ -103,6 +109,7 @@ class Freestyle extends Component {
                 });
                 this.props.appContext.toggleBgmForceMuted(false);
                 this.cid = resp.data.Game.Id;
+                this.shareUrl = resp.data.Game.ShareUrl;
                 checkToast(this.props.appContext);
             } else {
                 alert(resp.code);
@@ -170,7 +177,7 @@ class Freestyle extends Component {
                                     </p>
                                     {/* <img className="freestyleReady__gif" src="http://via.placeholder.com/400x400" /> */}
                                     <div className="freestyleReady__tip">
-                                        <video className="freestyleReady__tipVideo" width="400" height="400" loop autoPlay="1" playsInline="playsinline" muted src={tip} />
+                                        <video disableRemotePlayback className="freestyleReady__tipVideo" width="400" height="400" loop autoPlay="1" playsInline="playsinline" muted src={device.desktop() ? tip : tipM} />
                                     </div>
 
                                     <div>

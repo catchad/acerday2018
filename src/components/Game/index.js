@@ -294,8 +294,9 @@ class Step1 extends Component {
                             data={this.state.data}
                         />
                     ) : (
-                        <p>沒有資料</p>
+                        ""
                     )}
+                    {this.state.data && this.state.data.length == 0 ? <p>沒有符合條件的玩家</p> : ""}
                 </div>
             </div>
         );

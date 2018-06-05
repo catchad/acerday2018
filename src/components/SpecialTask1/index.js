@@ -11,30 +11,34 @@ class SpecialTask1 extends Component {
     constructor(props) {
         super(props);
         this.ajaxing = false;
+        this.answer = [0, 0, 0];
     }
     _send = () => {
         if (this.ajaxing) return;
-        this.ajaxing = true;
+        if (this.answer[0] == 2 && this.answer[1] == 3 && this.answer[2] == 1) {
+            this.ajaxing = true;
 
-        // 限定任務 / 完成限定任務
-        axios({
-            method: "POST",
-            url: "/api/tasks/special",
-            responseType: "json",
-            data: {
-                TaskName: "VideoChallenge1"
-            }
-        }).then(response => {
-            var resp = response.data;
-            if (resp.code == 201) {
-                toast(this.props.intlContext.formatMessage({ id: "intl.notification.sentence12" }));
-                this.props.appContext.history.push(`/${this.props.appContext.currentCountry}`);
-                checkToast(this.props.appContext);
-            } else {
-                alert(resp.code);
-                this.ajaxing = false;
-            }
-        });
+            // 限定任務 / 完成限定任務
+            axios({
+                method: "POST",
+                url: "/api/tasks/special",
+                responseType: "json",
+                data: {
+                    TaskName: "VideoChallenge1"
+                }
+            }).then(response => {
+                var resp = response.data;
+                if (resp.code == 201) {
+                    this.props.appContext.history.push(`/${this.props.appContext.currentCountry}`);
+                    checkToast(this.props.appContext);
+                } else {
+                    alert(resp.code);
+                    this.ajaxing = false;
+                }
+            });
+        } else {
+            alert("答案錯誤");
+        }
     };
     render() {
         return (
@@ -42,7 +46,7 @@ class SpecialTask1 extends Component {
                 <section className="page__section">
                     <div className="page__fixedLeft">
                         <div className="ytContainer">
-                            <iframe className="ytContainer__iframe" width="560" height="315" src="https://www.youtube.com/embed/9RLD7Ds629Y?rel=0&showinfo=0" frameBorder="0" allow="autoplay; encrypted-media" allowFullScreen />
+                            <iframe className="ytContainer__iframe" width="560" height="315" src="https://www.youtube.com/embed/CbswdY6DkYU?rel=0&showinfo=0" frameBorder="0" allow="autoplay; encrypted-media" allowFullScreen />
                         </div>
                     </div>
                     <div className="page__heading">
@@ -54,19 +58,34 @@ class SpecialTask1 extends Component {
                         <p className="page__qTitle">
                             <FormattedMessage id="intl.specialtask1.q1" />
                         </p>
-                        <Radio options={[{ text: this.props.intlContext.formatMessage({ id: "intl.specialtask1.q1a1" }), value: 1 }, { text: this.props.intlContext.formatMessage({ id: "intl.specialtask1.q1a2" }), value: 2 }, { text: this.props.intlContext.formatMessage({ id: "intl.specialtask1.q1a3" }), value: 3 }]} />
+                        <Radio
+                            onChange={value => {
+                                this.answer[0] = value;
+                            }}
+                            options={[{ text: this.props.intlContext.formatMessage({ id: "intl.specialtask1.q1a1" }), value: 1 }, { text: this.props.intlContext.formatMessage({ id: "intl.specialtask1.q1a2" }), value: 2 }, { text: this.props.intlContext.formatMessage({ id: "intl.specialtask1.q1a3" }), value: 3 }]}
+                        />
                     </div>
                     <div className="page__row page__row--widthM page__row--marginBottomBig">
                         <p className="page__qTitle">
                             <FormattedMessage id="intl.specialtask1.q2" />
                         </p>
-                        <Radio options={[{ text: this.props.intlContext.formatMessage({ id: "intl.specialtask1.q2a1" }), value: 1 }, { text: this.props.intlContext.formatMessage({ id: "intl.specialtask1.q2a2" }), value: 2 }, { text: this.props.intlContext.formatMessage({ id: "intl.specialtask1.q2a3" }), value: 3 }]} />
+                        <Radio
+                            onChange={value => {
+                                this.answer[1] = value;
+                            }}
+                            options={[{ text: this.props.intlContext.formatMessage({ id: "intl.specialtask1.q2a1" }), value: 1 }, { text: this.props.intlContext.formatMessage({ id: "intl.specialtask1.q2a2" }), value: 2 }, { text: this.props.intlContext.formatMessage({ id: "intl.specialtask1.q2a3" }), value: 3 }]}
+                        />
                     </div>
                     <div className="page__row page__row--widthM page__row--marginBottomBig">
                         <p className="page__qTitle">
                             <FormattedMessage id="intl.specialtask1.q3" />
                         </p>
-                        <Radio options={[{ text: this.props.intlContext.formatMessage({ id: "intl.specialtask1.q3a1" }), value: 1 }, { text: this.props.intlContext.formatMessage({ id: "intl.specialtask1.q3a2" }), value: 2 }, { text: this.props.intlContext.formatMessage({ id: "intl.specialtask1.q3a3" }), value: 3 }]} />
+                        <Radio
+                            onChange={value => {
+                                this.answer[2] = value;
+                            }}
+                            options={[{ text: this.props.intlContext.formatMessage({ id: "intl.specialtask1.q3a1" }), value: 1 }, { text: this.props.intlContext.formatMessage({ id: "intl.specialtask1.q3a2" }), value: 2 }, { text: this.props.intlContext.formatMessage({ id: "intl.specialtask1.q3a3" }), value: 3 }]}
+                        />
                     </div>
                     <div className="page__row page__row--widthM page__row--center">
                         <RoundBtn onClick={this._send}>

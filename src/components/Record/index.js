@@ -42,6 +42,9 @@ class Record extends Component {
             }
         });
     }
+    componentDidMount() {
+        this.props.appContext.scrollToTop();
+    }
 
     render() {
         return (

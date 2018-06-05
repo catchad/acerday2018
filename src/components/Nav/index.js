@@ -61,7 +61,9 @@ class Nav extends Component {
                                                         <div className="userInfo">
                                                             <p className="userInfo__name">{appContext.name}</p>
                                                             <p className="userInfo__acerID">Acer ID: {appContext.userCode}</p>
-                                                            <p className="userInfo__point">{appContext.point} 點</p>
+                                                            <p className="userInfo__point">
+                                                                <FormattedMessage id="intl.nav.point" values={{ point: appContext.point }} />
+                                                            </p>
                                                         </div>
                                                     ) : (
                                                         ""

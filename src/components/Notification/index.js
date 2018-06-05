@@ -21,16 +21,16 @@ class Notification extends Component {
             data: {}
         };
 
+        this.props.appContext.notification.updateData();
+
         axios({
             method: "GET",
             url: "/api/tasks/rythmgames",
             responseType: "json"
         }).then(response => {
             var resp = response.data;
-
             if (resp.code == 200) {
                 var inviteData = [];
-
                 resp.data.List.forEach((el, id) => {
                     if (el.Players.length == 2) {
                         if (el.Players[1].User.Id == this.props.appContext.id && el.Players[1].GameData == null) {
@@ -41,7 +41,6 @@ class Notification extends Component {
                         }
                     }
                 });
-
                 this.setState({
                     data: {
                         ...this.state.data,

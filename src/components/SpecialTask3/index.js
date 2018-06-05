@@ -10,6 +10,7 @@ import "./index.scss";
 class SpecialTask3 extends Component {
     constructor(props) {
         super(props);
+        this.ajaxing = false;
     }
     _send = () => {
         if (this.ajaxing) return;
@@ -26,7 +27,6 @@ class SpecialTask3 extends Component {
         }).then(response => {
             var resp = response.data;
             if (resp.code == 201) {
-                toast(this.props.intlContext.formatMessage({ id: "intl.notification.sentence14" }));
                 this.props.appContext.history.push(`/${this.props.appContext.currentCountry}`);
                 checkToast(this.props.appContext);
             } else {

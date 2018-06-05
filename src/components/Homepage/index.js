@@ -56,6 +56,7 @@ class Homepage extends Component {
     }
 
     componentDidMount() {
+        this.props.appContext.scrollToTop();
         this.sliderNum = document.querySelectorAll(".homepage__slide").length - 1;
         this.sliderAnimate = [
             new TimelineMax({ repeat: 0, paused: true })
@@ -97,21 +98,6 @@ class Homepage extends Component {
         this.myReq = requestAnimationFrame(this._loop);
 
         checkToast(this.props.appContext);
-
-        // toast(
-        //     <Fragment>
-        //         <p className="Toastify__title">
-        //             <FormattedHTMLMessage id="intl.toast.specialTaskOpen.title" />
-        //         </p>
-        //         <p className="Toastify__text">
-        //             <FormattedHTMLMessage id="intl.toast.specialTaskOpen.desc" />
-        //         </p>
-        //     </Fragment>
-        // );
-
-        // toast(<FormattedHTMLMessage id="intl.notification.sentence3" />);
-        // toast(<FormattedHTMLMessage id="intl.notification.sentence4" />);
-        // toast("你連續登錄網站8天，獲得4000點");
     }
 
     _loop = () => {

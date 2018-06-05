@@ -34,7 +34,7 @@ class Login extends Component {
                                 });
                             }}
                             data={[{ text: this.props.intlContext.formatMessage({ id: "intl.login.facebook" }), icon: icon_facebook, value: "facebook" }, { text: this.props.intlContext.formatMessage({ id: "intl.login.twitter" }), icon: icon_twitter, value: "twitter" }]}
-                        />;
+                        />
                     </div>
                     <div className="page__row page__row--center">
                         {/* routerLink={`/${this.props.appContext.currentCountry}/register`} */}

@@ -90,8 +90,8 @@ class Register extends Component {
 
                 <ReactTransitionGroup component="div">
                     {this.state.currentStep == 1 ? <Step1 intl={this.props.intlContext} appContext={this.props.appContext} nextStep={this._nextStep} userData={this.userData} /> : null}
-                    {this.state.currentStep == 2 ? <Step2 intl={this.props.intlContext} nextStep={this._nextStep} avatarGenderChange={this._avatarGenderChange} /> : null}
-                    {this.state.currentStep == 3 ? <Step3 intl={this.props.intlContext} nextStep={this._nextStep} avatarGenderChange={this._avatarGenderChange} userData={this.userData} avatarTargetChange={this._avatarTargetChange} avatarResultChange={this._avatarResultChange} avatarTarget={this.state.avatarTarget} avatarGender={this.state.avatarGender} /> : null}
+                    {this.state.currentStep == 2 ? <Step2 intl={this.props.intlContext} appContext={this.props.appContext} nextStep={this._nextStep} avatarGenderChange={this._avatarGenderChange} /> : null}
+                    {this.state.currentStep == 3 ? <Step3 intl={this.props.intlContext} appContext={this.props.appContext} nextStep={this._nextStep} avatarGenderChange={this._avatarGenderChange} userData={this.userData} avatarTargetChange={this._avatarTargetChange} avatarResultChange={this._avatarResultChange} avatarTarget={this.state.avatarTarget} avatarGender={this.state.avatarGender} /> : null}
                     {this.state.currentStep == 4 ? <Step4 intl={this.props.intlContext} appContext={this.props.appContext} nextStep={this._nextStep} userData={this.userData} avatarResult={this.state.avatarResult} /> : null}
                     {this.state.currentStep == 5 ? <Step5 intl={this.props.intlContext} appContext={this.props.appContext} nextStep={this._nextStep} avatarResult={this.state.avatarResult} /> : null}
                 </ReactTransitionGroup>
@@ -147,7 +147,7 @@ class Step1 extends Component {
         TweenMax.to(this.refs.section, 0.25, {
             autoAlpha: 0,
             onComplete: () => {
-                // window.scrollTo(0, 0);
+                this.props.appContext.scrollToTop();
                 this.props.appContext.history.push(`/${this.props.userData.Country}/register`);
                 callback();
             }
@@ -219,7 +219,7 @@ class Step2 extends Component {
         TweenMax.to(this.refs.section, 0.25, {
             autoAlpha: 0,
             onComplete: () => {
-                window.scrollTo(0, 0);
+                this.props.appContext.scrollToTop();
                 callback();
             }
         });
@@ -276,7 +276,7 @@ class Step3 extends Component {
         TweenMax.to(this.refs.section, 0.25, {
             autoAlpha: 0,
             onComplete: () => {
-                window.scrollTo(0, 0);
+                this.props.appContext.scrollToTop();
                 callback();
             }
         });
@@ -298,7 +298,7 @@ class Step3 extends Component {
 
                 <div className="page__row page__row--flex avatarUI">
                     <div className="avatarUI__left">
-                        <SquareBtnGroup defaultValue="hair" size="s" onChange={this.props.avatarTargetChange} data={[{ text: this.props.intl.formatMessage({ id: "intl.register.step3.hair" }), value: "hair", icon: this.props.avatarGender == "male" ? iconMaleHair : iconFemaleHair }, { text: this.props.intl.formatMessage({ id: "intl.register.step3.eye" }), value: "eye", icon: this.props.avatarGender == "male" ? iconMaleEye : iconFemaleEye }, { text: this.props.intl.formatMessage({ id: "intl.register.step3.mouth" }), value: "mouth", icon: this.props.avatarGender == "male" ? iconMaleMouth : iconFemaleMouth }]} />;
+                        <SquareBtnGroup defaultValue="hair" size="s" onChange={this.props.avatarTargetChange} data={[{ text: this.props.intl.formatMessage({ id: "intl.register.step3.hair" }), value: "hair", icon: this.props.avatarGender == "male" ? iconMaleHair : iconFemaleHair }, { text: this.props.intl.formatMessage({ id: "intl.register.step3.eye" }), value: "eye", icon: this.props.avatarGender == "male" ? iconMaleEye : iconFemaleEye }, { text: this.props.intl.formatMessage({ id: "intl.register.step3.mouth" }), value: "mouth", icon: this.props.avatarGender == "male" ? iconMaleMouth : iconFemaleMouth }]} />
                     </div>
                     <div className="avatarUI__right">
                         <CircleBtn
@@ -375,7 +375,7 @@ class Step4 extends Component {
         TweenMax.to(this.refs.section, 0.25, {
             autoAlpha: 0,
             onComplete: () => {
-                window.scrollTo(0, 0);
+                this.props.appContext.scrollToTop();
                 callback();
             }
         });
@@ -527,7 +527,7 @@ class Step5 extends Component {
         TweenMax.to(this.refs.section, 0.25, {
             autoAlpha: 0,
             onComplete: () => {
-                window.scrollTo(0, 0);
+                this.props.appContext.scrollToTop();
                 callback();
             }
         });

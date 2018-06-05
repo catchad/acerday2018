@@ -4,7 +4,9 @@ import Background from "../Background";
 class Rule extends Component {
     constructor(props) {
         super(props);
-        console.log(this.props);
+    }
+    componentDidMount() {
+        this.props.appContext.scrollToTop();
     }
     render() {
         return (
@@ -152,23 +154,23 @@ class Rule extends Component {
                             <p className="page__text">Point usage: 35,000 points/one time</p>
                             <p className="page__text">Award announcement time: will be announced on 9/30/2018 on the Acer Day event website</p>
                             <br />
-                            <p className="page__text page__text--highlight">One Year Spotify Membership</p>
+                            {/* <p className="page__text page__text--highlight">One Year Spotify Membership</p>
                             <p className="page__text">Award content: one year Spotify membership </p>
                             <p className="page__text">Exchange method: points can be exchanged for multiple drawing opportunities; the more times you exchange, the higher your chances of winning</p>
                             <p className="page__text">Point usage: 10,000 points/one time</p>
                             <p className="page__text">Award announcement: will be announced on 9/30/2018 on the Acer Day event website</p>
-                            <br />
+                            <br /> */}
                             <p className="page__text page__text--highlight">Acer Products</p>
                             <p className="page__text">Award content: please reference the following models </p>
                             <p className="page__text">Exchange method: points can be exchanged for multiple drawing opportunities; the more times you exchange, the higher your chances of winning </p>
                             <p className="page__text">Point usage: 23,000 points</p>
                             <p className="page__text">Award announcement: will be announced on 9/30/2018 on the Acer Day event website</p>
-                            <br />
+                            {/* <br />
                             <p className="page__text page__text--highlight">Product Warranty</p>
                             <p className="page__text">Award content: one year extension of Acer laptop warranty </p>
                             <p className="page__text">Exchange method: points can be exchanged for multiple drawing opportunities; the more times you exchange, the higher your chances of winning </p>
                             <p className="page__text">Point usage: 15,000 points </p>
-                            <p className="page__text">Award announcement: will be announced on 9/30/2018 on the Acer Day event website</p>
+                            <p className="page__text">Award announcement: will be announced on 9/30/2018 on the Acer Day event website</p> */}
                         </div>
                         <div className="page__row page__row--widthL">
                             <p className="page__subTitle">Prize Draw Terms and Conditions:</p>

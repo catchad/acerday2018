@@ -21,11 +21,10 @@ import SpecialTask3 from "../SpecialTask3";
 import Bgm from "../Bgm";
 import Wave from "../Wave";
 // redux
-import { connect } from "react-redux";
+// import { connect } from "react-redux";
 
 // react-router
 import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-dom";
-
 // import { withRouter } from "react-router";
 
 import { AppContextProvider, AppContextConsumer } from "../../AppContext";
@@ -58,6 +57,8 @@ class App extends React.Component {
             wh: window.innerHeight
         };
         window.addEventListener("resize", this._resize);
+
+        this.scrollbar = React.createRef();
     }
     _resize = () => {
         this.setState({
@@ -71,7 +72,15 @@ class App extends React.Component {
             return true;
         }
     }
-
+    scrollToTop = () => {
+        // console.log(this.scrollbar.current.scrollToTop());
+        console.log(this.scrollbar);
+        if (this.scrollbar.current) {
+            setTimeout(() => {
+                this.scrollbar.current.scrollToTop();
+            }, 1);
+        }
+    };
     render() {
         // const { intl } = this.props;
         // let tmp = intl.formatMessage({ id: "intl.name" }, { name: this.props.userData.name });
@@ -103,7 +112,7 @@ class App extends React.Component {
         return (
             <IntlProvider textComponent="span" locale={this.locale} messages={this.messages}>
                 <IntlContextProvider locale={this.locale} messages={this.messages}>
-                    <AppContextProvider currentCountry={this.props.match.params.country} history={this.props.history}>
+                    <AppContextProvider currentCountry={this.props.match.params.country} history={this.props.history} scrollToTop={this.scrollToTop}>
                         <Header />
                         <AppContextConsumer>
                             {appContext => {
@@ -112,7 +121,7 @@ class App extends React.Component {
                                         {intlContext => {
                                             return (
                                                 <main className="main">
-                                                    <Scrollbars style={{ width: "100%" }}>
+                                                    <Scrollbars ref={this.scrollbar} style={{ width: "100%" }}>
                                                         <Switch>
                                                             <Route
                                                                 path="/:country/"
@@ -184,7 +193,7 @@ class App extends React.Component {
                                                             <Route
                                                                 path="/:country/game/:cid?"
                                                                 render={props => {
-                                                                    return <Game {...props} appContext={appContext} intlContext={intlContext.intl} />;
+                                                                    return <Game {...props} appContext={appContext} intlContext={intlContext.intl} scrollToTop={Scrollbars.scrollToTop} />;
                                                                 }}
                                                             />
                                                             <Route component={NoMatch} />

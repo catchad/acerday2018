@@ -14,6 +14,7 @@ const sg = {
     "intl.nav.exchange": "Point Redepmtion",
     "intl.nav.promote": "Promotional Activities ",
     "intl.nav.promote.link": "https://www.facebook.com/acer.sg/",
+    "intl.nav.point": "{point} Points",
 
     "intl.login.title": "Select login method",
     "intl.login.readme": "I have read and agreed to the terms and conditions of the privacy policy",
@@ -95,7 +96,7 @@ const sg = {
     "intl.exchange.form.error.address": "Please enter the correct address",
     "intl.exchange.form.success": "Successfully redeemed",
 
-    "intl.specialtask1.title": "limited challenge 1- Watch movie and answer question",
+    "intl.specialtask1.title": "Watch movie and answer question",
     "intl.specialtask1.q1": "Q1. In what background did the movie take place?",
     "intl.specialtask1.q1a1": "Movie theater",
     "intl.specialtask1.q1a2": "Hotel",
@@ -110,7 +111,7 @@ const sg = {
     "intl.specialtask1.q3a3": "Dance together",
     "intl.specialtask1.btn": "Confirm and send",
 
-    "intl.specialtask2.title": "limited challenge 2- Watch movie and answer question",
+    "intl.specialtask2.title": "Answer product question",
     "intl.specialtask2.q1": "Q1. Which one of the following is heavier than the Acer Swift 5?",
     "intl.specialtask2.q1a1": "One kilogram of water",
     "intl.specialtask2.q1a2": "One kilogram of cotton",
@@ -127,7 +128,7 @@ const sg = {
     "intl.specialtask2.q3a4": "Both of the above",
     "intl.specialtask2.btn": "Confirm and send",
 
-    "intl.specialtask3.title": "limited challenge 3- Watch movie and answer question",
+    "intl.specialtask3.title": "Watch movie and answer question",
     "intl.specialtask3.q1": "Q1. Which of the following do you think an Acer laptop can help you complete?",
     "intl.specialtask3.q1a1": "Manage a blog with rich content",
     "intl.specialtask3.q1a2": "Create music",
@@ -172,6 +173,7 @@ const sg = {
     "intl.notification.sentence12": "You completed the 7/23 Limited challenge, receive 2000 ponts",
     "intl.notification.sentence13": "You completed the 7/27 Limited challenge, receive 2000 ponts",
     "intl.notification.sentence14": "You completed the 7/31 Limited challenge, receive 2000 ponts",
+    "intl.notification.sentence15": "你兌換了{prize}抽獎機會{amount}次，共扣除{point}點",
 
     "intl.toast.specialTaskOpen.title": "The Limited challenge is about to start",
     "intl.toast.specialTaskOpen.desc": "Want more points? Click your challenge list to find out more.",
